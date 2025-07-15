@@ -14,10 +14,14 @@ struct VisionITSMApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
                 .environment(appModel)
         }
         .windowResizability(.contentSize)
+        
+        WindowGroup(id: "slideWindow") {
+            SlideView()
+        }
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()

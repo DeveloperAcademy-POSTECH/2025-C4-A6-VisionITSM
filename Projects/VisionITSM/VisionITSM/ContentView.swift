@@ -21,7 +21,7 @@ struct ContentView: View {
 //            ToggleImmersiveSpaceButton()
 //        }
 //        .padding()
-        ResultView()
+//        ResultView()
     }
 }
 

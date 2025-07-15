@@ -12,14 +12,16 @@ import _RealityKit_SwiftUI
 struct HomeView: View {
     //MARK: - PROPERTIES
     let columns = Array(repeating: GridItem(.adaptive(minimum: 256), spacing: 48), count: 1)
+    let texts: [String] = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF"]
     
     @State private var isModal: Bool = false
     
-    let texts: [String] = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF"]
+    
+    @State private var router = NavigationRouter()
  
     //MARK: - BODY
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $router.path) {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 48) {
                     ForEach(texts, id: \.self) { text in
@@ -41,9 +43,21 @@ struct HomeView: View {
                 }
             }
             .sheet(isPresented: $isModal) {
-                SettingView()
+                SettingView(router: router)
             }
+            .navigationDestination(for: Route.self) { route in
+                switch route {
+                case .home:
+                    HomeView()
+                case .script:
+                    ScriptView(router: router)
+                case .result:
+                    ResultView(router: router)
+                }
+            }
+            
         }
+        
     }
 }
 
