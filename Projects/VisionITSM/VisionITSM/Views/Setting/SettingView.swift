@@ -13,6 +13,9 @@ struct SettingView: View {
     @State private var audienceSize: Float = 0.0
     @State private var distractionLevel: Float = 0.0
     
+    @Bindable var router: NavigationRouter
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.openWindow) private var openWindow
     
     //MARK: - BODY
     var body: some View {
@@ -23,6 +26,7 @@ struct SettingView: View {
                 HStack {
                     Button(action: {
                         print("뒤로가기")
+                        dismiss()
                     }, label: {
                         Image(systemName: "chevron.left")
                     })
@@ -111,7 +115,9 @@ struct SettingView: View {
                 }
                 
                 Button {
-                    print("^^")
+                    dismiss()
+                    router.push(.script)
+                    openWindow(id: "slideWindow")
                 } label: {
                     Label {
                         Text("Enter Session")
@@ -128,5 +134,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView()
+    SettingView(router: .init())
 }
