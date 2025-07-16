@@ -10,15 +10,16 @@ import SwiftUI
 struct ResultView: View {
     //MARK: - PROPERTIES
     @Bindable var router: NavigationRouter
+    @Bindable var settingViewModel: SettingViewModel
     
     //MARK: - BODY
     var body: some View {
         VStack(alignment: .leading, spacing: 36) {
             HStack {
                 VStack(alignment: .leading, spacing: 24) {
-                    resultItemView(title: "Audience Size", result: "Medium")
-                    resultItemView(title: "Dustraction Level", result: "Easy")
-                    resultItemView(title: "Time Spent", result: "13: 02")
+                    resultItemView(title: "Audience Size", result: settingViewModel.settingModel.background.title)
+                    resultItemView(title: "Dustraction Level", result: "\(settingViewModel.settingModel.audienceSize)")
+                    resultItemView(title: "Time Spent", result: "\(settingViewModel.settingModel.distractionLevel)")
                 }
                 
                 Spacer()
@@ -50,5 +51,5 @@ struct ResultView: View {
 }
 
 #Preview {
-    ResultView(router: .init())
+    ResultView(router: .init(), settingViewModel: .init())
 }
