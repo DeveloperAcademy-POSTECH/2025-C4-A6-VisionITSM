@@ -9,9 +9,10 @@ import SwiftUI
 
 struct SettingView: View {
     //MARK: - PROPERTIES
-    @State private var environment: String = "NURL"
-    @State private var audienceSize: Float = 0.0
-    @State private var distractionLevel: Float = 0.0
+//    @State private var environment: String = "NURL"
+//    @State private var audienceSize: Float = 0.0
+//    @State private var distractionLevel: Float = 0.0
+    @Bindable var settingViewModel: SettingViewModel
     
     @Bindable var router: NavigationRouter
     @Environment(\.dismiss) private var dismiss
@@ -46,7 +47,7 @@ struct SettingView: View {
                         .frame(width: 36, height: 36)
                     VStack(alignment: .leading) {
                         Text("Environments")
-                        Text("Main 3")
+                        Text(settingViewModel.settingModel.background.title)
                     }
                     
                     Spacer()
@@ -66,11 +67,11 @@ struct SettingView: View {
                     
                     ZStack(alignment: .center) {
                         Slider(
-                            value: $audienceSize,
-                            in: 0...4,
+                            value: $settingViewModel.settingModel.audienceSize,
+                            in: 0...2,
                             step: 1
                         ) {
-                            Text("\(audienceSize)")
+                            Text("\(settingViewModel.settingModel.audienceSize)")
                         }
                         .frame(width: 288, height: 64)
                         
@@ -94,11 +95,11 @@ struct SettingView: View {
                     
                     ZStack(alignment: .center) {
                         Slider(
-                            value: $distractionLevel,
-                            in: 0...4,
+                            value: $settingViewModel.settingModel.distractionLevel,
+                            in: 0...2,
                             step: 1
                         ) {
-                            Text("\(distractionLevel)")
+                            Text("\(settingViewModel.settingModel.distractionLevel)")
                         }
                         .frame(width: 288, height: 64)
                         
@@ -150,5 +151,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView(router: .init())
+    SettingView(settingViewModel: .init(), router: .init())
 }

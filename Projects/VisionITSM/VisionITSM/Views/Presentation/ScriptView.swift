@@ -12,6 +12,8 @@ struct ScriptView: View {
     @Bindable var router: NavigationRouter
     @Environment(\.dismissWindow) private var dismissWindow
     
+    @State private var isCounting: Bool = false
+    
     //MARK: - BODY
     var body: some View {
         VStack(spacing: 36) {
@@ -50,6 +52,23 @@ struct ScriptView: View {
                         .foregroundStyle(Color.secondary)
                 }
             }
+        }
+        .ornament(attachmentAnchor: .scene(UnitPoint(x: 0.5, y: -0.07)), contentAlignment: .top) {
+            VStack {
+                Button {
+                    isCounting.toggle()
+                } label: {
+                    ZStack {
+                        HStack(spacing: 6) {
+                            Image(systemName: isCounting ? "stop.fill" : "play.fill")
+                            Text(isCounting ? "0:0" : "Start")
+                        }
+                        .foregroundStyle(isCounting ? Color.red : Color.white)
+                    }
+                }
+                .tint(isCounting ? nil : Color.red)
+            }
+//            .offset(y: -30)
         }
     }
 }
