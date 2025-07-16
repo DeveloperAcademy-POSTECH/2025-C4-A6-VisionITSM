@@ -16,7 +16,8 @@ struct SettingView: View {
     @Bindable var router: NavigationRouter
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openWindow) private var openWindow
-    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
+    //MARK: - 이머시브존1
+//    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     
     //MARK: - BODY
     var body: some View {
@@ -120,6 +121,8 @@ struct SettingView: View {
                     router.push(.script)
                     openWindow(id: "slideWindow")
                     
+                    //MARK: - 이머시브존2
+                    /*
                     Task {
                         let result = await openImmersiveSpace(id: "ImmersiveSpace")
                         switch result {
@@ -130,7 +133,7 @@ struct SettingView: View {
                         @unknown default:
                             break
                         }
-                    }
+                    }*/
                 } label: {
                     Label {
                         Text("Enter Session")

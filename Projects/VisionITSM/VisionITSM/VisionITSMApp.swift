@@ -39,5 +39,7 @@ struct VisionITSMApp: App {
                 }
         }
         .immersionStyle(selection: .constant(.progressive), in: .progressive)
+        //MARK: - 이머시브존3 ( 크라운 조절 믹스드)
+//        .immersionStyle(selection: .constant(.full), in: .mixed)
     }
 }
