@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct VisionITSMApp: App {
@@ -22,6 +23,7 @@ struct VisionITSMApp: App {
             HomeView()
                 .environment(appModel)
         }
+        .modelContainer(for: HomeModel.self)
         .windowResizability(.contentSize)
         
         WindowGroup(id: "slideWindow") {
