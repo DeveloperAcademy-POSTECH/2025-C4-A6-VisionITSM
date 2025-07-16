@@ -76,7 +76,7 @@ struct ImmersiveView: View {
     }
 }
 
-extension ImmersiveColosseum {
+extension ImmersiveView {
 
     
     func playPotatoAnimation(on entity: Entity) {

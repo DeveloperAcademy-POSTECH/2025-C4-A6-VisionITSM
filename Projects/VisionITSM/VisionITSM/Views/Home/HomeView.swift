@@ -7,7 +7,7 @@
 
 import SwiftUI
 import RealityKitContent
-import _RealityKit_SwiftUI
+//import _RealityKit_SwiftUI
 
 struct HomeView: View {
     //MARK: - PROPERTIES
