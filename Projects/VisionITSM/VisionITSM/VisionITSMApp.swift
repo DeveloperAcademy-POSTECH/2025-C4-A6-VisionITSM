@@ -10,7 +10,12 @@ import SwiftUI
 @main
 struct VisionITSMApp: App {
 
-    @State private var appModel = AppModel()
+    @State private var appModel: AppModel = AppModel()
+    
+    init() {
+        TrackingSystem.registerSystem()
+        TrackingComponent.registerComponent()
+    }
 
     var body: some Scene {
         WindowGroup {
