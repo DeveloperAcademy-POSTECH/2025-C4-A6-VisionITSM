@@ -12,7 +12,6 @@ import SwiftData
 struct HomeView: View {
     //MARK: - PROPERTIES
     let columns = Array(repeating: GridItem(.adaptive(minimum: 256), spacing: 48), count: 1)
-    let texts: [String] = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF"]
     
     @State private var router = NavigationRouter()
     @State private var settingViewModel: SettingViewModel = .init()
@@ -41,8 +40,14 @@ struct HomeView: View {
             
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 48) {
-                    ForEach(texts, id: \.self) { text in
-                        GridItemView()
+                    ForEach(keynotes, id: \.self) { keynote in
+                        Button {
+                            print(keynote.title)
+                            settingViewModel.isShowSetting.toggle()
+                        } label: {
+                            GridItemView(title: keynote.title, date: "\(keynote.keynote.count)", image: keynote.keynote.first?.slideImage)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }
