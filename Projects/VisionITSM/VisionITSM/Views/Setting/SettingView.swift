@@ -16,6 +16,7 @@ struct SettingView: View {
     @Bindable var router: NavigationRouter
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openWindow) private var openWindow
+    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     
     //MARK: - BODY
     var body: some View {
@@ -36,7 +37,7 @@ struct SettingView: View {
                 .padding(.leading, 24)
             }
             .frame(height: 92)
-
+            
             
             VStack(alignment: .center, spacing: 24) {
                 HStack(spacing: 8) {
@@ -57,8 +58,8 @@ struct SettingView: View {
                     .buttonStyle(.plain)
                     .padding(.trailing, 8)
                 }
-            
-            
+                
+                
                 VStack(alignment: .leading, spacing: 7) {
                     Text("Audience Size")
                     
@@ -80,7 +81,7 @@ struct SettingView: View {
                         }
                         .padding(.horizontal, 66)
                     }
-                
+                    
                     
                     Text("Audience SizeAudience SizeAudience SizeAudience SizeAudience SizeAudience SizeAudience Size")
                         .font(.system(size: 13))
@@ -118,13 +119,25 @@ struct SettingView: View {
                     dismiss()
                     router.push(.script)
                     openWindow(id: "slideWindow")
+                    
+                    Task {
+                        let result = await openImmersiveSpace(id: "ImmersiveSpace")
+                        switch result {
+                        case .opened:
+                            print("Immersive space opened")
+                        case .userCancelled, .error:
+                            print("Failed to open immersive space")
+                        @unknown default:
+                            break
+                        }
+                    }
                 } label: {
                     Label {
                         Text("Enter Session")
                     } icon: {
                         Image(systemName: "door.right.hand.open")
                     }
-
+                    
                 }
             }
             .padding(.horizontal, 44)
