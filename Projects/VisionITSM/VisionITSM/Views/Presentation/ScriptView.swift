@@ -11,8 +11,9 @@ struct ScriptView: View {
     //MARK: - PROPERTIES
     @Bindable var router: NavigationRouter
     @Environment(\.dismissWindow) private var dismissWindow
-    
     @State private var isCounting: Bool = false
+    @Bindable var settingViewModel: SettingViewModel
+    
     
     //MARK: - BODY
     var body: some View {
@@ -45,6 +46,7 @@ struct ScriptView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     print("더 보기")
+                    isCounting = false
                     router.push(.result)
                     dismissWindow(id: "slideWindow")
                 }) {
@@ -54,25 +56,11 @@ struct ScriptView: View {
             }
         }
         .ornament(attachmentAnchor: .scene(UnitPoint(x: 0.5, y: -0.07)), contentAlignment: .top) {
-            VStack {
-                Button {
-                    isCounting.toggle()
-                } label: {
-                    ZStack {
-                        HStack(spacing: 6) {
-                            Image(systemName: isCounting ? "stop.fill" : "play.fill")
-                            Text(isCounting ? "0:0" : "Start")
-                        }
-                        .foregroundStyle(isCounting ? Color.red : Color.white)
-                    }
-                }
-                .tint(isCounting ? nil : Color.red)
-            }
-//            .offset(y: -30)
+            TimerView(isPlaying: $isCounting, settingViewModel: settingViewModel)
         }
     }
 }
 
 #Preview {
-    ScriptView(router: .init())
+    ScriptView(router: .init(), settingViewModel: .init())
 }

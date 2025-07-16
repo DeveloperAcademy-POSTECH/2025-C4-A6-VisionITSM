@@ -48,7 +48,7 @@ struct HomeView: View {
                 case .home:
                     HomeView()
                 case .script:
-                    ScriptView(router: router)
+                    ScriptView(router: router, settingViewModel: settingViewModel)
                 case .result:
                     ResultView(router: router, settingViewModel: settingViewModel)
                 }
