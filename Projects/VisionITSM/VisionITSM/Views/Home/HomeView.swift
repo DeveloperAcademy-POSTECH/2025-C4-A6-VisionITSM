@@ -45,7 +45,6 @@ struct HomeView: View {
                         GridItemView()
                     }
                 }
-
             }
             .sheet(isPresented: $homeViewModel.showingFilePicker) {
                 MultipleDocumentPicker(selectedPPTXURL: $homeViewModel.selectedPPTXURL, selectedPDFURL: $homeViewModel.selectedPDFURL, isPresented: $homeViewModel.showingFilePicker)
