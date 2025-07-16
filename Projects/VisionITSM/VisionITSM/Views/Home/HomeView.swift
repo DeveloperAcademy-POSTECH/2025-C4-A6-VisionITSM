@@ -16,7 +16,12 @@ struct HomeView: View {
     
     @State private var router = NavigationRouter()
     @State private var settingViewModel: SettingViewModel = .init()
+    @State private var parser = HybridPPTXParser()
  
+    @State private var isShowing: Bool = false
+    @State private var pptxURL: URL?
+    @State private var pdfURL: URL?
+    
     //MARK: - BODY
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -27,6 +32,9 @@ struct HomeView: View {
                     }
                 }
 
+            }
+            .sheet(isPresented: $isShowing) {
+                MultipleDocumentPicker(selectedPPTXURL: $pptxURL, selectedPDFURL: $pdfURL, isPresented: $isShowing)
             }
             .navigationTitle("Recents")
             .padding(.horizontal, 40)
