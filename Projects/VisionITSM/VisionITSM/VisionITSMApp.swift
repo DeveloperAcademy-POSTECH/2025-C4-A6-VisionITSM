@@ -10,7 +10,6 @@ import SwiftData
 
 @main
 struct VisionITSMApp: App {
-
     @State private var appModel: AppModel = AppModel()
     
     init() {

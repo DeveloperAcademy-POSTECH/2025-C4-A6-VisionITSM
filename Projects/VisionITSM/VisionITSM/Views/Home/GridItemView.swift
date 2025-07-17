@@ -26,10 +26,10 @@ struct GridItemView: View {
                     .frame(height: 138)
             }
             Text(title)
+                .lineLimit(1)
                 .font(.title)
             Text(date)
         }
-        .border(.red)
     }
 }
 

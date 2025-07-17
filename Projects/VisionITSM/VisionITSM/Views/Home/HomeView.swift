@@ -13,11 +13,14 @@ struct HomeView: View {
     //MARK: - PROPERTIES
     let columns = Array(repeating: GridItem(.adaptive(minimum: 256), spacing: 48), count: 1)
     
+    @State var homeViewModel: HomeViewModel = .init()
+    
     @State private var router = NavigationRouter()
-    @State private var settingViewModel: SettingViewModel = .init()
     @State private var parser = HybridPPTXParser()
     
-    @State private var homeViewModel: HomeViewModel = .init()
+    @State var settingViewModel: SettingViewModel = .init()
+    
+    @State private var parsingSheet: Bool = false
     
     @Environment(\.modelContext) private var context
     @Query(sort: \HomeModel.createAt, order: .reverse) private var keynotes: [HomeModel]
@@ -25,34 +28,36 @@ struct HomeView: View {
     //MARK: - BODY
     var body: some View {
         NavigationStack(path: $router.path) {
-            
-            VStack {
-                recentKeynoteView
-                
-                if parser.isLoading {
-                    loadingView
-                } else if homeViewModel.currentKeynote == nil {
-                    SelectView
-                } else {
-                    PresentButtonView
-                }
-            }
-            
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 48) {
+                    Button(action: {
+                        print("추가 버튼 클릭")
+                        homeViewModel.openPicker()
+                        
+                    }, label: {
+                        GridItemView(title: "Add New File", date: "Supports .pptx, .pdf", image: .gridNewButton)
+                    })
+                    .buttonBorderShape(.roundedRectangle(radius: 12))
+                    .buttonStyle(.plain)
+                    
                     ForEach(keynotes, id: \.self) { keynote in
                         Button {
                             print(keynote.title)
                             settingViewModel.isShowSetting.toggle()
+                            homeViewModel.currentKeynote = keynote
                         } label: {
                             GridItemView(title: keynote.title, date: "\(keynote.keynote.count)", image: keynote.keynote.first?.slideImage)
                         }
+                        .buttonBorderShape(.roundedRectangle(radius: 12))
                         .buttonStyle(.plain)
                     }
                 }
             }
             .sheet(isPresented: $homeViewModel.showingFilePicker) {
-                MultipleDocumentPicker(selectedPPTXURL: $homeViewModel.selectedPPTXURL, selectedPDFURL: $homeViewModel.selectedPDFURL, isPresented: $homeViewModel.showingFilePicker)
+                MultipleDocumentPicker(selectedPPTXURL: $homeViewModel.selectedPPTXURL, selectedPDFURL: $homeViewModel.selectedPDFURL, isPresented: $homeViewModel.showingFilePicker, isNext: $homeViewModel.showingParsing)
+            }
+            .sheet(isPresented: $homeViewModel.showingParsing) {
+                parsingModalView
             }
             .navigationTitle("Recents")
             .padding(.horizontal, 40)
@@ -61,20 +66,21 @@ struct HomeView: View {
                     Button(action: {
                         settingViewModel.isShowSetting.toggle()
                     }) {
-                        Image(systemName: "square.and.arrow.down")
+                        Image(systemName: "ellipsis")
                             .foregroundStyle(Color.secondary)
                     }
+                    .buttonBorderShape(.circle)
                 }
             }
             .sheet(isPresented: $settingViewModel.isShowSetting) {
-                SettingView(settingViewModel: settingViewModel, router: router)
+                SettingView(settingViewModel: SettingView, router: Route)
             }
             .navigationDestination(for: Route.self) { route in
                 switch route {
                 case .home:
                     HomeView()
                 case .script:
-                    ScriptView(router: router, settingViewModel: settingViewModel)
+                    ScriptView(router: router, settingViewModel: settingViewModel, keynote: homeViewModel.currentKeynote ?? HomeModel(title: "오류", keynote: []))
                 case .result:
                     ResultView(router: router, settingViewModel: settingViewModel)
                 }
@@ -85,36 +91,16 @@ struct HomeView: View {
             .onChange(of: parser.slides.last) {
                 selectKeynote()
             }
-            
         }
-      
     }
     
     //MARK: - VIEW
-    private var recentKeynoteView: some View {
-        HStack {
-            VStack {
-                Text("저장된 목록")
-                Button(action: {
-                    homeViewModel.resetSelect()
-                }, label: {
-                    Text("RESET")
-                })
-            }
-            Spacer()
-            List {
-                ForEach(keynotes, id: \.self) { item in
-                    Button {
-                        parser.isLoading = false
-                        homeViewModel.currentKeynote = item
-                    } label: {
-                        HStack {
-                            Text("제목: \(item.title)")
-                            Text("슬라이드: \(item.keynote.count)장")
-                        }
-                    }
-                }
-                .onDelete(perform: deleteKeynote)
+    private var parsingModalView: some View {
+        VStack {
+            if parser.isLoading {
+                loadingView
+            } else if homeViewModel.currentKeynote == nil {
+                SelectView
             }
         }
     }
@@ -131,9 +117,6 @@ struct HomeView: View {
     
     private var SelectView: some View {
         VStack(spacing: 20) {
-            Image(systemName: "doc.text")
-                .foregroundStyle(Color.gray)
-            
             Text("PPTX와 PDF 파일을 업로드하세요")
                 .font(.headline)
                 .foregroundStyle(Color.gray)
@@ -171,10 +154,9 @@ struct HomeView: View {
             
             if let pptx = homeViewModel.selectedPPTXURL, let pdf = homeViewModel.selectedPDFURL {
                 VStack(spacing: 10) {
-                    TextField(text: $homeViewModel.keynoteTitle, label: {
-                        Circle()
-                            .foregroundStyle(Color.blue)
-                    })
+                    TextField("Title: ", text: $homeViewModel.keynoteTitle)
+                        .font(.title)
+                        .padding(.horizontal, 36)
                     
                     Button {
                         parser.parseFiles(pptxURL: pptx, pdfURL: pdf)
@@ -187,19 +169,7 @@ struct HomeView: View {
                 .padding(.vertical, 16)
             }
         }
-    }
-    
-    private var PresentButtonView: some View {
-        VStack(spacing: 20) {
-            Text(homeViewModel.currentKeynote?.title ?? "제목없음")
-            
-            Button {
-                router.push(.script)
-            } label: {
-                Text("발표로 넘어가기")
-            }
-        }
-        .padding(.vertical, 36)
+        .padding(.vertical, 12)
     }
     
     
@@ -209,7 +179,9 @@ struct HomeView: View {
         let keynoteData = HomeModel(title: homeViewModel.keynoteTitle, keynote: keynote)
         context.insert(keynoteData)
         try? context.save()
+        homeViewModel.showingParsing = false
         homeViewModel.keynoteTitle = ""
+        homeViewModel.resetSelect()
     }
     
     private func deleteKeynote(at offsets: IndexSet) {
@@ -218,7 +190,7 @@ struct HomeView: View {
         }
         try? context.save()
     }
-    
+        
     private func selectKeynote() {
         homeViewModel.currentKeynote = HomeModel(title: homeViewModel.keynoteTitle, keynote: parser.slides)
         if let currentKeynoteSlider = homeViewModel.currentKeynote?.keynote {
@@ -229,5 +201,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(homeViewModel: .init())
 }

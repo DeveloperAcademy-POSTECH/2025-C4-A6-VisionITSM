@@ -17,6 +17,7 @@ struct SettingView: View {
     @Bindable var router: NavigationRouter
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openWindow) private var openWindow
+    
     //MARK: - 이머시브존1
 //    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     
@@ -24,7 +25,7 @@ struct SettingView: View {
     var body: some View {
         VStack {
             ZStack {
-                Text("Title")
+                Text("🛠️ Setting")
                     .font(.largeTitle)
                 HStack {
                     Button(action: {
@@ -33,6 +34,7 @@ struct SettingView: View {
                     }, label: {
                         Image(systemName: "chevron.left")
                     })
+                    .buttonBorderShape(.circle)
                     Spacer()
                     
                 }

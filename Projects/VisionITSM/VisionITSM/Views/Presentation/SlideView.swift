@@ -12,9 +12,11 @@ struct SlideView: View {
     
     //MARK: - BODY
     var body: some View {
-        Image(systemName: "xmark")
-            .resizable()
-            .scaledToFit()
+        VStack {
+            Image(systemName: "xmark")
+                .resizable()
+                .scaledToFit()
+        }
     }
 }
 

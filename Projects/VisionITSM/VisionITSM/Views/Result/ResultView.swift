@@ -25,10 +25,15 @@ struct ResultView: View {
                 Spacer()
             }
         }
-        .navigationTitle("Result")
+        .navigationBarBackButtonHidden(true)
         .padding(.horizontal, 44)
         .padding(.vertical, 20)
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Text("Result")
+                    .font(.largeTitle)
+            }
+            
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     print("Finish!")
@@ -36,6 +41,7 @@ struct ResultView: View {
                 }) {
                     Image(systemName: "checkmark")
                 }
+                .buttonBorderShape(.circle)
             }
         }
     }
