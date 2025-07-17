@@ -10,16 +10,18 @@ import SwiftUI
 struct ScriptView: View {
     //MARK: - PROPERTIES
     @Bindable var router: NavigationRouter
-    @Environment(\.dismissWindow) private var dismissWindow
     
     @State private var isCounting: Bool = false
+    @State private var isPop: Bool = false
     
     @Bindable var settingViewModel: SettingViewModel
     
     @Bindable var keynote: HomeModel
     
-//    @State var keynote: HomeModel
     @State private var currentIndex: Int = 0
+    
+    @Environment(\.dismissWindow) private var dismissWindow
+    @Environment(\.openWindow) private var openWindow
     
     //MARK: - BODY
     var body: some View {
@@ -30,12 +32,32 @@ struct ScriptView: View {
             
             PresentNoteView
         }
+        .popover(isPresented: $isPop, attachmentAnchor: .point(.topTrailing), arrowEdge: .bottom , content: {
+            HStack(content: {
+                Button(action: {
+                    isPop = false
+                }, label: {
+                    Image(systemName: "xmark")
+                })
+                Button(action: {
+                    isCounting = false
+                    settingViewModel.counter = 0
+                    currentIndex = 0
+                    dismissWindow(id: "slideWindow")
+                    openWindow(id: "slideWindow")
+                    
+                }, label: {
+                    Image(systemName: "return")
+                })
+            })
+            .frame(width: 180, height: 80)
+        })
         .task {
             settingViewModel.counter = 0
             currentIndex = 0
         }
         .ornament(attachmentAnchor: .scene(UnitPoint(x: 0.5, y: -0.08)), contentAlignment: .top) {
-            TimerView(isPlaying: $isCounting, settingViewModel: settingViewModel)
+            TimerView(isPlaying: $isCounting, settingViewModel: settingViewModel, router: router)
         }
         .safeAreaPadding([.top, .horizontal], 24)
         .safeAreaInset(edge: .top, content: {
@@ -69,9 +91,7 @@ struct ScriptView: View {
             Spacer()
             Button(action: {
                 print("더 보기")
-                isCounting = false
-                router.push(.result)
-                dismissWindow(id: "slideWindow")
+                isPop.toggle()
             }, label: {
                 Image(systemName: "ellipsis")
             })

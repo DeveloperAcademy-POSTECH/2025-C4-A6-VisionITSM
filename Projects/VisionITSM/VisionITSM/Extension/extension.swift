@@ -16,3 +16,12 @@ extension Int {
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }
+
+extension Date {
+    func toStringFormat() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.string(from: self)
+    }
+}

@@ -20,6 +20,7 @@ struct GridItemView: View {
                 Image(uiImage: slideImage)
                     .resizable()
                     .frame(height: 138)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
             } else {
                 Image(systemName: "xmark")
                     .resizable()

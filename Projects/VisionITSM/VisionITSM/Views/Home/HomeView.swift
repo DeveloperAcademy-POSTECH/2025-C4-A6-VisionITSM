@@ -21,6 +21,7 @@ struct HomeView: View {
     @State var settingViewModel: SettingViewModel = .init()
     
     @State private var parsingSheet: Bool = false
+    @State private var isModal: Bool = false
     
     @Environment(\.modelContext) private var context
     @Query(sort: \HomeModel.createAt, order: .reverse) private var keynotes: [HomeModel]
@@ -29,29 +30,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack(path: $router.path) {
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 48) {
-                    Button(action: {
-                        print("추가 버튼 클릭")
-                        homeViewModel.openPicker()
-                        
-                    }, label: {
-                        GridItemView(title: "Add New File", date: "Supports .pptx, .pdf", image: .gridNewButton)
-                    })
-                    .buttonBorderShape(.roundedRectangle(radius: 12))
-                    .buttonStyle(.plain)
-                    
-                    ForEach(keynotes, id: \.self) { keynote in
-                        Button {
-                            print(keynote.title)
-                            settingViewModel.isShowSetting.toggle()
-                            homeViewModel.currentKeynote = keynote
-                        } label: {
-                            GridItemView(title: keynote.title, date: "\(keynote.keynote.count)", image: keynote.keynote.first?.slideImage)
-                        }
-                        .buttonBorderShape(.roundedRectangle(radius: 12))
-                        .buttonStyle(.plain)
-                    }
-                }
+                GridListView
             }
             .sheet(isPresented: $homeViewModel.showingFilePicker) {
                 MultipleDocumentPicker(selectedPPTXURL: $homeViewModel.selectedPPTXURL, selectedPDFURL: $homeViewModel.selectedPDFURL, isPresented: $homeViewModel.showingFilePicker, isNext: $homeViewModel.showingParsing)
@@ -59,21 +38,25 @@ struct HomeView: View {
             .sheet(isPresented: $homeViewModel.showingParsing) {
                 parsingModalView
             }
+            .sheet(isPresented: $settingViewModel.isShowSetting) {
+                SettingView(settingViewModel: settingViewModel, router: router)
+            }
+            .sheet(isPresented: $isModal, content: {
+                ModalView
+            })
             .navigationTitle("Recents")
             .padding(.horizontal, 40)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        settingViewModel.isShowSetting.toggle()
+                        isModal.toggle()
+                        print("더 보기")
                     }) {
                         Image(systemName: "ellipsis")
                             .foregroundStyle(Color.secondary)
                     }
                     .buttonBorderShape(.circle)
                 }
-            }
-            .sheet(isPresented: $settingViewModel.isShowSetting) {
-                SettingView(settingViewModel: SettingView, router: Route)
             }
             .navigationDestination(for: Route.self) { route in
                 switch route {
@@ -95,6 +78,32 @@ struct HomeView: View {
     }
     
     //MARK: - VIEW
+    private var GridListView: some View {
+        LazyVGrid(columns: columns, spacing: 48) {
+            Button(action: {
+                print("추가 버튼 클릭")
+                homeViewModel.openPicker()
+                
+            }, label: {
+                GridItemView(title: "Add New File", date: "Supports .pptx, .pdf", image: .gridNewButton)
+            })
+            .buttonBorderShape(.roundedRectangle(radius: 12))
+            .buttonStyle(.plain)
+            
+            ForEach(keynotes, id: \.self) { keynote in
+                Button {
+                    print(keynote.title)
+                    settingViewModel.isShowSetting.toggle()
+                    homeViewModel.currentKeynote = keynote
+                } label: {
+                    GridItemView(title: keynote.title, date: keynote.createAt.toStringFormat(), image: keynote.keynote.first?.slideImage)
+                }
+                .buttonBorderShape(.roundedRectangle(radius: 12))
+                .buttonStyle(.plain)
+            }
+        }
+    }
+    
     private var parsingModalView: some View {
         VStack {
             if parser.isLoading {
@@ -172,6 +181,31 @@ struct HomeView: View {
         .padding(.vertical, 12)
     }
     
+    private var ModalView: some View {
+        VStack(spacing: 20) {
+            HStack {
+                Button(action: {
+                    isModal = false
+                }, label: {
+                    Image(systemName: "xmark")
+                })
+                Spacer()
+                Text("삭제할 키노트를 슬라이드 해주세요.")
+                    .font(.title)
+                Spacer()
+            }
+            .padding(.horizontal, 16)
+            List  {
+                ForEach(keynotes, id: \.self) { item in
+                    HStack {
+                        Text("제목: \(item.title)")
+                    }
+                }
+                .onDelete(perform: deleteKeynote)
+            }
+        }
+        .padding(.vertical, 16)
+    }
     
     
     //MARK: - FUNCTION
