@@ -82,7 +82,7 @@ struct HomeView: View {
             .task {
                 homeViewModel.resetSelect()
             }
-            .onChange(of: parser.slides.isEmpty) {
+            .onChange(of: parser.slides.last) {
                 selectKeynote()
             }
             
