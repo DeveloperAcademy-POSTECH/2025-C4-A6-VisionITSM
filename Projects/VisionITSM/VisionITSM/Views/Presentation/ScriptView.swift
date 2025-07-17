@@ -38,6 +38,7 @@ struct ScriptView: View {
                     Image(systemName: "xmark")
                 })
                 Button(action: {
+                    isPop = false
                     isCounting = false
                     settingViewModel.counter = 0
                     homeViewModel.currentIndex = 0
