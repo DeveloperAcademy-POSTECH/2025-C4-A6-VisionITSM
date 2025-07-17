@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct VisionITSMApp: App {
     @State private var appModel: AppModel = AppModel()
+    @State private var homeViewModel: HomeViewModel = .init()
     
     init() {
         TrackingSystem.registerSystem()
@@ -19,14 +20,14 @@ struct VisionITSMApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            HomeView(homeViewModel: homeViewModel)
                 .environment(appModel)
         }
         .modelContainer(for: HomeModel.self)
         .windowResizability(.contentSize)
         
         WindowGroup(id: "slideWindow") {
-            SlideView()
+            SlideView(homeViewModel: homeViewModel)
         }
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {

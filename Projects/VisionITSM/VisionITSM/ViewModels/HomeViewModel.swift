@@ -17,6 +17,8 @@ class HomeViewModel {
     
     var currentKeynote: HomeModel?
     
+    var currentIndex: Int = 0 
+    
     func resetSelect() {
         currentKeynote = nil
         selectedPDFURL = nil

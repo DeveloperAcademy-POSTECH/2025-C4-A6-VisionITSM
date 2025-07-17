@@ -14,11 +14,9 @@ struct ScriptView: View {
     @State private var isCounting: Bool = false
     @State private var isPop: Bool = false
     
+    @Bindable var homeViewModel: HomeViewModel
     @Bindable var settingViewModel: SettingViewModel
-    
     @Bindable var keynote: HomeModel
-    
-    @State private var currentIndex: Int = 0
     
     @Environment(\.dismissWindow) private var dismissWindow
     @Environment(\.openWindow) private var openWindow
@@ -42,7 +40,7 @@ struct ScriptView: View {
                 Button(action: {
                     isCounting = false
                     settingViewModel.counter = 0
-                    currentIndex = 0
+                    homeViewModel.currentIndex = 0
                     dismissWindow(id: "slideWindow")
                     openWindow(id: "slideWindow")
                     
@@ -54,7 +52,7 @@ struct ScriptView: View {
         })
         .task {
             settingViewModel.counter = 0
-            currentIndex = 0
+            homeViewModel.currentIndex = 0
         }
         .ornament(attachmentAnchor: .scene(UnitPoint(x: 0.5, y: -0.08)), contentAlignment: .top) {
             TimerView(isPlaying: $isCounting, settingViewModel: settingViewModel, router: router)
@@ -105,14 +103,14 @@ struct ScriptView: View {
     private var slideButtonView: some View {
         HStack(spacing: 36) {
             Button(action: {
-                currentIndex -= (currentIndex == 0) ? 0 : 1
+                homeViewModel.currentIndex -= (homeViewModel.currentIndex == 0) ? 0 : 1
             }, label: {
                 VStack(alignment: .center, spacing: 8) {
                     Text("Current Page")
-                    Image(uiImage: imageProcessing(keynote: keynote, isLeft: true))
+                    Image(uiImage: imageProcessing(keynote: homeViewModel.currentKeynote ?? .init(title: "오류", keynote: []), isLeft: true))
                         .resizable()
                         .frame(width: 256, height: 138)
-                    Text(getIndex(currentIndex: currentIndex, maxIndex: keynote.keynote.count - 1, isLeft: true))
+                    Text(getIndex(currentIndex: homeViewModel.currentIndex, maxIndex: keynote.keynote.count - 1, isLeft: true))
                 }
             })
             .buttonBorderShape(.roundedRectangle(radius: 12))
@@ -121,14 +119,14 @@ struct ScriptView: View {
             Spacer()
             
             Button(action: {
-                currentIndex += (currentIndex == keynote.keynote.count - 1) ? 0 : 1
+                homeViewModel.currentIndex += (homeViewModel.currentIndex == keynote.keynote.count - 1) ? 0 : 1
             }, label: {
                 VStack(alignment: .center, spacing: 8) {
                     Text("Next Page")
-                    Image(uiImage: imageProcessing(keynote: keynote, isLeft: false))
+                    Image(uiImage: imageProcessing(keynote: homeViewModel.currentKeynote ?? .init(title: "오류", keynote: []), isLeft: false))
                         .resizable()
                         .frame(width: 256, height: 138)
-                    Text(getIndex(currentIndex: currentIndex, maxIndex: keynote.keynote.count - 1, isLeft: false))
+                    Text(getIndex(currentIndex: homeViewModel.currentIndex, maxIndex: keynote.keynote.count - 1, isLeft: false))
                 }
             })
             .buttonBorderShape(.roundedRectangle(radius: 12))
@@ -140,8 +138,8 @@ struct ScriptView: View {
     
     private var PresentNoteView: some View {
         ScrollView() {
-            if !keynote.keynote.isEmpty {
-                Text(keynote.keynote[currentIndex].presenterNotes ?? "No Memo")
+            if !(homeViewModel.currentKeynote?.keynote.isEmpty ?? .init()) {
+                Text(homeViewModel.currentKeynote?.keynote[homeViewModel.currentIndex].presenterNotes ?? "No Memo")
             }
         }
     }
@@ -158,17 +156,17 @@ struct ScriptView: View {
     
     func imageProcessing(keynote: HomeModel, isLeft: Bool) -> UIImage {
         if isLeft {
-            return keynote.keynote.count == 0 ? .gridNewButton : keynote.keynote[currentIndex].slideImage ?? .gridNewButton
+            return keynote.keynote.count == 0 ? .gridNewButton : keynote.keynote[homeViewModel.currentIndex].slideImage ?? .gridNewButton
         } else {
-            if currentIndex == keynote.keynote.count - 1 {
+            if homeViewModel.currentIndex == keynote.keynote.count - 1 {
                 return .gridNewButton
             } else {
-                return keynote.keynote.count == 0 ? .gridNewButton : keynote.keynote[currentIndex + 1].slideImage ?? .gridNewButton
+                return keynote.keynote.count == 0 ? .gridNewButton : keynote.keynote[homeViewModel.currentIndex + 1].slideImage ?? .gridNewButton
             }
         }
     }
 }
 
 #Preview {
-    ScriptView(router: .init(), settingViewModel: .init(), keynote: .init(title: "QQQ", keynote: []))
+    ScriptView(router: .init(), homeViewModel: .init(), settingViewModel: .init(), keynote: .init(title: "QQQ", keynote: []))
 }

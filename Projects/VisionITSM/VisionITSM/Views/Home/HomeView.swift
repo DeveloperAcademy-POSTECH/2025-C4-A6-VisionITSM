@@ -13,7 +13,7 @@ struct HomeView: View {
     //MARK: - PROPERTIES
     let columns = Array(repeating: GridItem(.adaptive(minimum: 256), spacing: 48), count: 1)
     
-    @State var homeViewModel: HomeViewModel = .init()
+    @Bindable var homeViewModel: HomeViewModel
     
     @State private var router = NavigationRouter()
     @State private var parser = HybridPPTXParser()
@@ -61,9 +61,9 @@ struct HomeView: View {
             .navigationDestination(for: Route.self) { route in
                 switch route {
                 case .home:
-                    HomeView()
+                    HomeView(homeViewModel: homeViewModel)
                 case .script:
-                    ScriptView(router: router, settingViewModel: settingViewModel, keynote: homeViewModel.currentKeynote ?? HomeModel(title: "오류", keynote: []))
+                    ScriptView(router: router, homeViewModel: homeViewModel, settingViewModel: settingViewModel, keynote: homeViewModel.currentKeynote ?? HomeModel(title: "오류", keynote: []))
                 case .result:
                     ResultView(router: router, settingViewModel: settingViewModel)
                 }
