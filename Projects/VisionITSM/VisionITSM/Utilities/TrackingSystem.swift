@@ -42,14 +42,14 @@ public struct TrackingSystem: System {
             let deviceTransform = Transform(matrix: deviceAnchor.originFromAnchorTransform)
 
             // 사용자 시선 벡터 (정면 방향)
-            let lookDirection = deviceTransform.matrix.columns.2.xyz * -1
+//            let lookDirection = deviceTransform.matrix.columns.2.xyz * -1
 
             // 시선의 목표 지점 (예: 사용자보다 1m 앞)
-            let targetPosition = deviceTransform.translation + lookDirection * 1.0
+//            let targetPosition = deviceTransform.translation + lookDirection * 1.0
 
             // 해당 방향을 향해 회전
             entity.look(
-                at: targetPosition,
+                at: deviceTransform.translation,
                 from: entity.position(relativeTo: entity.parent),
                 relativeTo: entity.parent,
                 forward: .positiveZ
