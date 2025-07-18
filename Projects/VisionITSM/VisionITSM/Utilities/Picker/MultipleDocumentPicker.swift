@@ -11,6 +11,7 @@ struct MultipleDocumentPicker: UIViewControllerRepresentable {
     @Binding var selectedPPTXURL: URL?
     @Binding var selectedPDFURL: URL?
     @Binding var isPresented: Bool
+    @Binding var isNext: Bool
     
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
         let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.item])
@@ -49,6 +50,10 @@ struct MultipleDocumentPicker: UIViewControllerRepresentable {
                 } else if fileExtension == "pdf" {
                     parent.selectedPDFURL = url
                 }
+            }
+            if !(parent.selectedPDFURL == nil) && !(parent.selectedPPTXURL == nil) {
+                print("선택 완료")
+                parent.isNext = true
             }
             parent.isPresented = false
         }

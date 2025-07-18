@@ -20,16 +20,17 @@ struct GridItemView: View {
                 Image(uiImage: slideImage)
                     .resizable()
                     .frame(height: 138)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
             } else {
                 Image(systemName: "xmark")
                     .resizable()
                     .frame(height: 138)
             }
             Text(title)
+                .lineLimit(1)
                 .font(.title)
             Text(date)
         }
-        .border(.red)
     }
 }
 

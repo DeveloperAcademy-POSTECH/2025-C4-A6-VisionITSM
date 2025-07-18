@@ -12,9 +12,12 @@ class HomeViewModel {
     var selectedPPTXURL: URL?
     var selectedPDFURL: URL?
     var showingFilePicker = false
+    var showingParsing = false
     var keynoteTitle = ""
     
     var currentKeynote: HomeModel?
+    
+    var currentIndex: Int = 0 
     
     func resetSelect() {
         currentKeynote = nil

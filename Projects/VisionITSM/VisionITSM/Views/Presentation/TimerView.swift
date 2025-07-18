@@ -11,6 +11,8 @@ struct TimerView: View {
     //MARK: - PROPERTIES
     @Binding var isPlaying: Bool
     @Bindable var settingViewModel: SettingViewModel
+    @Bindable var router: NavigationRouter
+    @Environment(\.dismissWindow) private var dismissWindow
     
     var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -18,7 +20,13 @@ struct TimerView: View {
     var body: some View {
         VStack {
             Button {
-                isPlaying.toggle()
+                if isPlaying {
+                    isPlaying = false
+                    router.push(.result)
+                    dismissWindow(id: "slideWindow")
+                } else {
+                    isPlaying = true
+                }
             } label: {
                 ZStack {
                     HStack(spacing: 6) {
@@ -33,7 +41,7 @@ struct TimerView: View {
                     .foregroundStyle(isPlaying ? Color.red : Color.white)
                 }
             }
-            .tint(isPlaying ? nil : Color.red)
+            .tint(isPlaying ? nil : Color.green)
         }
     }
 }
