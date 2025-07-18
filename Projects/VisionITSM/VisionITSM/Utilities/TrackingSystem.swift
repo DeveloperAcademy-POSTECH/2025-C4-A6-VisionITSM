@@ -31,8 +31,28 @@ public struct TrackingSystem: System {
         }
     }
     
+    public func update(context: SceneUpdateContext) {
+        guard worldTrackingProvider.state == .running else { return }
+        guard let deviceAnchor = worldTrackingProvider.queryDeviceAnchor(atTimestamp: CACurrentMediaTime()) else { return }
+
+        // 사용자 위치 (기기 위치)
+        let deviceTransform = Transform(matrix: deviceAnchor.originFromAnchorTransform)
+        let userPosition = deviceTransform.translation
+
+        for entity in context.entities(matching: Self.query, updatingSystemWhen: .rendering) {
+            // 눈은 몸에 종속되어 움직이므로, 월드 기준 위치로부터 사용자 바라보도록 회전
+            let eyeWorldPosition = entity.position(relativeTo: nil)
+            
+            entity.look(
+                at: userPosition,
+                from: eyeWorldPosition,
+                relativeTo: nil,
+                forward: .positiveZ
+            )
+        }
+    }
     
-    
+    /*
     public func update(context: SceneUpdateContext) {
         guard worldTrackingProvider.state == .running else { return }
         guard let deviceAnchor = worldTrackingProvider.queryDeviceAnchor(atTimestamp: CACurrentMediaTime()) else { return }
@@ -55,7 +75,7 @@ public struct TrackingSystem: System {
                 forward: .positiveZ
             )
         }
-    }
+    }*/
     
 }
 private extension simd_float4 {

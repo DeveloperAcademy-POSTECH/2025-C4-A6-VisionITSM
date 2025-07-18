@@ -40,7 +40,17 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potato",
+        "visionitsmSkybox"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potato_0",
+        "Armature",
         "Armature"
       ],
       {
@@ -51,8 +61,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potato_0",
-        "Armature",
+        "potatoWeye",
         "Armature"
       ],
       {
@@ -73,10 +82,13 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "visionitsmSkybox"
+        "potatoWeye",
+        "Armature",
+        "Armature"
       ],
       {
-        "isExpanded" : true,
+        "disallowsFraming" : false,
+        "isExpanded" : false,
         "isLocked" : false
       },
       [
@@ -91,7 +103,6 @@
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
         "potato",
-        "Armature",
         "Armature"
       ],
       {
@@ -102,7 +113,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potatoWeye",
+        "potato",
         "Armature",
         "Armature"
       ],
@@ -121,26 +132,6 @@
         "disallowsFraming" : false,
         "isExpanded" : false,
         "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "potatoWeye",
-        "Armature"
-      ],
-      {
-        "disallowsFraming" : false,
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "potato_7"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
       }
     ]
   },
@@ -148,8 +139,7 @@
     "objectMetadataList" : [
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root",
-        "GridMaterial"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -157,7 +147,8 @@
       },
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root"
+        "Root",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
