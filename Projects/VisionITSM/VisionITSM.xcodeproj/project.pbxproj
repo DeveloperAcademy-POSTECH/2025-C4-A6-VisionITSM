@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		112E1E012E280F170073ADDC /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 112E1E002E280F170073ADDC /* ZIPFoundation */; };
 		246515F92E1E3FBC00B35BC9 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 246515F82E1E3FBC00B35BC9 /* RealityKitContent */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				246515F92E1E3FBC00B35BC9 /* RealityKitContent in Frameworks */,
+				112E1E012E280F170073ADDC /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +96,7 @@
 			name = VisionITSM;
 			packageProductDependencies = (
 				246515F82E1E3FBC00B35BC9 /* RealityKitContent */,
+				112E1E002E280F170073ADDC /* ZIPFoundation */,
 			);
 			productName = VisionITSM;
 			productReference = 246515F32E1E3FBC00B35BC9 /* VisionITSM.app */;
@@ -123,6 +126,9 @@
 			);
 			mainGroup = 246515EA2E1E3FBC00B35BC9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				112E1DFF2E280F170073ADDC /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 246515F42E1E3FBC00B35BC9 /* Products */;
 			projectDirPath = "";
@@ -354,7 +360,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		112E1DFF2E280F170073ADDC /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.19;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		112E1E002E280F170073ADDC /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 112E1DFF2E280F170073ADDC /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
 		246515F82E1E3FBC00B35BC9 /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;

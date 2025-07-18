@@ -9,22 +9,20 @@ import SwiftUI
 
 struct SettingView: View {
     //MARK: - PROPERTIES
-//    @State private var environment: String = "NURL"
-//    @State private var audienceSize: Float = 0.0
-//    @State private var distractionLevel: Float = 0.0
     @Bindable var settingViewModel: SettingViewModel
     
     @Bindable var router: NavigationRouter
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openWindow) private var openWindow
+    
     //MARK: - 이머시브존1
-//    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
+    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     
     //MARK: - BODY
     var body: some View {
         VStack {
             ZStack {
-                Text("Title")
+                Text("🛠️ Setting")
                     .font(.largeTitle)
                 HStack {
                     Button(action: {
@@ -33,6 +31,7 @@ struct SettingView: View {
                     }, label: {
                         Image(systemName: "chevron.left")
                     })
+                    .buttonBorderShape(.circle)
                     Spacer()
                     
                 }
@@ -122,8 +121,8 @@ struct SettingView: View {
                     router.push(.script)
                     openWindow(id: "slideWindow")
                     
-                    //MARK: - 이머시브존2
-                    /*
+//                    MARK: - 이머시브존2
+//
                     Task {
                         let result = await openImmersiveSpace(id: "ImmersiveSpace")
                         switch result {
@@ -134,7 +133,7 @@ struct SettingView: View {
                         @unknown default:
                             break
                         }
-                    }*/
+                    }
                 } label: {
                     Label {
                         Text("Enter Session")

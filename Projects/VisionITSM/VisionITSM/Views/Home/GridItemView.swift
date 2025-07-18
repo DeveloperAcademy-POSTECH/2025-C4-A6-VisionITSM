@@ -9,21 +9,31 @@ import SwiftUI
 
 struct GridItemView: View {
     //MARK: - PROPERTIES
+    var title: String
+    var date: String
+    var image: UIImage?
     
     //MARK: - BODY
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
-            Image(systemName: "xmark")
-                .resizable()
-                .frame(height: 138)
-            Text("C4 Apple Review")
+            if let slideImage = image {
+                Image(uiImage: slideImage)
+                    .resizable()
+                    .frame(height: 138)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            } else {
+                Image(systemName: "xmark")
+                    .resizable()
+                    .frame(height: 138)
+            }
+            Text(title)
+                .lineLimit(1)
                 .font(.title)
-            Text("Last viewed 2025.05.05")
+            Text(date)
         }
-        .border(.red)
     }
 }
 
 #Preview {
-    GridItemView()
+    GridItemView(title: "AAA", date: "VVV", image: UIImage(systemName: "xmark")!)
 }

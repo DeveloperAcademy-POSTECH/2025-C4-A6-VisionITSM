@@ -18,17 +18,22 @@ struct ResultView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 24) {
                     resultItemView(title: "Audience Size", result: settingViewModel.settingModel.background.title)
-                    resultItemView(title: "Dustraction Level", result: "\(settingViewModel.settingModel.audienceSize)")
-                    resultItemView(title: "Time Spent", result: "\(settingViewModel.settingModel.distractionLevel)")
+                    resultItemView(title: "Dustraction Level", result: "\(settingViewModel.settingModel.distractionLevel)")
+                    resultItemView(title: "Time Spent", result: "\(settingViewModel.counter.asTimeHMS)")
                 }
                 
                 Spacer()
             }
         }
-        .navigationTitle("Result")
+        .navigationBarBackButtonHidden(true)
         .padding(.horizontal, 44)
         .padding(.vertical, 20)
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Text("Result")
+                    .font(.largeTitle)
+            }
+            
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     print("Finish!")
@@ -36,6 +41,7 @@ struct ResultView: View {
                 }) {
                     Image(systemName: "checkmark")
                 }
+                .buttonBorderShape(.circle)
             }
         }
     }
