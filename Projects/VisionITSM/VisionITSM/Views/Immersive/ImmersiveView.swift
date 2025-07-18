@@ -20,7 +20,7 @@ struct ImmersiveView: View {
     
 //    let headPositionedEntitiesRoot: Entity = Entity()
     
-    let potato: Entity = Entity()
+//    let potato: Entity = Entity()
     
     var body: some View {
         RealityView { content in
@@ -32,10 +32,10 @@ struct ImmersiveView: View {
 //                headAnchor.name = "headAnchor"
 //                headAnchorRoot.addChild(headAnchor)
 
-                guard let potatoContent = immersiveBackground.findEntity(named: "potatoWeye") else {
-                    fatalError("⚠️ potatoWeye not found in immersiveBackground")
-                }
-                potato.addChild(potatoContent)
+//                guard let potatoContent = immersiveBackground.findEntity(named: "potatoWeye") else {
+//                    fatalError("⚠️ potatoWeye not found in immersiveBackground")
+//                }
+//                potato.addChild(potatoContent)
 //                guard let potatoContent = try? await Entity(named: "potatoWeye", in: realityKitContentBundle) else {
 //                    fatalError("⚠️ Failed to load potatoWeye from realityKitContentBundle")
 //                }
@@ -43,9 +43,9 @@ struct ImmersiveView: View {
 //                trackRoot.components.set(TrackingComponent())
 //                content.add(trackRoot)
 
-                for position in viewModel.spawnPoints {
-                    let potatoClone = potato.clone(recursive: true)
-                    potatoClone.setPosition(position, relativeTo: nil)
+//                for position in viewModel.spawnPoints {
+//                    let potatoClone = potato.clone(recursive: true)
+//                    potatoClone.setPosition(position, relativeTo: nil)
 
 
                     // Only add TrackingComponent to left and right eye:
@@ -58,13 +58,44 @@ struct ImmersiveView: View {
 //                    }
 //                    potatoClone.setPosition(position, relativeTo: nil)
 //                    potatoClone.transform.rotation = originalTransform.rotation
-                    potatoClone.components.set(TrackingComponent())
-                    content.add(potatoClone)
+//                    potatoClone.components.set(TrackingComponent())
+//                    content.add(potatoClone)
 
 
-                    playPotatoAnimation(on: potatoClone)
+//                    playPotatoAnimation(on: potatoClone)
+//                }
+
+                
+                let potatoAnchors = ["potatoWeye", "potatoWeye_1", "potatoWeye_2", "potatoWeye_3", "potatoWeye_4", "potatoWeye_5", "potatoWeye_6", "potatoWeye_7"]
+//                let potatoVariants = ["potatoWeye", "Moon", "Neptune", "Jupiter", "Pluto"]
+                let potatoVariants = ["potatoWeye"]
+                
+                let spawnCount = 3
+                let selectedAnchors = potatoAnchors.shuffled().prefix(spawnCount)
+                
+                for anchorName in selectedAnchors {
+                    if let anchorEntity = immersiveBackground.findEntity(named: anchorName) {
+                        print("🔎 anchorEntity 추가 중: \(anchorName)")
+                        
+                        
+                        // TODO :: 감자 눈이 안 지워지는 이슈가 있으며, anchorEntity를 다 지워버리면
+//                        print("⚠️ 삭제: \(anchorEntity.children)")
+//                        removeAllChildrenRecursively(from: anchorEntity)
+                                
+                        let randomName = potatoVariants.randomElement()!
+                        let randomModel = try await Entity(named: randomName, in: realityKitContentBundle)
+                        
+//                        print(anchorEntity.transform)
+//                        randomModel.transform = anchorEntity.transform
+                        
+                        anchorEntity.addChild(randomModel)
+//                        print(anchorEntity)
+                        
+                        playPotatoAnimation(on: randomModel)
+                    } else {
+                        print("⚠️ anchorEntity 추가 실패: \(anchorName)")
+                    }
                 }
-
 
             } catch {
                 fatalError("No entity to load")
@@ -77,7 +108,13 @@ struct ImmersiveView: View {
 }
 
 extension ImmersiveView {
-
+    func removeAllChildrenRecursively(from entity: Entity) {
+        for child in entity.children {
+//            print("⚠️ 삭제 중: \(child)")
+            removeAllChildrenRecursively(from: child)
+            child.removeFromParent()
+        }
+    }
     
     func playPotatoAnimation(on entity: Entity) {
         guard let animation = entity.availableAnimations.first else { return }
