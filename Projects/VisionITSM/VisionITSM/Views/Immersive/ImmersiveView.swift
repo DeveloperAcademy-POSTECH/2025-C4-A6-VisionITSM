@@ -32,12 +32,12 @@ struct ImmersiveView: View {
 //                headAnchor.name = "headAnchor"
 //                headAnchorRoot.addChild(headAnchor)
 
-//                guard let potatoContent = immersiveBackground.findEntity(named: "potatoWeye") else {
-//                    fatalError("⚠️ potatoWeye not found in immersiveBackground")
+//                guard let potatoContent = immersiveBackground.findEntity(named: "potato") else {
+//                    fatalError("⚠️ potato not found in immersiveBackground")
 //                }
 //                potato.addChild(potatoContent)
-//                guard let potatoContent = try? await Entity(named: "potatoWeye", in: realityKitContentBundle) else {
-//                    fatalError("⚠️ Failed to load potatoWeye from realityKitContentBundle")
+//                guard let potatoContent = try? await Entity(named: "potato", in: realityKitContentBundle) else {
+//                    fatalError("⚠️ Failed to load potato from realityKitContentBundle")
 //                }
 
 //                trackRoot.components.set(TrackingComponent())
@@ -66,9 +66,8 @@ struct ImmersiveView: View {
 //                }
 
                 
-                let potatoAnchors = ["potatoWeye", "potatoWeye_1", "potatoWeye_2", "potatoWeye_3", "potatoWeye_4", "potatoWeye_5", "potatoWeye_6", "potatoWeye_7"]
-//                let potatoVariants = ["potatoWeye", "Moon", "Neptune", "Jupiter", "Pluto"]
-                let potatoVariants = ["potatoWeye"]
+                let potatoAnchors = ["potato_1", "potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
+                let potatoVariants = ["potato", "potato2", "potato3", "potato4"]
                 
                 let spawnCount = 3
                 let selectedAnchors = potatoAnchors.shuffled().prefix(spawnCount)
