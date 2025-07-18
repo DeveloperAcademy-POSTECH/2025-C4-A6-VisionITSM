@@ -7,7 +7,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["GridMaterial", "visionitsmSkybox", "potato3WEmpty", "potato_0", "potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
+    reorder nameChildren = ["GridMaterial", "visionitsmSkybox", "potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
     def "GridMaterial" (
         active = true
         references = @Materials/GridMaterial.usda@
@@ -34,526 +34,108 @@ def Xform "Root"
         }
     }
 
-    def "potato3WEmpty" (
-        active = true
-        customData = {
-            float3 rotationEulerHint = (-1.5707964, 0, 0)
-        }
-        references = @potato3.usdz@
-    )
-    {
-        reorder nameChildren = ["Area", "Area_001", "Area_002", "Camera", "body", "_materials", "Armature", "env_light"]
-        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-3, 0, 0)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
     def "potato_1" (
         active = true
-        customData = {
-            float3 rotationEulerHint = (-1.5707964, 0, 0)
-        }
-        references = @potato.usdz@
+        references = @potato2.usdz@
     )
     {
-        float2 ui:nodegraph:node:pos = (-351.0017, 314.515)
-        int ui:nodegraph:node:stackingOrder = 1
-        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (5.1893682, 0, 0)
+        float3 xformOp:translate = (-52.781727, 0, -6.5137787)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Camera" (
-            active = false
-        )
-        {
-        }
-
-        over "Empty_002" (
-            active = false
-        )
-        {
-        }
-
-        over "_materials" (
-            active = false
-        )
-        {
-        }
-
-        over "Armature" (
-            active = false
-        )
-        {
-        }
-
-        over "Area" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_001" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_002" (
-            active = false
-        )
-        {
-        }
-
-        over "env_light" (
-            active = false
-        )
-        {
-        }
     }
 
     def "potato_2" (
         active = true
-        customData = {
-            float3 rotationEulerHint = (-1.5707964, 0, 0)
-        }
-        references = @potato.usdz@
+        references = @potato2.usdz@
     )
     {
-        float2 ui:nodegraph:node:pos = (-331.0017, 334.515)
-        int ui:nodegraph:node:stackingOrder = 2
-        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-7.2390833, -1.15484e-7, 3.874302e-7)
+        float3 xformOp:translate = (-37.07943, 0, -21.169807)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Camera" (
-            active = false
-        )
-        {
-        }
-
-        over "Empty_002" (
-            active = false
-        )
-        {
-        }
-
-        over "_materials" (
-            active = false
-        )
-        {
-        }
-
-        over "Armature" (
-            active = false
-        )
-        {
-        }
-
-        over "Area" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_001" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_002" (
-            active = false
-        )
-        {
-        }
-
-        over "env_light" (
-            active = false
-        )
-        {
-        }
     }
 
     def "potato_3" (
         active = true
-        customData = {
-            float3 rotationEulerHint = (-1.5707964, 0, 0)
-        }
-        references = @potato.usdz@
+        references = @potato2.usdz@
     )
     {
-        float2 ui:nodegraph:node:pos = (-311.0017, 354.515)
-        int ui:nodegraph:node:stackingOrder = 3
-        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-12.431113, -1.15484e-7, 3.874302e-7)
+        float3 xformOp:translate = (-18.241837, 0, -32.192444)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Camera" (
-            active = false
-        )
-        {
-        }
-
-        over "Empty_002" (
-            active = false
-        )
-        {
-        }
-
-        over "_materials" (
-            active = false
-        )
-        {
-        }
-
-        over "Armature" (
-            active = false
-        )
-        {
-        }
-
-        over "Area" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_001" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_002" (
-            active = false
-        )
-        {
-        }
-
-        over "env_light" (
-            active = false
-        )
-        {
-        }
     }
 
     def "potato_4" (
         active = true
-        customData = {
-            float3 rotationEulerHint = (-1.5707964, 0, 0)
-        }
-        references = @potato.usdz@
+        references = @potato2.usdz@
     )
     {
-        float2 ui:nodegraph:node:pos = (-291.0017, 374.515)
-        int ui:nodegraph:node:stackingOrder = 4
-        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-17.640194, -1.15484e-7, 8.6426735e-7)
+        float3 xformOp:translate = (11.96476, 0, -26.101677)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Camera" (
-            active = false
-        )
-        {
-        }
-
-        over "Empty_002" (
-            active = false
-        )
-        {
-        }
-
-        over "_materials" (
-            active = false
-        )
-        {
-        }
-
-        over "Armature" (
-            active = false
-        )
-        {
-        }
-
-        over "Area" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_001" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_002" (
-            active = false
-        )
-        {
-        }
-
-        over "env_light" (
-            active = false
-        )
-        {
-        }
     }
 
     def "potato_5" (
         active = true
-        customData = {
-            float3 rotationEulerHint = (-1.5707964, 0, 0)
-        }
-        references = @potato.usdz@
+        references = @potato2.usdz@
     )
     {
-        float2 ui:nodegraph:node:pos = (-331.0017, 334.515)
-        int ui:nodegraph:node:stackingOrder = 2
-        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (11.73499, 1.0803342e-7, 8.6426735e-7)
+        float3 xformOp:translate = (40.20298, 0, -1.8134308)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Camera" (
-            active = false
-        )
-        {
-        }
-
-        over "Empty_002" (
-            active = false
-        )
-        {
-        }
-
-        over "_materials" (
-            active = false
-        )
-        {
-        }
-
-        over "Armature" (
-            active = false
-        )
-        {
-        }
-
-        over "Area" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_001" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_002" (
-            active = false
-        )
-        {
-        }
-
-        over "env_light" (
-            active = false
-        )
-        {
-        }
     }
 
     def "potato_6" (
         active = true
-        customData = {
-            float3 rotationEulerHint = (-1.5707964, 0, 0)
-        }
-        references = @potato.usdz@
+        references = @potato2.usdz@
     )
     {
-        float2 ui:nodegraph:node:pos = (-311.0017, 354.515)
-        int ui:nodegraph:node:stackingOrder = 3
-        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (17.122938, 8.614734e-8, 0.0000022649765)
+        float3 xformOp:translate = (70.914505, -4.8122396, -7.8007355)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Camera" (
-            active = false
-        )
-        {
-        }
-
-        over "Empty_002" (
-            active = false
-        )
-        {
-        }
-
-        over "_materials" (
-            active = false
-        )
-        {
-        }
-
-        over "Armature" (
-            active = false
-        )
-        {
-        }
-
-        over "Area" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_001" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_002" (
-            active = false
-        )
-        {
-        }
-
-        over "env_light" (
-            active = false
-        )
-        {
-        }
     }
 
     def "potato_7" (
         active = true
-        customData = {
-            float3 rotationEulerHint = (-1.5707964, 0, 0)
-        }
-        references = @potato.usdz@
+        references = @potato2.usdz@
     )
     {
-        float2 ui:nodegraph:node:pos = (-291.0017, 374.515)
-        int ui:nodegraph:node:stackingOrder = 4
-        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (22.908306, 4.3213367e-7, 0.0000037252903)
+        float3 xformOp:translate = (70.45793, 0, 19.563606)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
-        over "Camera" (
-            active = false
-        )
+        over "Area_002"
         {
         }
 
-        over "Empty_002" (
-            active = false
-        )
+        over "Area_001"
         {
         }
 
-        over "_materials" (
-            active = false
-        )
+        over "Area"
         {
         }
 
-        over "Armature" (
-            active = false
-        )
+        over "Camera"
         {
         }
 
-        over "Area" (
-            active = false
-        )
+        over "Armature"
         {
         }
 
-        over "Area_001" (
-            active = false
-        )
+        over "Sphere"
         {
         }
 
-        over "Area_002" (
-            active = false
-        )
+        over "_materials"
         {
         }
 
-        over "env_light" (
-            active = false
-        )
-        {
-        }
-    }
-
-    def "potato_0" (
-        active = true
-        customData = {
-            float3 rotationEulerHint = (-1.5707964, 0, 0)
-        }
-        references = @potato.usdz@
-    )
-    {
-        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Camera" (
-            active = false
-        )
+        over "Empty_002"
         {
         }
 
-        over "Empty_002" (
-            active = false
-        )
-        {
-        }
-
-        over "_materials" (
-            active = false
-        )
-        {
-        }
-
-        over "Armature" (
-            active = false
-        )
-        {
-        }
-
-        over "Area" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_001" (
-            active = false
-        )
-        {
-        }
-
-        over "Area_002" (
-            active = false
-        )
-        {
-        }
-
-        over "env_light" (
-            active = false
-        )
+        over "env_light"
         {
         }
     }

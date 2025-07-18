@@ -66,32 +66,49 @@ struct ImmersiveView: View {
 //                }
 
                 
-                let potatoAnchors = ["potato_1", "potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
+                let potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
                 let potatoVariants = ["potato", "potato2", "potato3", "potato4"]
                 
                 let spawnCount = 3
-                let selectedAnchors = potatoAnchors.shuffled().prefix(spawnCount)
+                let selectedAnchors = Set(potatoAnchors.shuffled().prefix(spawnCount))
+                
+                for anchorName in potatoAnchors {
+                    if let anchorEntity = immersiveBackground.findEntity(named: anchorName) {
+                        anchorEntity.isEnabled = false
+                    }
+                }
                 
                 for anchorName in selectedAnchors {
                     if let anchorEntity = immersiveBackground.findEntity(named: anchorName) {
                         print("🔎 anchorEntity 추가 중: \(anchorName)")
                         
+                        // ✅ 자식 엔티티 비활성화
+                            deactivateAllChildren(of: anchorEntity)
                         
                         // TODO :: 감자 눈이 안 지워지는 이슈가 있으며, anchorEntity를 다 지워버리면
-//                        print("⚠️ 삭제: \(anchorEntity.children)")
-//                        removeAllChildrenRecursively(from: anchorEntity)
-                                
-                        let randomName = potatoVariants.randomElement()!
-                        let randomModel = try await Entity(named: randomName, in: realityKitContentBundle)
+                        //                        print("⚠️ 삭제: \(anchorEntity.children)")
+                        //                        removeAllChildrenRecursively(from: anchorEntity)
                         
-//                        print(anchorEntity.transform)
-//                        randomModel.transform = anchorEntity.transform
+                        anchorEntity.isEnabled = true
                         
-                        anchorEntity.addChild(randomModel)
-//                        print(anchorEntity)
-                        
-                        playPotatoAnimation(on: randomModel)
-                    } else {
+                        if selectedAnchors.contains(anchorName) {
+                            // 기존 자식 제거
+//                            removeAllChildrenRecursively(from: anchorEntity)
+                            
+                            
+                            
+                            let randomName = potatoVariants.randomElement()!
+                            let randomModel = try await Entity(named: randomName, in: realityKitContentBundle)
+                            
+                            //                        print(anchorEntity.transform)
+                            //                        randomModel.transform = anchorEntity.transform
+                            
+                            anchorEntity.addChild(randomModel)
+                            //                        print(anchorEntity)
+                            
+                            playPotatoAnimation(on: randomModel)
+                        }
+                    }else {
                         print("⚠️ anchorEntity 추가 실패: \(anchorName)")
                     }
                 }
@@ -107,11 +124,19 @@ struct ImmersiveView: View {
 }
 
 extension ImmersiveView {
+    /*
     func removeAllChildrenRecursively(from entity: Entity) {
         for child in entity.children {
 //            print("⚠️ 삭제 중: \(child)")
             removeAllChildrenRecursively(from: child)
             child.removeFromParent()
+        }
+    }*/
+    
+    func deactivateAllChildren(of entity: Entity) {
+        for child in entity.children {
+            child.isEnabled = false
+            deactivateAllChildren(of: child)
         }
     }
     
