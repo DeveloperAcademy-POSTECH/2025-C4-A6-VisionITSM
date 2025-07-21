@@ -14,57 +14,15 @@ struct ImmersiveView: View {
     @Environment(AppModel.self) private var appModel
     @StateObject private var viewModel = AudienceSpawnViewModel()
     
-//    let trackRoot: Entity = Entity()
-    
-//    let headAnchorRoot: Entity = Entity()
-    
-//    let headPositionedEntitiesRoot: Entity = Entity()
-    
-//    let potato: Entity = Entity()
-    
     var body: some View {
+        
+        var potatoPositions: [SIMD3<Float>] = []    // 랜덤 배치되는 감자 청중의 위치를 저장하여 조명 등의 기능에 사용될 위치정보
+        
         RealityView { content in
             do {
                 let immersiveBackground = try await Entity(named: "Immersive", in: realityKitContentBundle)
                 content.add(immersiveBackground)
-
-//                let headAnchor = AnchorEntity(.head)
-//                headAnchor.name = "headAnchor"
-//                headAnchorRoot.addChild(headAnchor)
-
-//                guard let potatoContent = immersiveBackground.findEntity(named: "potato") else {
-//                    fatalError("⚠️ potato not found in immersiveBackground")
-//                }
-//                potato.addChild(potatoContent)
-//                guard let potatoContent = try? await Entity(named: "potato", in: realityKitContentBundle) else {
-//                    fatalError("⚠️ Failed to load potato from realityKitContentBundle")
-//                }
-
-//                trackRoot.components.set(TrackingComponent())
-//                content.add(trackRoot)
-
-//                for position in viewModel.spawnPoints {
-//                    let potatoClone = potato.clone(recursive: true)
-//                    potatoClone.setPosition(position, relativeTo: nil)
-
-
-                    // Only add TrackingComponent to left and right eye:
-//                    ["Sphere_001", "Sphere_002"].forEach { name in
-//                        if let eye = potatoClone.findEntity(named: name) {
-////                            eye.components.set(TrackingComponent())
-//                        } else {
-//                            print("⚠️ Entity named \(name) not found in clone")
-//                        }
-//                    }
-//                    potatoClone.setPosition(position, relativeTo: nil)
-//                    potatoClone.transform.rotation = originalTransform.rotation
-//                    potatoClone.components.set(TrackingComponent())
-//                    content.add(potatoClone)
-
-
-//                    playPotatoAnimation(on: potatoClone)
-//                }
-
+                
                 
                 let potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
                 let potatoVariants = ["potato", "potato2", "potato3", "potato4"]
@@ -83,30 +41,21 @@ struct ImmersiveView: View {
                         print("🔎 anchorEntity 추가 중: \(anchorName)")
                         
                         // ✅ 자식 엔티티 비활성화
-                            deactivateAllChildren(of: anchorEntity)
-                        
-                        // TODO :: 감자 눈이 안 지워지는 이슈가 있으며, anchorEntity를 다 지워버리면
-                        //                        print("⚠️ 삭제: \(anchorEntity.children)")
-                        //                        removeAllChildrenRecursively(from: anchorEntity)
+                        deactivateAllChildren(of: anchorEntity)
                         
                         anchorEntity.isEnabled = true
                         
                         if selectedAnchors.contains(anchorName) {
-                            // 기존 자식 제거
-//                            removeAllChildrenRecursively(from: anchorEntity)
-                            
-                            
                             
                             let randomName = potatoVariants.randomElement()!
                             let randomModel = try await Entity(named: randomName, in: realityKitContentBundle)
                             
-                            //                        print(anchorEntity.transform)
-                            //                        randomModel.transform = anchorEntity.transform
                             
                             anchorEntity.addChild(randomModel)
-                            //                        print(anchorEntity)
                             
-                            // Eye tracking component 추가
+                            let position = anchorEntity.position(relativeTo: nil)
+                            potatoPositions.append(position)
+                            
                             ["rightEye", "leftEyeball", "rightEye_001"].forEach { eyeName in
                                 if let eye = randomModel.findEntity(named: eyeName) {
                                     eye.components.set(TrackingComponent())
@@ -123,7 +72,27 @@ struct ImmersiveView: View {
                         print("⚠️ anchorEntity 추가 실패: \(anchorName)")
                     }
                 }
+                if !potatoPositions.isEmpty {
+                    let averagePosition = potatoPositions.reduce(SIMD3<Float>(0,0,0), +) / Float(potatoPositions.count)
 
+                    let lightEntity = Entity()
+                    /*
+                     let light = DirectionalLightComponent(color: .white, intensity: 5000, isRealWorldProxy: false)
+                     lightEntity.components.set(light)
+                     */
+                    var light = DirectionalLightComponent()
+                    light.intensity = 5000
+                    lightEntity.components.set(light)
+
+                    // 감자들의 중심을 비추도록 방향 설정
+                    lightEntity.look(
+                        at: averagePosition,
+                        from: averagePosition + SIMD3<Float>(2, 3, 2),  // 위에서 비추도록 offset
+                        relativeTo: nil
+                    )
+
+                    content.add(lightEntity)
+                }
             } catch {
                 fatalError("No entity to load")
             }
@@ -135,14 +104,6 @@ struct ImmersiveView: View {
 }
 
 extension ImmersiveView {
-    /*
-    func removeAllChildrenRecursively(from entity: Entity) {
-        for child in entity.children {
-//            print("⚠️ 삭제 중: \(child)")
-            removeAllChildrenRecursively(from: child)
-            child.removeFromParent()
-        }
-    }*/
     
     func deactivateAllChildren(of entity: Entity) {
         for child in entity.children {
@@ -153,12 +114,12 @@ extension ImmersiveView {
     
     func playPotatoAnimation(on entity: Entity) {
         guard let animation = entity.availableAnimations.first else { return }
-
+        
         let delay = Double.random(in: 0..<0.5)
-
+        
         Task {
             try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
-
+            
             let repeated = animation.repeat(count: .max)
             entity.playAnimation(repeated, transitionDuration: 1, startsPaused: false)
         }
