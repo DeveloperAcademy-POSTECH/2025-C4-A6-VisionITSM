@@ -106,6 +106,17 @@ struct ImmersiveView: View {
                             anchorEntity.addChild(randomModel)
                             //                        print(anchorEntity)
                             
+                            // Eye tracking component 추가
+                            ["rightEye", "leftEyeball", "rightEye_001"].forEach { eyeName in
+                                if let eye = randomModel.findEntity(named: eyeName) {
+                                    eye.components.set(TrackingComponent())
+                                } else {
+                                    print("⚠️ 눈 엔티티 \(eyeName) 찾을 수 없음 in \(randomName)")
+                                }
+                            }
+                            randomModel.setPosition(randomModel.position, relativeTo: nil)
+                            content.add(randomModel)
+                            
                             playPotatoAnimation(on: randomModel)
                         }
                     }else {
