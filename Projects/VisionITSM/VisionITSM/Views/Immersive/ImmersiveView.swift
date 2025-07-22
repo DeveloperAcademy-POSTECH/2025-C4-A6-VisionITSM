@@ -100,7 +100,7 @@ struct ImmersiveView: View {
         .onAppear {
             viewModel.generateSpawnPositions()
         }
-    }
+    } 
 }
 
 extension ImmersiveView {
