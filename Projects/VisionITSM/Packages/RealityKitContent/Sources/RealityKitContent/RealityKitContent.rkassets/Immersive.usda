@@ -8,12 +8,14 @@
 def Xform "Root"
 {
     reorder nameChildren = ["GridMaterial", "visionitsmSkybox", "potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
+    reorder nameChildren = ["GridMaterial", "visionitsmSkybox", "potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "SpawnSlidePosition"]
     def "GridMaterial" (
         active = true
         references = @Materials/GridMaterial.usda@
     )
     {
         float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, -42.425, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
@@ -50,6 +52,7 @@ def Xform "Root"
     }
 
     def "potato_7" (
+    def "potato_2" (
         active = true
         customData = {
             float3 rotationEulerHint = (-1.5707965, -0.17453292, 1.8913795e-7)
@@ -99,12 +102,16 @@ def Xform "Root"
         }
     }
 
-    def "potato3" (
+
+    def "potato_3" (
+
         active = true
         customData = {
             float3 rotationEulerHint = (-1.5707965, 0.52359873, 1.720638e-8)
         }
-        prepend references = @potato3.usdz@
+
+        references = @potato3.usdz@
+
     )
     {
         quatf xformOp:orient = (0.6830126, -0.6830128, 0.18301266, 0.18301272)
@@ -113,12 +120,16 @@ def Xform "Root"
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
-    def "potato" (
+
+    def "potato_4" (
+
         active = true
         customData = {
             float3 rotationEulerHint = (-1.5707965, 0.17453292, -1.0591725e-7)
         }
-        prepend references = @potato.usdz@
+
+        references = @potato.usdz@
+
     )
     {
         quatf xformOp:orient = (0.704416, -0.7044161, 0.06162845, 0.061628386)
@@ -127,12 +138,16 @@ def Xform "Root"
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
-    def "potato4" (
+
+    def "potato_5" (
+
         active = true
         customData = {
             float3 rotationEulerHint = (-1.5707967, 0.6981317, -7.780833e-8)
         }
-        prepend references = @potato4.usdz@
+
+        references = @potato4.usdz@
+
     )
     {
         quatf xformOp:orient = (0.6644629, -0.66446316, 0.24184473, 0.24184477)
@@ -140,5 +155,34 @@ def Xform "Root"
         float3 xformOp:translate = (-46.286022, -42.425, -22.755333)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
+
+
+    def Cube "SpawnSlidePosition" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/SpawnSlidePosition/DefaultMaterial>
+        double size = 0.2
+        float3 xformOp:translate = (6.62082, 3.6440868, 81.68709)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/SpawnSlidePosition/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:opacity = 0
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+
 }
 

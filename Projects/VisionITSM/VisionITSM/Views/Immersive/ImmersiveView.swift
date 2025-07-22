@@ -14,6 +14,17 @@ struct ImmersiveView: View {
     @Environment(AppModel.self) private var appModel
     @StateObject private var viewModel = AudienceSpawnViewModel()
     
+
+//    let trackRoot: Entity = Entity()
+    
+//    let headAnchorRoot: Entity = Entity()
+    
+//    let headPositionedEntitiesRoot: Entity = Entity()
+    
+//    let potato: Entity = Entity()
+    let spawnSliderPosition: Entity = Entity()
+    
+
     var body: some View {
         
         var potatoPositions: [SIMD3<Float>] = []    // 랜덤 배치되는 감자 청중의 위치를 저장하여 조명 등의 기능에 사용될 위치정보
@@ -25,9 +36,13 @@ struct ImmersiveView: View {
                 
                 
                 let potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
+                let potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5"
+//                                     , "potato_6", "potato_7"
+                ]
                 let potatoVariants = ["potato", "potato2", "potato3", "potato4"]
                 
                 let spawnCount = 3
+                let spawnCount = 5
                 let selectedAnchors = Set(potatoAnchors.shuffled().prefix(spawnCount))
                 
                 for anchorName in potatoAnchors {
@@ -72,8 +87,10 @@ struct ImmersiveView: View {
                         print("⚠️ anchorEntity 추가 실패: \(anchorName)")
                     }
                 }
+
                 if !potatoPositions.isEmpty {
                     let averagePosition = potatoPositions.reduce(SIMD3<Float>(0,0,0), +) / Float(potatoPositions.count)
+
 
                     let lightEntity = Entity()
                     /*
@@ -92,6 +109,11 @@ struct ImmersiveView: View {
                     )
 
                     content.add(lightEntity)
+
+                    
+                    spawnSliderPosition.setPosition(spawnSliderPosition.position, relativeTo: nil)
+                    content.add(spawnSliderPosition)
+
                 }
             } catch {
                 fatalError("No entity to load")

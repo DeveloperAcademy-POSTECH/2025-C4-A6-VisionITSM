@@ -32,11 +32,11 @@ struct VisionITSMApp: App {
         WindowGroup(id: "slideWindow") {
             SlideView(homeViewModel: homeViewModel)
         }
-        .defaultWindowPlacement { content, context in
-            guard let contentWindow = context.windows.first(where: { $0.id == "home" }) else { return WindowPlacement(nil)
-            }
-            return WindowPlacement(.above(contentWindow))
-        }
+//        .defaultWindowPlacement { content, context in
+//            guard let contentWindow = context.windows.first(where: { $0.id == "home" }) else { return WindowPlacement(nil)
+//            }
+//            return WindowPlacement(.above(contentWindow))
+//        }
         
         
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
