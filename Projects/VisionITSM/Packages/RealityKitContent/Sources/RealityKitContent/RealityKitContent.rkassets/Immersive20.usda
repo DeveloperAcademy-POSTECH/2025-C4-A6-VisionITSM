@@ -1,0 +1,143 @@
+#usda 1.0
+(
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["GridMaterial", "visionitsmSkybox", "potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
+    def "GridMaterial" (
+        active = true
+        references = @Materials/GridMaterial.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "visionitsmSkybox" (
+        active = true
+        references = @visionitsmSkybox.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "SkySphere"
+        {
+            over "SkySphere_mat"
+            {
+                asset inputs:SkySphere_Texture = @visionitsmSkybox1.jpeg@
+            }
+        }
+    }
+
+    def "potato_1" (
+        active = true
+        references = @potato2.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-52.781727, 0, -6.5137787)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_2" (
+        active = true
+        references = @potato2.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-37.07943, 0, -21.169807)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_3" (
+        active = true
+        references = @potato2.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-18.241837, 0, -32.192444)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_4" (
+        active = true
+        references = @potato2.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (11.96476, 0, -26.101677)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_5" (
+        active = true
+        references = @potato2.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (40.20298, 0, -1.8134308)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_6" (
+        active = true
+        references = @potato2.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (70.914505, -4.8122396, -7.8007355)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_7" (
+        active = true
+        references = @potato2.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (70.45793, 0, 19.563606)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Area_002"
+        {
+        }
+
+        over "Area_001"
+        {
+        }
+
+        over "Area"
+        {
+        }
+
+        over "Camera"
+        {
+        }
+
+        over "Armature"
+        {
+        }
+
+        over "Sphere"
+        {
+        }
+
+        over "_materials"
+        {
+        }
+
+        over "Empty_002"
+        {
+        }
+
+        over "env_light"
+        {
+        }
+    }
+}
+

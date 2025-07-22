@@ -12,6 +12,7 @@ import SwiftData
 struct VisionITSMApp: App {
     @State private var appModel: AppModel = AppModel()
     @State private var homeViewModel: HomeViewModel = .init()
+    @State private var settingViewModel: SettingViewModel = SettingViewModel()
     
     init() {
         TrackingSystem.registerSystem()
@@ -42,6 +43,7 @@ struct VisionITSMApp: App {
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()
                 .environment(appModel)
+                .environment(settingViewModel)
                 .onAppear {
                     appModel.immersiveSpaceState = .open
                 }
