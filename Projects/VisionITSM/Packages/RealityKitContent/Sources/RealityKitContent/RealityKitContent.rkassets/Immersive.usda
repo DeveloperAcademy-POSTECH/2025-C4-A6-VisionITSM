@@ -23,6 +23,7 @@ def Xform "Root"
     )
     {
         float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "SkySphere"
@@ -34,73 +35,31 @@ def Xform "Root"
         }
     }
 
-    def "potato_1" (
-        active = true
-        references = @potato2.usdz@
-    )
-    {
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-52.781727, 0, -6.5137787)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
     def "potato_2" (
         active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707961, 0, -3.7827583e-8)
+        }
         references = @potato2.usdz@
     )
     {
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-37.07943, 0, -21.169807)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def "potato_3" (
-        active = true
-        references = @potato2.usdz@
-    )
-    {
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-18.241837, 0, -32.192444)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def "potato_4" (
-        active = true
-        references = @potato2.usdz@
-    )
-    {
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (11.96476, 0, -26.101677)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def "potato_5" (
-        active = true
-        references = @potato2.usdz@
-    )
-    {
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (40.20298, 0, -1.8134308)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def "potato_6" (
-        active = true
-        references = @potato2.usdz@
-    )
-    {
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (70.914505, -4.8122396, -7.8007355)
+        quatf xformOp:orient = (0.7071068, -0.7071067, 1.337407e-8, -1.3374072e-8)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (19.550434, -42.425, -48.028374)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
     def "potato_7" (
         active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707965, -0.17453292, 1.8913795e-7)
+        }
         references = @potato2.usdz@
     )
     {
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (70.45793, 0, 19.563606)
+        quatf xformOp:orient = (0.704416, -0.7044161, -0.06162848, -0.06162836)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (41.232155, -42.425, -38.75045)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "Area_002"
@@ -138,6 +97,48 @@ def Xform "Root"
         over "env_light"
         {
         }
+    }
+
+    def "potato3" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707965, 0.52359873, 1.720638e-8)
+        }
+        prepend references = @potato3.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.6830126, -0.6830128, 0.18301266, 0.18301272)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (-27.405228, -42.425, -43.72101)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707965, 0.17453292, -1.0591725e-7)
+        }
+        prepend references = @potato.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.704416, -0.7044161, 0.06162845, 0.061628386)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (-4.5550575, -42.667614, -51.376167)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato4" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707967, 0.6981317, -7.780833e-8)
+        }
+        prepend references = @potato4.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.6644629, -0.66446316, 0.24184473, 0.24184477)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (-46.286022, -42.425, -22.755333)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
 
