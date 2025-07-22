@@ -14,14 +14,7 @@ struct ImmersiveView: View {
     @Environment(AppModel.self) private var appModel
     @StateObject private var viewModel = AudienceSpawnViewModel()
     
-
-//    let trackRoot: Entity = Entity()
     
-//    let headAnchorRoot: Entity = Entity()
-    
-//    let headPositionedEntitiesRoot: Entity = Entity()
-    
-//    let potato: Entity = Entity()
     let spawnSliderPosition: Entity = Entity()
     
 
@@ -35,13 +28,12 @@ struct ImmersiveView: View {
                 content.add(immersiveBackground)
                 
                 
-                let potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
+                
                 let potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5"
-//                                     , "potato_6", "potato_7"
+                                     //                                     , "potato_6", "potato_7"
                 ]
                 let potatoVariants = ["potato", "potato2", "potato3", "potato4"]
                 
-                let spawnCount = 3
                 let spawnCount = 5
                 let selectedAnchors = Set(potatoAnchors.shuffled().prefix(spawnCount))
                 
@@ -57,10 +49,12 @@ struct ImmersiveView: View {
                         
                         // ✅ 자식 엔티티 비활성화
                         deactivateAllChildren(of: anchorEntity)
+
                         
                         anchorEntity.isEnabled = true
                         
                         if selectedAnchors.contains(anchorName) {
+
                             
                             let randomName = potatoVariants.randomElement()!
                             let randomModel = try await Entity(named: randomName, in: realityKitContentBundle)
@@ -117,12 +111,12 @@ struct ImmersiveView: View {
                 }
             } catch {
                 fatalError("No entity to load")
-            }
         }
+    }
         .onAppear {
             viewModel.generateSpawnPositions()
         }
-    }
+}
 }
 
 extension ImmersiveView {
