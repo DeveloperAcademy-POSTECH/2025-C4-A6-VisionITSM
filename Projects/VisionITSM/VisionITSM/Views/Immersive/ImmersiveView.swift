@@ -52,9 +52,9 @@ struct ImmersiveView: View {
                 let immersiveBackground = try await Entity(named: backgroundName, in: realityKitContentBundle)
                 content.add(immersiveBackground)
                 
-//                guard let spawnSliderPosition = immersiveBackground.findEntity(named: "SpawnSlidePosition") else {
-//                    fatalError("spawnSliderPosition 엔티티를 찾을 수 없습니다")
-//                }
+                guard let spawnSliderPosition = immersiveBackground.findEntity(named: "SpawnSlidePosition") else {
+                    fatalError("spawnSliderPosition 엔티티를 찾을 수 없습니다")
+                }
                 
                 let potatoVariants = ["potato", "potato2", "potato3", "potato4"]
                 
@@ -123,9 +123,9 @@ struct ImmersiveView: View {
                     
                     content.add(lightEntity)
                     
-                    // 이 위치는 RC Pro에서 설정한 위치
-//                    spawnSliderPosition.setPosition(spawnSliderPosition.position, relativeTo: nil)
-//                    content.add(spawnSliderPosition)
+//                     이 위치는 RC Pro에서 설정한 위치
+                    spawnSliderPosition.setPosition(spawnSliderPosition.position, relativeTo: nil)
+                    content.add(spawnSliderPosition)
                     
                 }
             } catch {
