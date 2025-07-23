@@ -42,7 +42,7 @@ struct ImmersiveView: View {
                 let immersiveBackground = try await Entity(named: backgroundName, in: realityKitContentBundle)
                 content.add(immersiveBackground)
                 
-                let potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
+                let potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5"]
                 let potatoVariants = ["potato", "potato2", "potato3", "potato4"]
                 
                 let selectedAnchors = Set(potatoAnchors).shuffled().prefix(spawnCount)
