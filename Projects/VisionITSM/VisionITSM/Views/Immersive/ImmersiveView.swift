@@ -14,7 +14,7 @@ struct ImmersiveView: View {
     @Environment(AppModel.self) private var appModel
     @StateObject private var viewModel = AudienceSpawnViewModel()
     
-    let spawnSliderPosition: Entity = Entity()
+//    let spawnSliderPosition: Entity = Entity()
     
     var body: some View {
         
@@ -25,11 +25,14 @@ struct ImmersiveView: View {
                 let immersiveBackground = try await Entity(named: "Immersive", in: realityKitContentBundle)
                 content.add(immersiveBackground)
                 
+                guard let spawnSliderPosition = immersiveBackground.findEntity(named: "SpawnSlidePosition") else {
+                    fatalError("spawnSliderPosition 엔티티를 찾을 수 없습니다")
+                }
                 
-                let potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7"]
+                let potatoAnchors = ["potato", "potato_2", "potato3", "potato4", "potato_7"]
                 let potatoVariants = ["potato", "potato2", "potato3", "potato4"]
                 
-                let spawnCount = 3
+                let spawnCount = 5
                 let selectedAnchors = Set(potatoAnchors.shuffled().prefix(spawnCount))
                 
                 for anchorName in potatoAnchors {
@@ -95,8 +98,10 @@ struct ImmersiveView: View {
                     
                     content.add(lightEntity)
                     
+                    // 이 위치는 RC Pro에서 설정한 위치
                     spawnSliderPosition.setPosition(spawnSliderPosition.position, relativeTo: nil)
                     content.add(spawnSliderPosition)
+                    
                 }
             } catch {
                 fatalError("No entity to load")
