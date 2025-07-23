@@ -59,6 +59,18 @@
       }
     ]
   },
+  "7DD061F7-77E1-4380-8219-E6BEB16655A8" : {
+    "objectMetadataList" : [
+      [
+        "7DD061F7-77E1-4380-8219-E6BEB16655A8",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "919EBBA3-1BEE-4996-AA78-74001E2FB9CA" : {
     "objectMetadataList" : [
       [
@@ -85,7 +97,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potato_0",
+        "potatoWeye",
         "Armature"
       ],
       {
@@ -197,7 +209,8 @@
         "Armature"
       ],
       {
-        "isExpanded" : true,
+        "disallowsFraming" : false,
+        "isExpanded" : false,
         "isLocked" : false
       }
     ]

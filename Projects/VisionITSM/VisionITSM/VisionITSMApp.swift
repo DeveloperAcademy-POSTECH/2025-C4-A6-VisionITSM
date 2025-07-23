@@ -23,6 +23,7 @@ struct VisionITSMApp: App {
         WindowGroup(id: "home") {
             HomeView(homeViewModel: homeViewModel)
                 .environment(appModel)
+                .environment(settingViewModel)
         }
         .modelContainer(for: HomeModel.self)
         .windowResizability(.contentSize)
