@@ -14,6 +14,8 @@ struct ImmersiveView: View {
     @Environment(AppModel.self) private var appModel
     @StateObject private var viewModel = AudienceSpawnViewModel()
     
+    let spawnSliderPosition: Entity = Entity()
+    
     var body: some View {
         
         var potatoPositions: [SIMD3<Float>] = []    // 랜덤 배치되는 감자 청중의 위치를 저장하여 조명 등의 기능에 사용될 위치정보
@@ -90,8 +92,11 @@ struct ImmersiveView: View {
                         from: averagePosition + SIMD3<Float>(2, 3, 2),  // 위에서 비추도록 offset
                         relativeTo: nil
                     )
-
+                    
                     content.add(lightEntity)
+                    
+                    spawnSliderPosition.setPosition(spawnSliderPosition.position, relativeTo: nil)
+                    content.add(spawnSliderPosition)
                 }
             } catch {
                 fatalError("No entity to load")
