@@ -11,6 +11,18 @@
       }
     ]
   },
+  "648A96A3-FFBD-4037-8E77-982FEF1B7B68" : {
+    "objectMetadataList" : [
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "65F6F990-A780-4474-B78B-572E0E4E273D" : {
     "objectMetadataList" : [
       [
@@ -28,6 +40,39 @@
       [
         "66168B71-AB05-424E-8B6C-D33D6E61B08F",
         "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "7110E10C-51D7-44A6-AAAC-79953A29A865" : {
+    "objectMetadataList" : [
+      [
+        "7110E10C-51D7-44A6-AAAC-79953A29A865",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "919EBBA3-1BEE-4996-AA78-74001E2FB9CA" : {
+    "objectMetadataList" : [
+      [
+        "919EBBA3-1BEE-4996-AA78-74001E2FB9CA",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "919EBBA3-1BEE-4996-AA78-74001E2FB9CA",
+        "Root",
+        "_20gamza"
       ],
       {
         "isExpanded" : true,
