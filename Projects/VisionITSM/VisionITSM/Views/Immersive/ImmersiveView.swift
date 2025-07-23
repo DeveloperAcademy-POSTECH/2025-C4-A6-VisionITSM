@@ -12,6 +12,7 @@ import ARKit
 
 struct ImmersiveView: View {
     @Environment(AppModel.self) private var appModel
+    @Environment(SettingViewModel.self) private var settingViewModel
     @StateObject private var viewModel = AudienceSpawnViewModel()
     
 //    let spawnSliderPosition: Entity = Entity()
@@ -22,22 +23,47 @@ struct ImmersiveView: View {
         
         RealityView { content in
             do {
-                let immersiveBackground = try await Entity(named: "Immersive", in: realityKitContentBundle)
+                let audienceSizeLevel = settingViewModel.settingModel.audienceSize
+                let spawnCount: Int
+                let backgroundName: String
+                let potatoAnchors: [String]
+                
+                switch audienceSizeLevel {
+                case 0.0:
+                    spawnCount = 5
+                    backgroundName = "Immersive_5"
+                    potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5"]
+                case 1.0:
+                    spawnCount = 10
+                    backgroundName = "Immersive_10"
+                    potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7", "potato_8", "potato_9", "potato_10"]
+                case 2.0:
+                    spawnCount = 20
+                    backgroundName = "Immersive_20"
+                    potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7", "potato_8", "potato_9", "potato_10", "potato_11", "potato_12", "potato_13", "potato_14", "potato_15", "potato_16", "potato_17", "potato_18", "potato_19", "potato_20"]
+                default:
+                    spawnCount = 5
+                    backgroundName = "Immersive_5"
+                    potatoAnchors = ["potato_1", "potato_2", "potato_3", "potato_4", "potato_5"]
+                }
+                
+                print("발표 연습 시작: \(spawnCount), \(backgroundName)")
+                
+                let immersiveBackground = try await Entity(named: backgroundName, in: realityKitContentBundle)
                 content.add(immersiveBackground)
                 
                 guard let spawnSliderPosition = immersiveBackground.findEntity(named: "SpawnSlidePosition") else {
                     fatalError("spawnSliderPosition 엔티티를 찾을 수 없습니다")
                 }
                 
-                let potatoAnchors = ["potato", "potato_2", "potato3", "potato4", "potato_7"]
                 let potatoVariants = ["potato", "potato2", "potato3", "potato4"]
                 
-                let spawnCount = 5
-                let selectedAnchors = Set(potatoAnchors.shuffled().prefix(spawnCount))
+                let selectedAnchors = Set(potatoAnchors).shuffled().prefix(spawnCount)
                 
                 for anchorName in potatoAnchors {
                     if let anchorEntity = immersiveBackground.findEntity(named: anchorName) {
                         anchorEntity.isEnabled = false
+                        deactivateAllChildren(of: anchorEntity)
                     }
                 }
                 
@@ -45,16 +71,12 @@ struct ImmersiveView: View {
                     if let anchorEntity = immersiveBackground.findEntity(named: anchorName) {
                         print("🔎 anchorEntity 추가 중: \(anchorName)")
                         
-                        // ✅ 자식 엔티티 비활성화
-                        deactivateAllChildren(of: anchorEntity)
-                        
-                        anchorEntity.isEnabled = true
+//                        anchorEntity.isEnabled = true
                         
                         if selectedAnchors.contains(anchorName) {
                             
                             let randomName = potatoVariants.randomElement()!
                             let randomModel = try await Entity(named: randomName, in: realityKitContentBundle)
-                            
                             
                             anchorEntity.addChild(randomModel)
                             
@@ -68,12 +90,15 @@ struct ImmersiveView: View {
                                     print("⚠️ 눈 엔티티 \(eyeName) 찾을 수 없음 in \(randomName)")
                                 }
                             }
+                            
                             randomModel.setPosition(randomModel.position, relativeTo: nil)
                             content.add(randomModel)
                             
+                            deactivateAllChildren(of: anchorEntity)
+                            
                             playPotatoAnimation(on: randomModel)
                         }
-                    }else {
+                    } else {
                         print("⚠️ anchorEntity 추가 실패: \(anchorName)")
                     }
                 }
@@ -98,7 +123,7 @@ struct ImmersiveView: View {
                     
                     content.add(lightEntity)
                     
-                    // 이 위치는 RC Pro에서 설정한 위치
+//                     이 위치는 RC Pro에서 설정한 위치
                     spawnSliderPosition.setPosition(spawnSliderPosition.position, relativeTo: nil)
                     content.add(spawnSliderPosition)
                     

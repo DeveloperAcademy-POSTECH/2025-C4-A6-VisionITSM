@@ -1,0 +1,384 @@
+#usda 1.0
+(
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["GridMaterial", "visionitsmSkybox", "potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7", "potato_8", "potato_9", "potato_10", "potato_11", "potato_12", "potato_13", "potato_14", "potato_15", "potato_16", "potato_17", "potato_18", "potato_19", "potato_20"]
+    def "GridMaterial" (
+        active = true
+        references = @Materials/GridMaterial.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "visionitsmSkybox" (
+        active = true
+        references = @visionitsmSkybox.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "SkySphere"
+        {
+            over "SkySphere_mat"
+            {
+                asset inputs:SkySphere_Texture = @visionitsmSkybox1.jpeg@
+            }
+        }
+    }
+
+    def "potato_1" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, -0.17453292, -2.2696552e-8)
+        }
+        references = @potato2.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70441604, -0.70441604, -0.061628412, -0.061628427)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (-26.75424, -42.605, -65.03033)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_2" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707965, 0, 1.8913794e-7)
+        }
+        references = @potato2.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.7071067, -0.7071068, -6.687036e-8, 6.6870356e-8)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (3.17214, -42.605, -34.05593)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Area_002"
+        {
+        }
+
+        over "Area_001"
+        {
+        }
+
+        over "Area"
+        {
+        }
+
+        over "Camera"
+        {
+        }
+
+        over "Armature"
+        {
+        }
+
+        over "Sphere"
+        {
+        }
+
+        over "_materials"
+        {
+        }
+
+        over "Empty_002"
+        {
+        }
+
+        over "env_light"
+        {
+        }
+    }
+
+    def "potato_3" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707965, -0.17453292, 1.5131036e-8)
+        }
+        references = @potato3.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.704416, -0.7044161, -0.061628416, -0.061628416)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (17.46164, -42.605, -86.10455)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_4" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, -0.6981317, -1.5561668e-7)
+        }
+        references = @potato.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.664463, -0.66446304, -0.24184467, -0.24184479)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (70.166, -42.605, -3.248)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_5" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707968, -0.17453292, -6.808966e-8)
+        }
+        references = @potato4.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70441586, -0.7044162, -0.06162838, -0.061628457)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (19.02713, -42.425, -54.53799)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_6" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, 0.34906584, 0)
+        }
+        references = @potato.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.6963642, -0.6963643, 0.12278779, 0.1227878)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (-43.59431, -42.605, -57.2523)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_7" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707965, 0, 7.565518e-9)
+        }
+        references = @potato2.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.7071067, -0.7071068, -2.6748148e-9, 2.6748144e-9)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (-18.4172, -42.605, -35.35523)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_8" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707966, -0.34906587, 1.5857484e-8)
+        }
+        references = @potato4.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.69636416, -0.69636434, -0.12278779, -0.12278781)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (41.83887, -42.605, -25.02285)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_9" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707965, 0.17453292, -7.565518e-9)
+        }
+        references = @potato3.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.704416, -0.7044161, 0.061628416, 0.061628424)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (-38.21057, -42.605, -83.05377)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_10" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707965, -0.5235988, 0)
+        }
+        references = @potato2.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.68301266, -0.6830127, -0.1830127, -0.18301271)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (54.25274, -42.605, -13.99391)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_11" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, -0.2617994, 0)
+        }
+        references = @potato.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.7010574, -0.7010574, -0.09229595, -0.09229595)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (25.95211, -42.605, -33.18789)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_12" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707965, 0.5235988, 0)
+        }
+        references = @potato2.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.68301266, -0.6830127, 0.1830127, 0.18301271)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (-57.1336, -42.605, -18.19229)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_13" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, -0.69813174, -3.890417e-8)
+        }
+        references = @potato3.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.664463, -0.66446304, -0.24184471, -0.24184476)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (64.35533, -42.605, -44.89661)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_14" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, 0, 0)
+        }
+        references = @potato4.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (3.45853, -42.605, -90.83846)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_15" (
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, 0.34906584, 0)
+        }
+        references = @potato4.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.6963642, -0.6963643, 0.12278779, 0.1227878)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (-39.49471, -42.605, -33.5003)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_16" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, -0.34906584, 0)
+        }
+        references = @potato.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.6963642, -0.6963643, -0.12278779, -0.1227878)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (49.82401, -42.605, -74.23627)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_17" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, -0.2617994, 0)
+        }
+        references = @potato2.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.7010574, -0.7010574, -0.09229595, -0.09229595)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (33.58963, -42.605, -82.67616)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_18" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, -0.34906584, 0)
+        }
+        references = @potato3.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.6963642, -0.6963643, -0.12278779, -0.1227878)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (44.62262, -42.425, -51.649)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_19" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, 0, 0)
+        }
+        references = @potato3.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (-6.33436, -42.605, -58.32269)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "potato_20" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, 0, 0)
+        }
+        references = @potato4.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
+        float3 xformOp:scale = (6, 6, 6)
+        float3 xformOp:translate = (-11.05849, -42.605, -80.69971)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Cube "SpawnSlidePosition" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/SpawnSlidePosition/DefaultMaterial>
+        double size = 0.2
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (6.3455067, 8.928434, 55.658283)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/SpawnSlidePosition/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:opacity = 0
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+}
+
