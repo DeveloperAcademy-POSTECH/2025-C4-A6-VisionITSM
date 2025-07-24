@@ -31,18 +31,9 @@ struct VisionITSMApp: App {
             WindowPlacement(.utilityPanel)
         }
         
-        WindowGroup(id: "slideWindow") {
-            SlideView(homeViewModel: homeViewModel)
-        }
-        .defaultWindowPlacement { content, context in
-            guard let contentWindow = context.windows.first(where: { $0.id == "home" }) else { return WindowPlacement(nil)
-            }
-            return WindowPlacement(.above(contentWindow))
-        }
-        
         
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
-            ImmersiveView()
+            ImmersiveView(homeViewModel: homeViewModel)
                 .environment(appModel)
                 .environment(settingViewModel)
                 .onAppear {

@@ -15,13 +15,15 @@ struct ImmersiveView: View {
     @Environment(SettingViewModel.self) private var settingViewModel
     @StateObject private var viewModel = AudienceSpawnViewModel()
     
+    @Bindable var homeViewModel: HomeViewModel
+    
 //    let spawnSliderPosition: Entity = Entity()
     
     var body: some View {
         
         var potatoPositions: [SIMD3<Float>] = []    // 랜덤 배치되는 감자 청중의 위치를 저장하여 조명 등의 기능에 사용될 위치정보
         
-        RealityView { content in
+        RealityView { content, attachments in
             do {
                 let audienceSizeLevel = settingViewModel.settingModel.audienceSize
                 let spawnCount: Int
@@ -127,9 +129,19 @@ struct ImmersiveView: View {
                     spawnSliderPosition.setPosition(spawnSliderPosition.position, relativeTo: nil)
                     content.add(spawnSliderPosition)
                     
+                    if let attachment = attachments.entity(for: "Slide") {
+                        attachment.transform.rotation = simd_quatf(angle: .pi, axis: SIMD3<Float>(0, 1, 0))
+                        attachment.position = SIMD3<Float>(0.0, 0.15, 0)
+                        spawnSliderPosition.addChild(attachment)
+                    }
+                    
                 }
             } catch {
                 fatalError("No entity to load")
+            }
+        } attachments: {
+            Attachment(id: "Slide") {
+                SlideView(homeViewModel: homeViewModel)
             }
         }
         .onAppear {

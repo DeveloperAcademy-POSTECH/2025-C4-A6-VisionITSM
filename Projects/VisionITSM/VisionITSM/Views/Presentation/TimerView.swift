@@ -12,7 +12,7 @@ struct TimerView: View {
     @Binding var isPlaying: Bool
     @Bindable var settingViewModel: SettingViewModel
     @Bindable var router: NavigationRouter
-    @Environment(\.dismissWindow) private var dismissWindow
+    @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     
     var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -23,7 +23,9 @@ struct TimerView: View {
                 if isPlaying {
                     isPlaying = false
                     router.push(.result)
-                    dismissWindow(id: "slideWindow")
+                    Task {
+                        await dismissImmersiveSpace()
+                    }
                 } else {
                     isPlaying = true
                 }
