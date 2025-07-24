@@ -6,15 +6,20 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
+import PDFKit
 
 struct MultipleDocumentPicker: UIViewControllerRepresentable {
-    @Binding var selectedPPTXURL: URL?
-    @Binding var selectedPDFURL: URL?
-    @Binding var isPresented: Bool
+    let allowedTypes: [UTType]
+    @Binding var selectedPDFURL: [URL]
+    @Binding var selectedPPTXURL: [URL]
+//    @Binding var isPresented: Bool
     @Binding var isNext: Bool
     
+    @Bindable var viewModel: HomeViewModel
+    
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
-        let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.item])
+        let picker = UIDocumentPickerViewController(forOpeningContentTypes: allowedTypes)
         picker.delegate = context.coordinator
         picker.allowsMultipleSelection = true
         return picker
@@ -34,10 +39,11 @@ struct MultipleDocumentPicker: UIViewControllerRepresentable {
         }
         
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+//            var pdfURLs: [URL] = []
+//            var pptxURLs: [URL] = []
+            
             for url in urls {
-                // 보안 스코프 리소스 접근 시작 (확인용)
                 let accessing = url.startAccessingSecurityScopedResource()
-                
                 defer {
                     if accessing {
                         url.stopAccessingSecurityScopedResource()
@@ -45,21 +51,39 @@ struct MultipleDocumentPicker: UIViewControllerRepresentable {
                 }
                 
                 let fileExtension = url.pathExtension.lowercased()
-                if fileExtension == "pptx" {
-                    parent.selectedPPTXURL = url
-                } else if fileExtension == "pdf" {
-                    parent.selectedPDFURL = url
+
+                if fileExtension == "pdf" {
+                    parent.viewModel.selectedPDFURL = [url]
+//                    parent.viewModel.keynoteTitle = getPDFTitle(from: url) ?? ""
+                    print(parent.selectedPDFURL)
+                } else if fileExtension == "pptx" {
+                    parent.viewModel.selectedPPTXURL = [url]
+//                    parent.viewModel.keynoteTitle = getPDFTitle(from: url) ?? ""
+                    print(parent.selectedPPTXURL)
                 }
             }
-            if !(parent.selectedPDFURL == nil) && !(parent.selectedPPTXURL == nil) {
-                print("선택 완료")
-                parent.isNext = true
-            }
-            parent.isPresented = false
+            
+            parent.isNext = true
         }
         
         func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-            parent.isPresented = false
+//            parent.isPresented = false
+        }
+        
+        
+        func getPDFTitle(from url: URL) -> String? {
+            guard let pdfDocument = PDFDocument(url: url) else {
+                print("❌ PDFDocument를 열 수 없음")
+                return nil
+            }
+            
+            // PDF 메타데이터에서 제목 가져오기
+            if let title = pdfDocument.documentAttributes?[PDFDocumentAttribute.titleAttribute] as? String {
+                return title
+            } else {
+                print("ℹ️ 제목 정보 없음")
+                return nil
+            }
         }
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKitContent
 import SwiftData
+import UniformTypeIdentifiers
 
 struct HomeView: View {
     //MARK: - PROPERTIES
@@ -23,6 +24,9 @@ struct HomeView: View {
     @State private var parsingSheet: Bool = false
     @State private var isModal: Bool = false
     
+    @State var selectedPDFURLs: [URL] = []
+    @State var selectedPPTXURLs: [URL] = []
+    
     @Environment(\.modelContext) private var context
     @Query(sort: \HomeModel.createAt, order: .reverse) private var keynotes: [HomeModel]
     
@@ -33,7 +37,31 @@ struct HomeView: View {
                 GridListView
             }
             .sheet(isPresented: $homeViewModel.showingFilePicker) {
-                MultipleDocumentPicker(selectedPPTXURL: $homeViewModel.selectedPPTXURL, selectedPDFURL: $homeViewModel.selectedPDFURL, isPresented: $homeViewModel.showingFilePicker, isNext: $homeViewModel.showingParsing)
+                NewFileModalView(homeViewModel: homeViewModel)
+            }
+            .sheet(isPresented: $homeViewModel.showPDFPicker, onDismiss: {
+                homeViewModel.showingFilePicker = true
+            }) {
+                MultipleDocumentPicker(
+                    allowedTypes: [UTType.pdf],
+                    selectedPDFURL: $selectedPDFURLs,
+                    selectedPPTXURL: .constant([]),
+//                    isPresented: $homeViewModel.showPDFPicker,
+                    isNext: .constant(false),
+                    viewModel: homeViewModel
+                )
+            }
+            .sheet(isPresented: $homeViewModel.showPPTXPicker, onDismiss: {
+                homeViewModel.showingFilePicker = true
+            }) {
+                MultipleDocumentPicker(
+                    allowedTypes: [UTType(filenameExtension: "pptx")!],
+                    selectedPDFURL: .constant([]),
+                    selectedPPTXURL: $selectedPPTXURLs,
+//                    isPresented: $homeViewModel.showPPTXPicker,
+                    isNext: .constant(false),
+                    viewModel: homeViewModel
+                )
             }
             .sheet(isPresented: $homeViewModel.showingParsing) {
                 parsingModalView
@@ -136,8 +164,8 @@ struct HomeView: View {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundStyle(Color.green)
                         
-                        Text("PPTX: \(pptxURL.lastPathComponent)")
-                            .font(.caption)
+//                        Text("PPTX: \(pptxURL.lastPathComponent)")
+//                            .font(.caption)
                     }
                 }
                 
@@ -146,8 +174,8 @@ struct HomeView: View {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundStyle(Color.green)
                         
-                        Text("PDF: \(pdfURL.lastPathComponent)")
-                            .font(.caption)
+//                        Text("PDF: \(pdfURL.lastPathComponent)")
+//                            .font(.caption)
                     }
                 }
             }
@@ -168,7 +196,7 @@ struct HomeView: View {
                         .padding(.horizontal, 36)
                     
                     Button {
-                        parser.parseFiles(pptxURL: pptx, pdfURL: pdf)
+//                        parser.parseFiles(pptxURL: pptx, pdfURL: pdf)
                     } label: {
                         Text("처리 시작")
                     }
