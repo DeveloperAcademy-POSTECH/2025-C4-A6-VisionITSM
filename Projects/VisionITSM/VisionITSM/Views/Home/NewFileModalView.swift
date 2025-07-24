@@ -59,69 +59,71 @@ struct NewFileModalView: View {
             TextField("File Name", text: $fileName)
                 .font(.largeTitle)
             
-            VStack(alignment: .leading, spacing: 20) {
-                Text("Upload Slide Deck (Required)")
-                    .font(.system(size: 19))
-                    .fontWeight(.bold)
-                
-                Button {
-                    homeViewModel.showingFilePicker = false
-                    homeViewModel.showPDFPicker = true
-                } label: {
-                    HStack {
-                        Spacer()
-                        if let pdfURL = homeViewModel.selectedPDFURL?.first {
-                            HStack {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(Color.green)
-                                Text("PDF: \(pdfURL.lastPathComponent)")
+            ForEach(homeViewModel.newFileInfos, id: \.id) { info in
+                VStack(alignment: .leading, spacing: 20) {
+                    Text(info.title)
+                        .font(.system(size: 19))
+                        .fontWeight(.bold)
+                    
+                    Button {
+                        info.action()
+                    } label: {
+                        HStack {
+                            Spacer()
+                            if let pdfURL = homeViewModel.selectedPDFURL?.first {
+                                HStack {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundStyle(Color.green)
+                                    Text("PDF: \(pdfURL.lastPathComponent)")
+                                }
+                            } else {
+                                Text(info.buttonDescription)
                             }
-                        } else {
-                            Text("Upload from File (.PDF)")
+                            Spacer()
                         }
-                        Spacer()
+                        .frame(height: 72)
                     }
-                    .frame(height: 72)
+                    .buttonBorderShape(.roundedRectangle(radius: 16))
+                    
+                    Text(info.description)
+                        .font(.system(size: 13))
+                        .fontWeight(.medium)
                 }
-                .buttonBorderShape(.roundedRectangle(radius: 16))
-                
-                Text("A PDF file is required to render slide images.")
-                    .font(.system(size: 13))
-                    .fontWeight(.medium)
+                .padding(.bottom, 18)
             }
-            .padding(.bottom, 18)
             
-            VStack(alignment: .leading, spacing: 20) {
-                Text("Upload Slide Notes (Optional)")
-                    .font(.system(size: 19))
-                    .fontWeight(.bold)
-                
-                Button {
-                    homeViewModel.showingFilePicker = false
-                    homeViewModel.showPPTXPicker = true
-                } label: {
-                    HStack {
-                        Spacer()
-                        if let pptxURL = homeViewModel.selectedPPTXURL?.first {
-                            HStack {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(Color.green)
-                                Text("PPTX: \(pptxURL.lastPathComponent)")
-                            }
-                        } else {
-                            Text("Upload from file (.PPTX)")
-                        }
-                        Spacer()
-                    }
-                    .frame(height: 72)
-                }
-                .buttonBorderShape(.roundedRectangle(radius: 16))
-                
-                Text("A PPTX file is only needed if you want to import slide notes.")
-                    .font(.system(size: 13))
-                    .fontWeight(.medium)
-            }
-            .padding(.bottom, 18)
+            
+//            VStack(alignment: .leading, spacing: 20) {
+//                Text("Upload Slide Notes (Optional)")
+//                    .font(.system(size: 19))
+//                    .fontWeight(.bold)
+//                
+//                Button {
+//                    homeViewModel.showingFilePicker = false
+//                    homeViewModel.showPPTXPicker = true
+//                } label: {
+//                    HStack {
+//                        Spacer()
+//                        if let pptxURL = homeViewModel.selectedPPTXURL?.first {
+//                            HStack {
+//                                Image(systemName: "checkmark.circle.fill")
+//                                    .foregroundStyle(Color.green)
+//                                Text("PPTX: \(pptxURL.lastPathComponent)")
+//                            }
+//                        } else {
+//                            Text("Upload from file (.PPTX)")
+//                        }
+//                        Spacer()
+//                    }
+//                    .frame(height: 72)
+//                }
+//                .buttonBorderShape(.roundedRectangle(radius: 16))
+//                
+//                Text("A PPTX file is only needed if you want to import slide notes.")
+//                    .font(.system(size: 13))
+//                    .fontWeight(.medium)
+//            }
+//            .padding(.bottom, 18)
         }
         .padding(.vertical, 20)
         .padding(.horizontal, 20)

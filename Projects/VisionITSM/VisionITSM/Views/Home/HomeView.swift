@@ -36,6 +36,9 @@ struct HomeView: View {
             ScrollView {
                 GridListView
             }
+            .onChange(of: homeViewModel.showingFilePicker) { oldValue, newValue in
+                print(newValue)
+            }
             .sheet(isPresented: $homeViewModel.showingFilePicker) {
                 NewFileModalView(homeViewModel: homeViewModel)
             }
@@ -47,7 +50,7 @@ struct HomeView: View {
                     selectedPDFURL: $selectedPDFURLs,
                     selectedPPTXURL: .constant([]),
 //                    isPresented: $homeViewModel.showPDFPicker,
-                    isNext: .constant(false),
+//                    isNext: .constant(false),
                     viewModel: homeViewModel
                 )
             }
@@ -59,7 +62,7 @@ struct HomeView: View {
                     selectedPDFURL: .constant([]),
                     selectedPPTXURL: $selectedPPTXURLs,
 //                    isPresented: $homeViewModel.showPPTXPicker,
-                    isNext: .constant(false),
+//                    isNext: .constant(false),
                     viewModel: homeViewModel
                 )
             }

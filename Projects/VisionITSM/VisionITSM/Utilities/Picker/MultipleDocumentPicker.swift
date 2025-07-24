@@ -10,12 +10,11 @@ import UniformTypeIdentifiers
 import PDFKit
 
 struct MultipleDocumentPicker: UIViewControllerRepresentable {
+    
     let allowedTypes: [UTType]
     @Binding var selectedPDFURL: [URL]
     @Binding var selectedPPTXURL: [URL]
-//    @Binding var isPresented: Bool
-    @Binding var isNext: Bool
-    
+
     @Bindable var viewModel: HomeViewModel
     
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
@@ -39,9 +38,6 @@ struct MultipleDocumentPicker: UIViewControllerRepresentable {
         }
         
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-//            var pdfURLs: [URL] = []
-//            var pptxURLs: [URL] = []
-            
             for url in urls {
                 let accessing = url.startAccessingSecurityScopedResource()
                 defer {
@@ -54,16 +50,12 @@ struct MultipleDocumentPicker: UIViewControllerRepresentable {
 
                 if fileExtension == "pdf" {
                     parent.viewModel.selectedPDFURL = [url]
-//                    parent.viewModel.keynoteTitle = getPDFTitle(from: url) ?? ""
                     print(parent.selectedPDFURL)
                 } else if fileExtension == "pptx" {
                     parent.viewModel.selectedPPTXURL = [url]
-//                    parent.viewModel.keynoteTitle = getPDFTitle(from: url) ?? ""
                     print(parent.selectedPPTXURL)
                 }
             }
-            
-            parent.isNext = true
         }
         
         func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
@@ -76,8 +68,7 @@ struct MultipleDocumentPicker: UIViewControllerRepresentable {
                 print("❌ PDFDocument를 열 수 없음")
                 return nil
             }
-            
-            // PDF 메타데이터에서 제목 가져오기
+
             if let title = pdfDocument.documentAttributes?[PDFDocumentAttribute.titleAttribute] as? String {
                 return title
             } else {

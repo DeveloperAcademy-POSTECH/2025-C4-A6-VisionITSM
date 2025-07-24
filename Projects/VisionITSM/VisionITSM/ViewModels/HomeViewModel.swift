@@ -20,6 +20,10 @@ class HomeViewModel {
     
     var currentIndex: Int = 0
     
+    init() {
+        fetchList()
+    }
+    
     func resetSelect() {
         currentKeynote = nil
         selectedPDFURL = nil
@@ -31,4 +35,26 @@ class HomeViewModel {
         selectedPDFURL = nil
         selectedPPTXURL = nil
     }
+    
+    func openPDFPicker() {
+        self.showingFilePicker = false
+        self.showPDFPicker = true
+        print(showingFilePicker)
+        print(showPDFPicker)
+    }
+    
+    func openPPTXPicker() {
+        self.showingFilePicker = false
+        self.showPPTXPicker = true
+    }
+    
+    var newFileInfos: [NewFileModalInfo] = []
+    
+    func fetchList() {
+        self.newFileInfos = [
+            .init(title: "Upload Slide Deck (Required)", action: {self.openPDFPicker()}, buttonDescription: "Upload from File (.PDF)", description: "A PDF file is required to render slide images."),
+            .init(title: "Upload Slide Notes (Optional)", action: {self.openPPTXPicker()}, buttonDescription: "Upload from file (.PPTX)", description: "A PPTX file is only needed if you want to import slide notes.")
+        ]
+    }
+    
 }
