@@ -119,7 +119,6 @@ struct SettingView: View {
                 Button {
                     dismiss()
                     router.push(.script)
-                    openWindow(id: "slideWindow")
                     
 //                    MARK: - 이머시브존2
 //
