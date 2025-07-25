@@ -9,8 +9,8 @@ import SwiftUI
 
 @Observable
 class HomeViewModel {
-    var selectedPPTXURL: [URL]?
-    var selectedPDFURL: [URL]?
+    var selectedPPTXURL: URL?
+    var selectedPDFURL: URL?
     var showingFilePicker = false
     var showingParsing = false
     var keynoteTitle = ""
@@ -52,8 +52,8 @@ class HomeViewModel {
     
     func fetchList() {
         self.newFileInfos = [
-            .init(title: "Upload Slide Deck (Required)", action: {self.openPDFPicker()}, buttonDescription: "Upload from File (.PDF)", description: "A PDF file is required to render slide images."),
-            .init(title: "Upload Slide Notes (Optional)", action: {self.openPPTXPicker()}, buttonDescription: "Upload from file (.PPTX)", description: "A PPTX file is only needed if you want to import slide notes.")
+            .init(title: "Upload Slide Deck (Required)", action: {self.openPDFPicker()}, selectedFileName: "\(selectedPDFURL?.lastPathComponent ?? "")", buttonDescription: "Upload from File (.PDF)", description: "A PDF file is required to render slide images."),
+            .init(title: "Upload Slide Notes (Optional)", action: {self.openPPTXPicker()}, selectedFileName: "fdsfdbv", buttonDescription: "Upload from file (.PPTX)", description: "A PPTX file is only needed if you want to import slide notes.")
         ]
     }
     

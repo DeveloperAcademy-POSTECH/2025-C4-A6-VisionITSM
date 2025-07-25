@@ -11,6 +11,7 @@ struct NewFileModalInfo: Identifiable {
     var id = UUID()
     var title: String
     var action: () -> Void
+    var selectedFileName: String
     var buttonDescription: String
     var description: String
 }

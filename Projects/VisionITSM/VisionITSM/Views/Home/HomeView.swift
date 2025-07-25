@@ -24,9 +24,6 @@ struct HomeView: View {
     @State private var parsingSheet: Bool = false
     @State private var isModal: Bool = false
     
-    @State var selectedPDFURLs: [URL] = []
-    @State var selectedPPTXURLs: [URL] = []
-    
     @Environment(\.modelContext) private var context
     @Query(sort: \HomeModel.createAt, order: .reverse) private var keynotes: [HomeModel]
     
@@ -47,10 +44,8 @@ struct HomeView: View {
             }) {
                 MultipleDocumentPicker(
                     allowedTypes: [UTType.pdf],
-                    selectedPDFURL: $selectedPDFURLs,
-                    selectedPPTXURL: .constant([]),
-//                    isPresented: $homeViewModel.showPDFPicker,
-//                    isNext: .constant(false),
+                    selectedPDFURL: $homeViewModel.selectedPDFURL,
+                    selectedPPTXURL: $homeViewModel.selectedPPTXURL,
                     viewModel: homeViewModel
                 )
             }
@@ -59,10 +54,8 @@ struct HomeView: View {
             }) {
                 MultipleDocumentPicker(
                     allowedTypes: [UTType(filenameExtension: "pptx")!],
-                    selectedPDFURL: .constant([]),
-                    selectedPPTXURL: $selectedPPTXURLs,
-//                    isPresented: $homeViewModel.showPPTXPicker,
-//                    isNext: .constant(false),
+                    selectedPDFURL: $homeViewModel.selectedPDFURL,
+                    selectedPPTXURL: $homeViewModel.selectedPPTXURL,
                     viewModel: homeViewModel
                 )
             }
@@ -199,7 +192,7 @@ struct HomeView: View {
                         .padding(.horizontal, 36)
                     
                     Button {
-//                        parser.parseFiles(pptxURL: pptx, pdfURL: pdf)
+                        parser.parseFiles(pptxURL: pptx, pdfURL: pdf)
                     } label: {
                         Text("처리 시작")
                     }

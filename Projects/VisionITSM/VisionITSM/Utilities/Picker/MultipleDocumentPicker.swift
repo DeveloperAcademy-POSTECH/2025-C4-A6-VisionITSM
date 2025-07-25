@@ -12,8 +12,8 @@ import PDFKit
 struct MultipleDocumentPicker: UIViewControllerRepresentable {
     
     let allowedTypes: [UTType]
-    @Binding var selectedPDFURL: [URL]
-    @Binding var selectedPPTXURL: [URL]
+    @Binding var selectedPDFURL: URL?
+    @Binding var selectedPPTXURL: URL?
 
     @Bindable var viewModel: HomeViewModel
     
@@ -38,23 +38,21 @@ struct MultipleDocumentPicker: UIViewControllerRepresentable {
         }
         
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-            for url in urls {
-                let accessing = url.startAccessingSecurityScopedResource()
-                defer {
-                    if accessing {
-                        url.stopAccessingSecurityScopedResource()
-                    }
+            guard let url = urls.first else { return }
+            
+            let accessing = url.startAccessingSecurityScopedResource()
+            defer {
+                if accessing {
+                    url.stopAccessingSecurityScopedResource()
                 }
-                
-                let fileExtension = url.pathExtension.lowercased()
+            }
+            
+            let fileExtension = url.pathExtension.lowercased()
 
-                if fileExtension == "pdf" {
-                    parent.viewModel.selectedPDFURL = [url]
-                    print(parent.selectedPDFURL)
-                } else if fileExtension == "pptx" {
-                    parent.viewModel.selectedPPTXURL = [url]
-                    print(parent.selectedPPTXURL)
-                }
+            if fileExtension == "pdf" {
+                parent.viewModel.selectedPDFURL = url
+            } else if fileExtension == "pptx" {
+                parent.viewModel.selectedPPTXURL = url
             }
         }
         
@@ -65,14 +63,14 @@ struct MultipleDocumentPicker: UIViewControllerRepresentable {
         
         func getPDFTitle(from url: URL) -> String? {
             guard let pdfDocument = PDFDocument(url: url) else {
-                print("❌ PDFDocument를 열 수 없음")
+                print("PDFDocument를 열 수 없음")
                 return nil
             }
 
             if let title = pdfDocument.documentAttributes?[PDFDocumentAttribute.titleAttribute] as? String {
                 return title
             } else {
-                print("ℹ️ 제목 정보 없음")
+                print("제목 정보 없음")
                 return nil
             }
         }

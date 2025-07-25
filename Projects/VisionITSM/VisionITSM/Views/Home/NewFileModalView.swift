@@ -12,6 +12,7 @@ struct NewFileModalView: View {
     @State private var fileName = ""
     @Environment(\.dismiss) private var dismiss
     @Bindable var homeViewModel: HomeViewModel
+    @State private var parser = HybridPPTXParser()
     
     //MARK: - BODY
     var body: some View {
@@ -47,6 +48,7 @@ struct NewFileModalView: View {
     
     private var NewFileImportButton: some View {
         Button {
+            parser.parseFiles(pptxURL: homeViewModel.selectedPPTXURL, pdfURL: homeViewModel.selectedPDFURL)
             print("import")
         } label: {
             Label("Import", systemImage: "square.and.arrow.down")
@@ -70,14 +72,26 @@ struct NewFileModalView: View {
                     } label: {
                         HStack {
                             Spacer()
-                            if let pdfURL = homeViewModel.selectedPDFURL?.first {
-                                HStack {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .foregroundStyle(Color.green)
-                                    Text("PDF: \(pdfURL.lastPathComponent)")
+                            if info.buttonDescription.contains("PDF") {
+                                if let pdfURL = homeViewModel.selectedPDFURL {
+                                    HStack {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundStyle(Color.green)
+                                        Text("PDF: \(pdfURL.lastPathComponent)")
+                                    }
+                                } else {
+                                    Text(info.buttonDescription)
                                 }
-                            } else {
-                                Text(info.buttonDescription)
+                            } else if info.buttonDescription.contains("PPTX") {
+                                if let pptxURL = homeViewModel.selectedPPTXURL {
+                                    HStack {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundStyle(Color.green)
+                                        Text("PPTX: \(pptxURL.lastPathComponent)")
+                                    }
+                                } else {
+                                    Text(info.buttonDescription)
+                                }
                             }
                             Spacer()
                         }
@@ -91,39 +105,6 @@ struct NewFileModalView: View {
                 }
                 .padding(.bottom, 18)
             }
-            
-            
-//            VStack(alignment: .leading, spacing: 20) {
-//                Text("Upload Slide Notes (Optional)")
-//                    .font(.system(size: 19))
-//                    .fontWeight(.bold)
-//                
-//                Button {
-//                    homeViewModel.showingFilePicker = false
-//                    homeViewModel.showPPTXPicker = true
-//                } label: {
-//                    HStack {
-//                        Spacer()
-//                        if let pptxURL = homeViewModel.selectedPPTXURL?.first {
-//                            HStack {
-//                                Image(systemName: "checkmark.circle.fill")
-//                                    .foregroundStyle(Color.green)
-//                                Text("PPTX: \(pptxURL.lastPathComponent)")
-//                            }
-//                        } else {
-//                            Text("Upload from file (.PPTX)")
-//                        }
-//                        Spacer()
-//                    }
-//                    .frame(height: 72)
-//                }
-//                .buttonBorderShape(.roundedRectangle(radius: 16))
-//                
-//                Text("A PPTX file is only needed if you want to import slide notes.")
-//                    .font(.system(size: 13))
-//                    .fontWeight(.medium)
-//            }
-//            .padding(.bottom, 18)
         }
         .padding(.vertical, 20)
         .padding(.horizontal, 20)

@@ -15,14 +15,25 @@ class HybridPPTXParser: ObservableObject {
     var isLoading = false
     var errorMessage: String?
     
-    func parseFiles(pptxURL: URL, pdfURL: URL) {
+    func parseFiles(pptxURL: URL?, pdfURL: URL?) {
         isLoading = true
         errorMessage = nil
         
         DispatchQueue.global(qos: .userInitiated).async {
             // 보안 스코프 리소스 접근 시작
-            let pptxAccessing = pptxURL.startAccessingSecurityScopedResource()
+            
+            guard let pdfURL = pdfURL else {
+                print("pdf Error")
+                return
+            }
             let pdfAccessing = pdfURL.startAccessingSecurityScopedResource()
+            
+            guard let pptxURL = pptxURL else  {
+                print("pptx Error")
+                return
+            }
+            let pptxAccessing = pptxURL.startAccessingSecurityScopedResource()
+            
             
             defer {
                 // 작업 완료 후 리소스 접근 중지
