@@ -253,6 +253,7 @@ extension ImmersiveView {
         }
         
         let awakePotatos = potatoEntities.filter { !$0.isSleeping }
+    }
         
     /// 기본 애니메이션과 수면 애니메이션을 순차적으로 재생하는 메서드
     func cyclePotatoAnimation(on entity: Entity) async {
