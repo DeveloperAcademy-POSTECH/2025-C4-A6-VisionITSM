@@ -17,6 +17,15 @@ struct ImmersiveView: View {
     
 //    let spawnSliderPosition: Entity = Entity()
     
+    @State private var potatoEntities: [PotatoEntity] = []
+    
+    struct PotatoEntity {
+        let entity: Entity
+        let anchor: Entity
+        let originalModelName: String
+        var isSleeping: Bool = false
+    }
+    
     var body: some View {
         
         var potatoPositions: [SIMD3<Float>] = []    // 랜덤 배치되는 감자 청중의 위치를 저장하여 조명 등의 기능에 사용될 위치정보
@@ -24,6 +33,7 @@ struct ImmersiveView: View {
         RealityView { content in
             do {
                 let audienceSizeLevel = settingViewModel.settingModel.audienceSize
+                
                 let spawnCount: Int
                 let backgroundName: String
                 
@@ -69,6 +79,8 @@ struct ImmersiveView: View {
                     }
                 }
                 
+                potatoEntities.removeAll()
+                
                 for anchorName in selectedAnchors {
                     if let anchorEntity = immersiveBackground.findEntity(named: anchorName) {
                         print("🔎 anchorEntity 추가 중: \(anchorName)")
@@ -99,6 +111,13 @@ struct ImmersiveView: View {
                             deactivateAllChildren(of: anchorEntity)
                             
                             playPotatoAnimation(on: randomModel)
+                            
+                            let potatoEntity = PotatoEntity(
+                                entity: randomModel,
+                                anchor: anchorEntity,
+                                originalModelName: randomName
+                            )
+                            potatoEntities.append(potatoEntity)
                         }
                     } else {
                         print("⚠️ anchorEntity 추가 실패: \(anchorName)")
@@ -128,7 +147,6 @@ struct ImmersiveView: View {
 //                     이 위치는 RC Pro에서 설정한 위치
                     spawnSliderPosition.setPosition(spawnSliderPosition.position, relativeTo: nil)
                     content.add(spawnSliderPosition)
-                    
                 }
             } catch {
                 fatalError("No entity to load")
@@ -177,5 +195,39 @@ extension ImmersiveView {
             let repeated = animation.repeat(count: .max)
             entity.playAnimation(repeated, transitionDuration: 1, startsPaused: false)
         }
+    }
+    
+    // 돌발행동: 졸기
+    func checkSleepEvent(currentTime: Int) {
+        let distractionLevel = settingViewModel.settingModel.distractionLevel
+        
+        guard distractionLevel > 0 else { return }
+        
+        let interval: Int
+        switch distractionLevel {
+        case 1:
+            interval = 60
+        case 2:
+            interval = 30
+        default:
+            return
+        }
+        
+        if currentTime > 0 && currentTime % interval == 0 {
+            handleSleepEvent()
+            print("졸음 이벤트 확인 시작 - 시간: \(currentTime)초, distractionLevel: \(distractionLevel)")
+        }
+    }
+    
+    func handleSleepEvent() {
+        let distractionLevel = settingViewModel.settingModel.distractionLevel
+        
+        if Bool.random() == false {
+            print("50% 확률로 졸음 이벤트 스킵됨")
+            return
+        }
+        
+        let awakePotatos = potatoEntities.filter { !$0.isSleeping }
+        
     }
 }
