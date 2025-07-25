@@ -5,10 +5,12 @@
 //  Created by 선애 on 7/9/25.
 //
 
+
 import SwiftUI
 import RealityKit
 import RealityKitContent
 import ARKit
+
 
 struct ImmersiveView: View {
     @Environment(AppModel.self) private var appModel
@@ -16,8 +18,6 @@ struct ImmersiveView: View {
     @StateObject private var viewModel = AudienceSpawnViewModel()
     
     @Bindable var homeViewModel: HomeViewModel
-    
-//    let spawnSliderPosition: Entity = Entity()
     
     var body: some View {
         
@@ -28,6 +28,8 @@ struct ImmersiveView: View {
                 let audienceSizeLevel = settingViewModel.settingModel.audienceSize
                 let spawnCount: Int
                 let backgroundName: String
+                
+                let sleepPotato: [String]
                 
                 switch audienceSizeLevel {
                 case 0.0:
@@ -100,7 +102,10 @@ struct ImmersiveView: View {
                             
                             deactivateAllChildren(of: anchorEntity)
                             
-                            playPotatoAnimation(on: randomModel)
+                            Task {
+                                await cyclePotatoAnimation(on: randomModel)
+                            }
+                            
                         }
                     } else {
                         print("⚠️ anchorEntity 추가 실패: \(anchorName)")
@@ -136,7 +141,6 @@ struct ImmersiveView: View {
                         attachment.position = SIMD3<Float>(0.0, 0.15, 0)
                         spawnSliderPosition.addChild(attachment)
                     }
-                    
                 }
             } catch {
                 fatalError("No entity to load")
@@ -153,6 +157,15 @@ struct ImmersiveView: View {
 }
 
 extension ImmersiveView {
+    // 감자 애니메이션 전반에 사용되는 설정 (전환 시간, 속도, 대기 시간 등)
+    private struct PotatoAnimationConfig {
+        static let transitionDuration: TimeInterval = 0.3
+        static let basicAnimationSpeed: Float = 0.4
+        static let sleepAnimationSpeed: Float = 0.5
+        static let sleepDelay: TimeInterval = 5.0
+        static let sleepAnimationDuration: TimeInterval = 10.0    // 수면 애니메이션 재생 시간 (10초)
+    }
+    
     func findPotatoAnchors(in rootEntity: Entity) -> [String] {
         var potatoAnchors: [String] = []
         
@@ -181,7 +194,7 @@ extension ImmersiveView {
     func playPotatoAnimation(on entity: Entity) {
         guard let animation = entity.availableAnimations.first else { return }
         
-        let delay = Double.random(in: 0..<0.5)
+        let delay = Double.random(in: 0..<1.0)
         
         Task {
             try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
@@ -189,5 +202,45 @@ extension ImmersiveView {
             let repeated = animation.repeat(count: .max)
             entity.playAnimation(repeated, transitionDuration: 1, startsPaused: false)
         }
+    }
+    
+    /// 기본 애니메이션과 수면 애니메이션을 순차적으로 재생하는 메서드
+    func cyclePotatoAnimation(on entity: Entity) async {
+        // 지정된 속도로 애니메이션을 반복 재생하는 헬퍼
+        func playLooping(_ clip: AnimationResource) {
+            let resource = clip.repeat(count: .max)
+            let controller = entity.playAnimation(
+                resource,
+                transitionDuration: PotatoAnimationConfig.transitionDuration,
+                startsPaused: false
+            )
+            controller.speed = PotatoAnimationConfig.basicAnimationSpeed
+        }
+
+        // 1. 기본 애니메이션 재생
+        guard let basicClip = entity.availableAnimations.first else { return }
+        playLooping(basicClip)
+
+        // 2. 수면 전 대기
+        try? await Task.sleep(for: .seconds(PotatoAnimationConfig.sleepDelay))
+        // entity.stopAllAnimations()  // 기본 애니메이션을 계속 유지
+
+        // 3. 수면 애니메이션 로드 및 재생
+        if let sleepEntity = try? await Entity(named: "potatoZZZ", in: realityKitContentBundle),
+           let sleepClip = sleepEntity.availableAnimations.first {
+            // sleep 전용 속도로 반복 재생
+            let sleepResource = sleepClip.repeat(count: .max)
+            let sleepController = entity.playAnimation(
+                sleepResource,
+                transitionDuration: PotatoAnimationConfig.transitionDuration,
+                startsPaused: false
+            )
+            sleepController.speed = PotatoAnimationConfig.sleepAnimationSpeed
+        }
+
+        // 4. 수면 애니메이션 재생 후 기본 애니메이션으로 복귀
+        try? await Task.sleep(for: .seconds(PotatoAnimationConfig.sleepAnimationDuration))
+        // entity.stopAllAnimations()  // 중단 없이 바로 기본 재생 유지
+        playLooping(basicClip)
     }
 }
