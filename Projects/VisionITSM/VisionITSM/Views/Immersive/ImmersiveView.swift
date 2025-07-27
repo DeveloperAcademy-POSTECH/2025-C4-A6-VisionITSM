@@ -1,11 +1,3 @@
-//
-//  ImmersiveView.swift
-//  VisionITSM
-//
-//  Created by 선애 on 7/9/25.
-//
-
-
 import SwiftUI
 import RealityKit
 import RealityKitContent
@@ -79,7 +71,6 @@ struct ImmersiveView: View {
                 for anchorName in potatoAnchors {
                     if let anchorEntity = immersiveBackground.findEntity(named: anchorName) {
                         anchorEntity.isEnabled = false
-                        deactivateAllChildren(of: anchorEntity)
                     }
                 }
                 
@@ -99,6 +90,7 @@ struct ImmersiveView: View {
                             anchorEntity.addChild(randomModel)
                             
                             let position = anchorEntity.position(relativeTo: nil)
+                            print("position: \(position)")
                             potatoPositions.append(position)
                             
                             ["rightEye", "leftEyeball", "rightEye_001"].forEach { eyeName in
@@ -109,14 +101,21 @@ struct ImmersiveView: View {
                                 }
                             }
                             
-                            randomModel.setPosition(randomModel.position, relativeTo: nil)
+                            randomModel.position = anchorEntity.position(relativeTo: nil)
+                            print("position: \(randomModel.position)")
+                            randomModel.scale = anchorEntity.scale(relativeTo: nil)
+                            
                             content.add(randomModel)
                             
                             deactivateAllChildren(of: anchorEntity)
                             
-                            Task {
-                                await cyclePotatoAnimation(on: randomModel)
-                            }
+                            playPotatoAnimation(on: randomModel)
+                            
+//                            playPotatoAnimation(on: anchorEntity)
+                            
+//                            Task {
+//                                await cyclePotatoAnimation(on: randomModel)
+//                            }
                             
                             let potatoEntity = PotatoEntity(
                                 entity: randomModel,
@@ -253,6 +252,17 @@ extension ImmersiveView {
         }
         
         let awakePotatos = potatoEntities.filter { !$0.isSleeping }
+        
+        guard let target = awakePotatos.randomElement() else {
+            print("모든 감자가 자는 중")
+            return
+        }
+        
+        print("😴 감자 졸기 시작: \(target.originalModelName)")
+        
+//        Task {
+//            await playSleepAnimation(for: target)
+//        }
     }
         
     /// 기본 애니메이션과 수면 애니메이션을 순차적으로 재생하는 메서드
