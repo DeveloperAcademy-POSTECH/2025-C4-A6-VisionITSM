@@ -12,7 +12,7 @@ struct NewFileModalView: View {
     @State private var fileName = ""
     @Environment(\.dismiss) private var dismiss
     @Bindable var homeViewModel: HomeViewModel
-    @State private var parser = HybridPPTXParser()
+//    @State private var parser = HybridPPTXParser()
     
     //MARK: - BODY
     var body: some View {
@@ -48,17 +48,24 @@ struct NewFileModalView: View {
     
     private var NewFileImportButton: some View {
         Button {
-            parser.parseFiles(pptxURL: homeViewModel.selectedPPTXURL, pdfURL: homeViewModel.selectedPDFURL)
-            print("import")
+//            homeViewModel.keynoteTitle = self.fileName
+            homeViewModel.parser.parseFiles(
+                pptxURL: homeViewModel.selectedPPTXURL,
+                pdfURL: homeViewModel.selectedPDFURL
+            )
         } label: {
             Label("Import", systemImage: "square.and.arrow.down")
         }
         .padding(.bottom, 23)
+        .disabled(
+            homeViewModel.keynoteTitle == "" ||
+            homeViewModel.selectedPDFURL == nil
+        )
     }
     
     private var NewFileSelectSection: some View {
         VStack(alignment: .leading, spacing: 24) {
-            TextField("File Name", text: $fileName)
+            TextField("File Name", text: $homeViewModel.keynoteTitle)
                 .font(.largeTitle)
             
             ForEach(homeViewModel.newFileInfos, id: \.id) { info in

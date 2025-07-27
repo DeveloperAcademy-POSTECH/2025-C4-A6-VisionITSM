@@ -18,6 +18,8 @@ class HomeViewModel {
     var showPPTXPicker = false
     var currentKeynote: HomeModel?
     
+    var parser = HybridPPTXParser()
+    
     var currentIndex: Int = 0
     
     init() {
@@ -39,8 +41,6 @@ class HomeViewModel {
     func openPDFPicker() {
         self.showingFilePicker = false
         self.showPDFPicker = true
-        print(showingFilePicker)
-        print(showPDFPicker)
     }
     
     func openPPTXPicker() {

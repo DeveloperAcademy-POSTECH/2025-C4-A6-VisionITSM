@@ -33,9 +33,9 @@ struct HomeView: View {
             ScrollView {
                 GridListView
             }
-            .onChange(of: homeViewModel.showingFilePicker) { oldValue, newValue in
-                print(newValue)
-            }
+//            .onChange(of: homeViewModel.showingFilePicker) { oldValue, newValue in
+//                print(newValue)
+//            }
             .sheet(isPresented: $homeViewModel.showingFilePicker) {
                 NewFileModalView(homeViewModel: homeViewModel)
             }
@@ -59,9 +59,9 @@ struct HomeView: View {
                     viewModel: homeViewModel
                 )
             }
-            .sheet(isPresented: $homeViewModel.showingParsing) {
-                parsingModalView
-            }
+//            .sheet(isPresented: $homeViewModel.showingParsing) {
+//                parsingModalView
+//            }
             .sheet(isPresented: $settingViewModel.isShowSetting) {
                 SettingView(settingViewModel: settingViewModel, router: router)
             }
@@ -95,7 +95,7 @@ struct HomeView: View {
             .task {
                 homeViewModel.resetSelect()
             }
-            .onChange(of: parser.slides.last) {
+            .onChange(of: homeViewModel.parser.slides.last) {
                 selectKeynote()
             }
         }
@@ -107,7 +107,6 @@ struct HomeView: View {
             Button(action: {
                 print("추가 버튼 클릭")
                 homeViewModel.openPicker()
-                
             }, label: {
                 GridItemView(title: "Add New File", date: "Supports .pptx, .pdf", image: .gridNewButton)
             })
@@ -128,15 +127,15 @@ struct HomeView: View {
         }
     }
     
-    private var parsingModalView: some View {
-        VStack {
-            if parser.isLoading {
-                loadingView
-            } else if homeViewModel.currentKeynote == nil {
-                SelectView
-            }
-        }
-    }
+//    private var parsingModalView: some View {
+//        VStack {
+//            if parser.isLoading {
+//                loadingView
+//            } else if homeViewModel.currentKeynote == nil {
+//                SelectView
+//            }
+//        }
+//    }
     
     private var loadingView: some View {
         VStack(spacing: 16) {
@@ -146,63 +145,6 @@ struct HomeView: View {
                 .font(.headline)
                 .foregroundStyle(Color.secondary)
         }
-    }
-    
-    private var SelectView: some View {
-        VStack(spacing: 20) {
-            Text("PPTX와 PDF 파일을 업로드하세요")
-                .font(.headline)
-                .foregroundStyle(Color.gray)
-            
-            VStack(spacing: 12) {
-                if let pptxURL = homeViewModel.selectedPPTXURL {
-                    HStack {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(Color.green)
-                        
-//                        Text("PPTX: \(pptxURL.lastPathComponent)")
-//                            .font(.caption)
-                    }
-                }
-                
-                if let pdfURL = homeViewModel.selectedPDFURL {
-                    HStack {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(Color.green)
-                        
-//                        Text("PDF: \(pdfURL.lastPathComponent)")
-//                            .font(.caption)
-                    }
-                }
-            }
-            
-            Button {
-                homeViewModel.openPicker()
-                print("오픈 피커")
-            } label: {
-                Text("파일 선택")
-            }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
-            
-            if let pptx = homeViewModel.selectedPPTXURL, let pdf = homeViewModel.selectedPDFURL {
-                VStack(spacing: 10) {
-                    TextField("Title: ", text: $homeViewModel.keynoteTitle)
-                        .font(.title)
-                        .padding(.horizontal, 36)
-                    
-                    Button {
-                        parser.parseFiles(pptxURL: pptx, pdfURL: pdf)
-                    } label: {
-                        Text("처리 시작")
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
-                }
-                .padding(.vertical, 16)
-            }
-        }
-        .padding(.vertical, 12)
     }
     
     private var ModalView: some View {
@@ -238,6 +180,8 @@ struct HomeView: View {
         context.insert(keynoteData)
         try? context.save()
         homeViewModel.showingParsing = false
+        homeViewModel.selectedPDFURL = nil
+        homeViewModel.selectedPPTXURL = nil
         homeViewModel.keynoteTitle = ""
         homeViewModel.resetSelect()
     }
@@ -250,10 +194,15 @@ struct HomeView: View {
     }
         
     private func selectKeynote() {
-        homeViewModel.currentKeynote = HomeModel(title: homeViewModel.keynoteTitle, keynote: parser.slides)
+        homeViewModel.currentKeynote = HomeModel(
+            title: homeViewModel.keynoteTitle,
+            keynote: homeViewModel.parser.slides
+        )
+        
         if let currentKeynoteSlider = homeViewModel.currentKeynote?.keynote {
             addKeynote(keynote: currentKeynoteSlider)
-            parser.isLoading = false
+            homeViewModel.showingFilePicker = false
+            homeViewModel.parser.isLoading = false
         }
     }
 }
