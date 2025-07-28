@@ -15,6 +15,65 @@
     "objectMetadataList" : [
       [
         "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "Timeline",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "visionitsmSkybox"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "SkyDome"
+      ],
+      {
+        "disallowsFraming" : true,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "SkySphere"
+      ],
+      {
+        "disallowsFraming" : true,
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "Timeline"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "Timeline",
+        "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
         "Root"
       ],
       {
@@ -93,7 +152,8 @@
     "objectMetadataList" : [
       [
         "919EBBA3-1BEE-4996-AA78-74001E2FB9CA",
-        "Root"
+        "Root",
+        "_20gamza"
       ],
       {
         "isExpanded" : true,
@@ -101,8 +161,7 @@
       },
       [
         "919EBBA3-1BEE-4996-AA78-74001E2FB9CA",
-        "Root",
-        "_20gamza"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -115,7 +174,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potatoWeye",
+        "potato",
         "Armature"
       ],
       {
@@ -126,7 +185,31 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potatoWeye",
+        "potato_4",
+        "Armature",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potato",
+        "Armature",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potato_0",
         "Armature",
         "Armature"
       ],
@@ -153,6 +236,17 @@
       ],
       {
         "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potato_0",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
         "isLocked" : false
       },
       [
