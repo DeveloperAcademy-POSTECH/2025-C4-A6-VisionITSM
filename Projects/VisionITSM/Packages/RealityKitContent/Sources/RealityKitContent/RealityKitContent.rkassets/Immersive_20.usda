@@ -365,8 +365,8 @@ def Xform "Root"
         float2 ui:nodegraph:node:pos = (20, 20)
         int ui:nodegraph:node:stackingOrder = 1
         quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1.5, 1.5, 1.5)
-        float3 xformOp:translate = (0, 1.5, 1.2)
+        float3 xformOp:scale = (1.7, 1.7, 1.7)
+        float3 xformOp:translate = (0, 0.8, 2)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Material "DefaultMaterial"

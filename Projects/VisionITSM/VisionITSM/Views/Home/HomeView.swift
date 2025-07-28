@@ -83,8 +83,6 @@ struct HomeView: View {
                 switch route {
                 case .home:
                     HomeView(homeViewModel: homeViewModel)
-                case .script:
-                    ScriptView(router: router, homeViewModel: homeViewModel, settingViewModel: settingViewModel, keynote: homeViewModel.currentKeynote ?? HomeModel(title: "오류", keynote: []))
                 case .result:
                     ResultView(router: router, settingViewModel: settingViewModel)
                 }

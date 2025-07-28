@@ -13,7 +13,7 @@ struct SettingView: View {
     
     @Bindable var router: NavigationRouter
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.openWindow) private var openWindow
+    @Environment(\.pushWindow) private var pushWindow
     
     //MARK: - 이머시브존1
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
@@ -117,6 +117,14 @@ struct SettingView: View {
                 }
                 
                 Button {
+
+                    dismiss()
+                    pushWindow(id: "Script")
+                    router.push(.result)
+                    
+//                    MARK: - 이머시브존2
+//
+
                     Task {
                         await handleEnterSession()
                     }
@@ -137,7 +145,7 @@ struct SettingView: View {
     @MainActor
     func handleEnterSession() async {
         dismiss()
-        router.push(.script)
+//        router.push(.script)
 
         let result = await openImmersiveSpace(id: "ImmersiveSpace")
         switch result {
