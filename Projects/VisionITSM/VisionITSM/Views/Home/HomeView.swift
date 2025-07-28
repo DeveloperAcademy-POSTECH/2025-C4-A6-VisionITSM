@@ -59,7 +59,7 @@ struct HomeView: View {
                     viewModel: homeViewModel
                 )
             }
-            .sheet(isPresented: $settingViewModel.isShowSetting) {
+            .sheet(isPresented: Bindable(settingViewModel).isShowSetting) {
                 SettingView(settingViewModel: settingViewModel, router: router)
             }
             .sheet(isPresented: $isModal, content: {
