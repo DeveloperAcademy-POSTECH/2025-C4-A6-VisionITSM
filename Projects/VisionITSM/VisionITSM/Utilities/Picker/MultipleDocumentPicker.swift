@@ -6,15 +6,19 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
+import PDFKit
 
 struct MultipleDocumentPicker: UIViewControllerRepresentable {
-    @Binding var selectedPPTXURL: URL?
+    
+    let allowedTypes: [UTType]
     @Binding var selectedPDFURL: URL?
-    @Binding var isPresented: Bool
-    @Binding var isNext: Bool
+    @Binding var selectedPPTXURL: URL?
+
+    @Bindable var viewModel: HomeViewModel
     
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
-        let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.item])
+        let picker = UIDocumentPickerViewController(forOpeningContentTypes: allowedTypes)
         picker.delegate = context.coordinator
         picker.allowsMultipleSelection = true
         return picker
@@ -34,32 +38,41 @@ struct MultipleDocumentPicker: UIViewControllerRepresentable {
         }
         
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-            for url in urls {
-                // 보안 스코프 리소스 접근 시작 (확인용)
-                let accessing = url.startAccessingSecurityScopedResource()
-                
-                defer {
-                    if accessing {
-                        url.stopAccessingSecurityScopedResource()
-                    }
-                }
-                
-                let fileExtension = url.pathExtension.lowercased()
-                if fileExtension == "pptx" {
-                    parent.selectedPPTXURL = url
-                } else if fileExtension == "pdf" {
-                    parent.selectedPDFURL = url
+            guard let url = urls.first else { return }
+            
+            let accessing = url.startAccessingSecurityScopedResource()
+            defer {
+                if accessing {
+                    url.stopAccessingSecurityScopedResource()
                 }
             }
-            if !(parent.selectedPDFURL == nil) && !(parent.selectedPPTXURL == nil) {
-                print("선택 완료")
-                parent.isNext = true
+            
+            let fileExtension = url.pathExtension.lowercased()
+
+            if fileExtension == "pdf" {
+                parent.viewModel.selectedPDFURL = url
+            } else if fileExtension == "pptx" {
+                parent.viewModel.selectedPPTXURL = url
             }
-            parent.isPresented = false
         }
         
         func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-            parent.isPresented = false
+//            parent.isPresented = false
+        }
+        
+        
+        func getPDFTitle(from url: URL) -> String? {
+            guard let pdfDocument = PDFDocument(url: url) else {
+                print("PDFDocument를 열 수 없음")
+                return nil
+            }
+
+            if let title = pdfDocument.documentAttributes?[PDFDocumentAttribute.titleAttribute] as? String {
+                return title
+            } else {
+                print("제목 정보 없음")
+                return nil
+            }
         }
     }
 }

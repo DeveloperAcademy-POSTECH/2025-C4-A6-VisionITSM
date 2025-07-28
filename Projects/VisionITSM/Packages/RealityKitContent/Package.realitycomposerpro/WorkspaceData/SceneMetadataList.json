@@ -16,30 +16,10 @@
       [
         "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
         "Root",
-        "Timeline",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
-        "Root",
         "visionitsmSkybox"
       ],
       {
         "disallowsFraming" : false,
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
-        "Root",
-        "SkyDome"
-      ],
-      {
-        "disallowsFraming" : true,
         "isExpanded" : false,
         "isLocked" : false
       },
@@ -56,7 +36,8 @@
       [
         "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
         "Root",
-        "Timeline"
+        "Timeline",
+        "Track2"
       ],
       {
         "isExpanded" : true,
@@ -66,7 +47,26 @@
         "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
         "Root",
         "Timeline",
-        "Track2"
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "SkyDome"
+      ],
+      {
+        "disallowsFraming" : true,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "Timeline"
       ],
       {
         "isExpanded" : true,
@@ -173,8 +173,16 @@
     "objectMetadataList" : [
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potato",
+        "potato_4",
         "Armature"
       ],
       {
@@ -186,18 +194,6 @@
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
         "potato_4",
-        "Armature",
-        "Armature"
-      ],
-      {
-        "disallowsFraming" : false,
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "potato",
         "Armature",
         "Armature"
       ],
@@ -235,13 +231,14 @@
         "SpawnSlidePosition"
       ],
       {
-        "isExpanded" : true,
+        "disallowsFraming" : false,
+        "isExpanded" : false,
         "isLocked" : false
       },
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potato_0",
+        "potato",
         "Armature"
       ],
       {
@@ -251,10 +248,14 @@
       },
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root"
+        "Root",
+        "potato",
+        "Armature",
+        "Armature"
       ],
       {
-        "isExpanded" : true,
+        "disallowsFraming" : false,
+        "isExpanded" : false,
         "isLocked" : false
       },
       [
@@ -277,8 +278,7 @@
         "Armature"
       ],
       {
-        "disallowsFraming" : false,
-        "isExpanded" : false,
+        "isExpanded" : true,
         "isLocked" : false
       },
       [

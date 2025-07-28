@@ -155,7 +155,7 @@ struct ImmersiveView: View {
                     
                     if let attachment = attachments.entity(for: "Slide") {
                         attachment.transform.rotation = simd_quatf(angle: .pi, axis: SIMD3<Float>(0, 1, 0))
-                        attachment.position = SIMD3<Float>(0.0, 0.15, 0)
+                        attachment.position = SIMD3<Float>(0.0, 0.54, 0)
                         spawnSliderPosition.addChild(attachment)
                     }
                 }
