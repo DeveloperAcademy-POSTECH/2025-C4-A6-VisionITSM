@@ -10,11 +10,17 @@
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Immersive_10.usda" : "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Immersive_20.usda" : "7DD061F7-77E1-4380-8219-E6BEB16655A8",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Immersive_5.usda" : "7110E10C-51D7-44A6-AAAC-79953A29A865",
-    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Scene.usda" : "D66134B1-3681-4A8E-AFE5-29F257229F3B"
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Scene.usda" : "D66134B1-3681-4A8E-AFE5-29F257229F3B",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/potatoZZZZ.usda" : "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/testSound.usda" : "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/testSound2.usda" : "4A9250F8-7C0D-4996-9016-CF0AB3FF63C6"
   },
   "projectID" : 6666049875095607118,
   "uuidToIntID" : {
+    "14DAD0C8-9D5D-497C-B783-BA328B93DA87" : 8340955721967945602,
+    "4A9250F8-7C0D-4996-9016-CF0AB3FF63C6" : 221053118818613788,
     "648A96A3-FFBD-4037-8E77-982FEF1B7B68" : 1483839295745885252,
+    "67B68799-BEF6-48BF-B323-B9D04E9EF0B1" : -5200622668106870484,
     "7110E10C-51D7-44A6-AAAC-79953A29A865" : 8053040742828145084,
     "7DD061F7-77E1-4380-8219-E6BEB16655A8" : -6783350814450206296,
     "919EBBA3-1BEE-4996-AA78-74001E2FB9CA" : -4886598940581358019,

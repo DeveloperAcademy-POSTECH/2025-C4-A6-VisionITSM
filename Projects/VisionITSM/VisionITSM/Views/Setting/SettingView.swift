@@ -117,21 +117,8 @@ struct SettingView: View {
                 }
                 
                 Button {
-                    dismiss()
-                    router.push(.script)
-                    
-//                    MARK: - 이머시브존2
-//
                     Task {
-                        let result = await openImmersiveSpace(id: "ImmersiveSpace")
-                        switch result {
-                        case .opened:
-                            print("Immersive space opened")
-                        case .userCancelled, .error:
-                            print("Failed to open immersive space")
-                        @unknown default:
-                            break
-                        }
+                        await handleEnterSession()
                     }
                 } label: {
                     Label {
@@ -144,6 +131,22 @@ struct SettingView: View {
             }
             .padding(.horizontal, 44)
             .padding(.vertical, 20)
+        }
+    }
+    
+    @MainActor
+    func handleEnterSession() async {
+        dismiss()
+        router.push(.script)
+
+        let result = await openImmersiveSpace(id: "ImmersiveSpace")
+        switch result {
+        case .opened:
+            print("Immersive space opened")
+        case .userCancelled, .error:
+            print("Failed to open immersive space")
+        @unknown default:
+            break
         }
     }
 }

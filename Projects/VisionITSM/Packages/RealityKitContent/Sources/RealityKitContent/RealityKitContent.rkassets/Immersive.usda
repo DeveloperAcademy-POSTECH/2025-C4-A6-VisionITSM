@@ -7,7 +7,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["GridMaterial", "visionitsmSkybox", "potato_2", "potato_7", "potato3", "potato", "potato4", "SpawnSlidePosition"]
+    reorder nameChildren = ["GridMaterial", "visionitsmSkybox", "potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "SpawnSlidePosition", "SpatialAudio2"]
     def "GridMaterial" (
         active = true
         references = @Materials/GridMaterial.usda@

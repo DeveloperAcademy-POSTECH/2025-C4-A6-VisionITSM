@@ -1,0 +1,42 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.120.2)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    quatf xformOp:orient = (1, 0, 0, 0)
+    float3 xformOp:scale = (1, 1, 1)
+    float3 xformOp:translate = (0, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def Xform "SpatialAudio" (
+        references = None
+    )
+    {
+        reorder nameChildren = ["testSound2_wav", "SpatialAudio", "testSound_wav"]
+        def RealityKitComponent "SpatialAudio"
+        {
+            float directivityFocus = 0
+            float directLevel = 0
+            float gain = -1.9905968
+            uniform token info:id = "RealityKit.SpatialAudio"
+            float reverbLevel = 0
+        }
+
+        def RealityKitAudioFile "testSound_wav" (
+            references = None
+        )
+        {
+            uniform asset file = @testSound.wav@
+            uniform token loadingStrategy = "Stream"
+            uniform bool shouldLoop = 1
+        }
+    }
+}
+

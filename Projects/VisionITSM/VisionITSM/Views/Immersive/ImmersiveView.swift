@@ -159,6 +159,16 @@ struct ImmersiveView: View {
                         spawnSliderPosition.addChild(attachment)
                     }
                 }
+
+                //이머시브존 입장음
+                let entryAudioEntity = Entity()
+                content.add(entryAudioEntity)
+                await SpatialAudioPlayer.playSound(
+                    entity: entryAudioEntity,
+                    audioFileName: "testSound2_wav",
+                    fromUSDAScene: "testSound2.usda",
+                    duration: 10
+                )
             } catch {
                 fatalError("No entity to load")
             }
@@ -297,6 +307,31 @@ extension ImmersiveView {
                 startsPaused: false
             )
             sleepController.speed = PotatoAnimationConfig.sleepAnimationSpeed
+
+            
+             // 졸음 소리 재생 (AudioFileResource 방식)
+//             do {
+//                 let audioResource = try await AudioFileResource.load(
+//                     named: "/Root/SpatialAudio/testSound_wav",  // ← RCP에서 실제 오디오가 존재하는 경로
+//                     from: "testSound.usda",
+//                     in: realityKitContentBundle
+//                 )
+//                 let audioController = entity.prepareAudio(audioResource)
+//                 audioController.play()
+//                 // 수면 애니메이션 종료 후 오디오 정지
+//                 Task {
+//                     try? await Task.sleep(for: .seconds(PotatoAnimationConfig.sleepAnimationDuration))
+//                     audioController.stop()
+//                 }
+//             } catch {
+//                 print("❌ testSound.wav 로드 실패: \(error)")
+//             }
+            await SpatialAudioPlayer.playSound(
+                entity: entity,
+                audioFileName: "testSound_wav",
+                fromUSDAScene: "testSound.usda",
+                duration: PotatoAnimationConfig.sleepAnimationDuration
+            )
         }
 
         // 4. 수면 애니메이션 재생 후 기본 애니메이션으로 복귀
