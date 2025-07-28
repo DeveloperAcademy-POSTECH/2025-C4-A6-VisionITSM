@@ -175,8 +175,10 @@ struct ScriptView: View {
         ScrollView() {
             if !(homeViewModel.currentKeynote?.keynote.isEmpty ?? .init()) {
                 Text(homeViewModel.currentKeynote?.keynote[homeViewModel.currentIndex].presenterNotes ?? "No Memo")
+                    .font(.system(size: 19))
             }
         }
+        .padding(.vertical, 36)
     }
     
     func getIndex(currentIndex: Int, maxIndex: Int, isLeft: Bool) -> String {
@@ -194,9 +196,9 @@ struct ScriptView: View {
             return keynote.keynote.count == 0 ? .gridNewButton : keynote.keynote[homeViewModel.currentIndex].slideImage ?? .gridNewButton
         } else {
             if homeViewModel.currentIndex == keynote.keynote.count - 1 {
-                return .gridNewButton
+                return .gridLastButton
             } else {
-                return keynote.keynote.count == 0 ? .gridNewButton : keynote.keynote[homeViewModel.currentIndex + 1].slideImage ?? .gridNewButton
+                return keynote.keynote.count == 0 ? .gridNewButton : keynote.keynote[homeViewModel.currentIndex + 1].slideImage ?? .gridLastButton
             }
         }
     }
