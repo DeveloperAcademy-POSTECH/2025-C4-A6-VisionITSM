@@ -19,7 +19,7 @@ struct HomeView: View {
     @State private var router = NavigationRouter()
     @State private var parser = HybridPPTXParser()
     
-    @State var settingViewModel: SettingViewModel = .init()
+    @Environment(SettingViewModel.self) var settingViewModel
     
     @State private var parsingSheet: Bool = false
     @State private var isModal: Bool = false
@@ -59,9 +59,6 @@ struct HomeView: View {
                     viewModel: homeViewModel
                 )
             }
-//            .sheet(isPresented: $homeViewModel.showingParsing) {
-//                parsingModalView
-//            }
             .sheet(isPresented: $settingViewModel.isShowSetting) {
                 SettingView(settingViewModel: settingViewModel, router: router)
             }

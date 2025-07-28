@@ -12,6 +12,7 @@ import SwiftData
 struct VisionITSMApp: App {
     @State private var appModel: AppModel = AppModel()
     @State private var homeViewModel: HomeViewModel = .init()
+    @State private var settingViewModel: SettingViewModel = SettingViewModel()
     
     init() {
         TrackingSystem.registerSystem()
@@ -22,6 +23,7 @@ struct VisionITSMApp: App {
         WindowGroup(id: "home") {
             HomeView(homeViewModel: homeViewModel)
                 .environment(appModel)
+                .environment(settingViewModel)
         }
         .modelContainer(for: HomeModel.self)
         .windowResizability(.contentSize)
@@ -29,19 +31,11 @@ struct VisionITSMApp: App {
             WindowPlacement(.utilityPanel)
         }
         
-        WindowGroup(id: "slideWindow") {
-            SlideView(homeViewModel: homeViewModel)
-        }
-        .defaultWindowPlacement { content, context in
-            guard let contentWindow = context.windows.first(where: { $0.id == "home" }) else { return WindowPlacement(nil)
-            }
-            return WindowPlacement(.above(contentWindow))
-        }
-        
         
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
-            ImmersiveView()
+            ImmersiveView(homeViewModel: homeViewModel)
                 .environment(appModel)
+                .environment(settingViewModel)
                 .onAppear {
                     appModel.immersiveSpaceState = .open
                 }
