@@ -122,7 +122,6 @@ struct SettingView: View {
                     router.push(.result)
                     
 //                    MARK: - 이머시브존2
-//
                     Task {
                         let result = await openImmersiveSpace(id: "ImmersiveSpace")
                         switch result {

@@ -17,9 +17,10 @@ struct ResultView: View {
         VStack(alignment: .leading, spacing: 36) {
             HStack {
                 VStack(alignment: .leading, spacing: 24) {
-                    resultItemView(title: "Audience Size", result: "\(settingViewModel.settingModel.audienceSize)")
-                    resultItemView(title: "Dustraction Level", result: "\(settingViewModel.settingModel.distractionLevel)")
-                    resultItemView(title: "Time Spent", result: "\(settingViewModel.counter.asTimeHMS)")
+                    resultItemView(title: "Audience Size", result: settingViewModel.settingModel.audienceSize)
+                    resultItemView(title: "Dustraction Level", result: settingViewModel.settingModel.distractionLevel)
+                    
+                    resultTimeItemView(title: "Time Spent", result: "\(settingViewModel.counter.asTimeHMS)")
                 }
                 
                 Spacer()
@@ -46,12 +47,31 @@ struct ResultView: View {
         }
     }
     
-    func resultItemView(title: String, result: String) -> some View {
+    func resultTimeItemView(title: String, result: String) -> some View {
         VStack(alignment: .leading, spacing: 24) {
             Text(title)
                 .font(.largeTitle)
             Text(result)
                 .font(.title2)
+        }
+    }
+    
+    func resultItemView(title: String, result: Float) -> some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text(title)
+                .font(.largeTitle)
+            Text(checkLevel(result: result))
+                .font(.title2)
+        }
+    }
+    
+    func checkLevel(result: Float) -> String {
+        if result == 0 {
+            return "Easy"
+        } else if result == 1.0 {
+             return "Medium"
+        } else {
+            return "Hard"
         }
     }
 }
