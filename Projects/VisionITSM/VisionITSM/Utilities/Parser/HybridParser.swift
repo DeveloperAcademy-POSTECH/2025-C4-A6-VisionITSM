@@ -15,46 +15,54 @@ class HybridPPTXParser: ObservableObject {
     var isLoading = false
     var errorMessage: String?
     
-    func parseFiles(pptxURL: URL, pdfURL: URL) {
+    func parseFiles(pptxURL: URL?, pdfURL: URL?) {
         isLoading = true
         errorMessage = nil
         
         DispatchQueue.global(qos: .userInitiated).async {
-            // 보안 스코프 리소스 접근 시작
-            let pptxAccessing = pptxURL.startAccessingSecurityScopedResource()
-            let pdfAccessing = pdfURL.startAccessingSecurityScopedResource()
-            
-            defer {
-                // 작업 완료 후 리소스 접근 중지
-                if pptxAccessing {
-                    pptxURL.stopAccessingSecurityScopedResource()
-                }
-                if pdfAccessing {
-                    pdfURL.stopAccessingSecurityScopedResource()
-                }
-            }
-            
-            do {
-                // 1. PDF에서 슬라이드 이미지 추출
-                let slideImages = self.extractImagesFromPDF(pdfURL: pdfURL)
-                
-                // 2. 정확한 발표자 메모 매핑 생성
-                let slideNoteMappings = try self.extractNotes(from: pptxURL)
-                
-                // 3. 최종 SlideData 생성
-                let slides = self.combineSlide(images: slideImages, mappings: slideNoteMappings)
-                
+            guard let pdfURL = pdfURL else {
+                print("❌ PDF는 필수입니다.")
                 DispatchQueue.main.async {
-                    self.slides = slides
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    self.errorMessage = error.localizedDescription
+                    self.errorMessage = "PDF 파일이 필요합니다."
                     self.isLoading = false
                 }
+                return
+            }
+
+            let pdfAccessing = pdfURL.startAccessingSecurityScopedResource()
+            var pptxAccessing = false
+            var slideNoteMappings: [SlideNoteMapping] = []
+            
+            // ✅ PDF에서 이미지 추출
+            let slideImages = self.extractImagesFromPDF(pdfURL: pdfURL)
+
+            // ✅ PPTX가 있는 경우에만 발표자 메모 추출 시도
+            if let pptxURL = pptxURL {
+                pptxAccessing = pptxURL.startAccessingSecurityScopedResource()
+                do {
+                    slideNoteMappings = try self.extractNotes(from: pptxURL)
+                } catch {
+                    print("⚠️ PPTX 파싱 실패: \(error.localizedDescription)")
+                }
+            } else {
+                print("⚠️ PPTX 파일 없음 → 발표자 메모 없이 진행")
+            }
+            
+            defer {
+                if pptxAccessing { pptxURL?.stopAccessingSecurityScopedResource() }
+                if pdfAccessing { pdfURL.stopAccessingSecurityScopedResource() }
+            }
+            
+            // ✅ PDF + (option) 발표자 메모 → SlideData
+            let slides = self.combineSlide(images: slideImages, mappings: slideNoteMappings)
+            
+            DispatchQueue.main.async {
+                self.slides = slides
+                self.isLoading = false
             }
         }
     }
+
     
     //MARK: PDF에서 슬라이드 이미지 추출
     private func extractImagesFromPDF(pdfURL: URL) -> [UIImage] {
