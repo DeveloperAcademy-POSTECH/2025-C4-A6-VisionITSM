@@ -4,14 +4,15 @@
 //
 //  Created by 진아현 on 7/14/25.
 //
-
+ 
 import SwiftUI
-
+ 
 struct ScriptView: View {
     //MARK: - PROPERTIES
     
     @State private var isCounting: Bool = false
     @State private var isPop: Bool = false
+    @State private var showingAlert: Bool = false
     
     @Bindable var homeViewModel: HomeViewModel
     @Bindable var settingViewModel: SettingViewModel
@@ -30,7 +31,7 @@ struct ScriptView: View {
             
             PresentNoteView
         }
-        .popover(isPresented: $isPop, attachmentAnchor: .point(.topTrailing), arrowEdge: .bottom , content: {
+        .popover(isPresented: $isPop, attachmentAnchor: .rect(.rect(CGRect(x: 624, y: 0, width: 0, height: 0))), arrowEdge: .leading , content: {
             HStack(content: {
                 Button(action: {
                     isPop = false
@@ -42,9 +43,6 @@ struct ScriptView: View {
                     isCounting = false
                     settingViewModel.counter = 0
                     homeViewModel.currentIndex = 0
-                    dismissWindow(id: "slideWindow")
-                    openWindow(id: "slideWindow")
-                    
                 }, label: {
                     Image(systemName: "return")
                 })
@@ -56,7 +54,7 @@ struct ScriptView: View {
             homeViewModel.currentIndex = 0
         }
         .ornament(attachmentAnchor: .scene(UnitPoint(x: 0.5, y: -0.11)), contentAlignment: .top) {
-            TimerView(isPlaying: $isCounting, settingViewModel: settingViewModel/*, router: router*/)
+            TimerView(isPlaying: $isCounting, settingViewModel: settingViewModel)
         }
         .safeAreaPadding([.top, .horizontal], 24)
         .safeAreaInset(edge: .top, content: {
@@ -83,15 +81,48 @@ struct ScriptView: View {
     private var topButton: some View {
         HStack {
             Button(action: {
-                dismissWindow(id: "Script")
-                Task {
-                    await dismissImmersiveSpace()
-                }
-                
+                showingAlert = true
             }, label: {
                 Image(systemName: "chevron.left")
             })
+            .alert(isPresented: $showingAlert) {
+                Alert(
+                    title: Text("End Session?"),
+                    message: Text("If you go back now, your session will end and all progress will be lost. Are you sure you want to continue?"),
+                    primaryButton: .default(Text("Dismiss")),
+                    secondaryButton: .destructive(Text("End Session"), action: {
+                        dismissWindow(id: "Script")
+                        Task {
+                            await dismissImmersiveSpace()
+                        }
+                    })
+                )
+            }
+            .alert(
+                Text("End Session?"),
+                isPresented: $showingAlert
+            ) {
+                Button(role: .cancel) {
+                    
+                } label: {
+                    Text("Dismiss")
+                }
+                
+                Button(role: .destructive) {
+                    dismissWindow(id: "Script")
+                    Task {
+                        await dismissImmersiveSpace()
+                    }
+                } label: {
+                    Text("End Session")
+                }
+            } message: {
+                Text("If you go back now, your session will end and all progress will be lost. Are you sure you want to continue?")
+            }
+
+            
             Spacer()
+            
             Button(action: {
                 print("더 보기")
                 isPop.toggle()
@@ -170,7 +201,7 @@ struct ScriptView: View {
         }
     }
 }
-
+ 
 #Preview {
-    ScriptView(/*router: .init(), */homeViewModel: .init(), settingViewModel: .init(), keynote: .init(title: "QQQ", keynote: []))
+    ScriptView(homeViewModel: .init(), settingViewModel: .init(), keynote: .init(title: "QQQ", keynote: []))
 }

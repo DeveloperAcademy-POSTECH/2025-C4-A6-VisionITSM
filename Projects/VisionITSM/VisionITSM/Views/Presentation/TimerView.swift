@@ -11,7 +11,7 @@ struct TimerView: View {
     //MARK: - PROPERTIES
     @Binding var isPlaying: Bool
     @Bindable var settingViewModel: SettingViewModel
-//    @Bindable var router: NavigationRouter
+    
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     @Environment(\.dismissWindow) private var dismissWindow
     

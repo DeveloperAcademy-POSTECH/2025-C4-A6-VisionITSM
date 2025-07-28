@@ -4,10 +4,10 @@
 //
 //  Created by 선애 on 7/9/25.
 //
-
+ 
 import SwiftUI
 import SwiftData
-
+ 
 @main
 struct VisionITSMApp: App {
     @State private var appModel: AppModel = AppModel()
@@ -18,7 +18,7 @@ struct VisionITSMApp: App {
         TrackingSystem.registerSystem()
         TrackingComponent.registerComponent()
     }
-
+ 
     var body: some Scene {
         WindowGroup(id: "home") {
             HomeView(homeViewModel: homeViewModel)
@@ -31,7 +31,7 @@ struct VisionITSMApp: App {
         
         WindowGroup(id: "Script") {
             ScriptView(homeViewModel: homeViewModel, settingViewModel: settingViewModel, keynote: homeViewModel.currentKeynote ?? HomeModel(title: "오류", keynote: []))
-                .frame(width: 700, height: 500)
+                .frame(width: 640, height: 480)
         }
         .windowResizability(.contentSize)
         .defaultWindowPlacement {content,context in
