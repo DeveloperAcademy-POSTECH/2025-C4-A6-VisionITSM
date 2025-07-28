@@ -27,7 +27,14 @@ struct VisionITSMApp: App {
         }
         .modelContainer(for: HomeModel.self)
         .windowResizability(.contentSize)
-        .defaultWindowPlacement {content,context in 
+        
+        
+        WindowGroup(id: "Script") {
+            ScriptView(homeViewModel: homeViewModel, settingViewModel: settingViewModel, keynote: homeViewModel.currentKeynote ?? HomeModel(title: "오류", keynote: []))
+                .frame(width: 700, height: 500)
+        }
+        .windowResizability(.contentSize)
+        .defaultWindowPlacement {content,context in
             WindowPlacement(.utilityPanel)
         }
         

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ScriptView: View {
     //MARK: - PROPERTIES
-    @Bindable var router: NavigationRouter
     
     @State private var isCounting: Bool = false
     @State private var isPop: Bool = false
@@ -19,6 +18,7 @@ struct ScriptView: View {
     @Bindable var keynote: HomeModel
     
     @Environment(\.dismissWindow) private var dismissWindow
+    @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     @Environment(\.openWindow) private var openWindow
     
     //MARK: - BODY
@@ -55,8 +55,8 @@ struct ScriptView: View {
             settingViewModel.counter = 0
             homeViewModel.currentIndex = 0
         }
-        .ornament(attachmentAnchor: .scene(UnitPoint(x: 0.5, y: -0.08)), contentAlignment: .top) {
-            TimerView(isPlaying: $isCounting, settingViewModel: settingViewModel, router: router)
+        .ornament(attachmentAnchor: .scene(UnitPoint(x: 0.5, y: -0.11)), contentAlignment: .top) {
+            TimerView(isPlaying: $isCounting, settingViewModel: settingViewModel/*, router: router*/)
         }
         .safeAreaPadding([.top, .horizontal], 24)
         .safeAreaInset(edge: .top, content: {
@@ -83,7 +83,11 @@ struct ScriptView: View {
     private var topButton: some View {
         HStack {
             Button(action: {
-                router.pop()
+                dismissWindow(id: "Script")
+                Task {
+                    await dismissImmersiveSpace()
+                }
+                
             }, label: {
                 Image(systemName: "chevron.left")
             })
@@ -117,7 +121,6 @@ struct ScriptView: View {
             .buttonBorderShape(.roundedRectangle(radius: 12))
             .buttonStyle(.plain)
             
-            Spacer()
             
             Button(action: {
                 homeViewModel.currentIndex += (homeViewModel.currentIndex == keynote.keynote.count - 1) ? 0 : 1
@@ -169,5 +172,5 @@ struct ScriptView: View {
 }
 
 #Preview {
-    ScriptView(router: .init(), homeViewModel: .init(), settingViewModel: .init(), keynote: .init(title: "QQQ", keynote: []))
+    ScriptView(/*router: .init(), */homeViewModel: .init(), settingViewModel: .init(), keynote: .init(title: "QQQ", keynote: []))
 }

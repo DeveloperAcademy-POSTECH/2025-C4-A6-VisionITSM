@@ -11,8 +11,9 @@ struct TimerView: View {
     //MARK: - PROPERTIES
     @Binding var isPlaying: Bool
     @Bindable var settingViewModel: SettingViewModel
-    @Bindable var router: NavigationRouter
+//    @Bindable var router: NavigationRouter
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
+    @Environment(\.dismissWindow) private var dismissWindow
     
     var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -22,7 +23,7 @@ struct TimerView: View {
             Button {
                 if isPlaying {
                     isPlaying = false
-                    router.push(.result)
+                    dismissWindow(id: "Script")
                     Task {
                         await dismissImmersiveSpace()
                     }

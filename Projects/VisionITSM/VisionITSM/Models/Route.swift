@@ -9,6 +9,5 @@ import Foundation
 
 enum Route: Hashable {
     case home
-    case script
     case result
 }
