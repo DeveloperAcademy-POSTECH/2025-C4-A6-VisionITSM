@@ -13,7 +13,7 @@ struct SettingView: View {
     
     @Bindable var router: NavigationRouter
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.openWindow) private var openWindow
+    @Environment(\.pushWindow) private var pushWindow
     
     //MARK: - 이머시브존1
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
@@ -118,7 +118,8 @@ struct SettingView: View {
                 
                 Button {
                     dismiss()
-                    router.push(.script)
+                    pushWindow(id: "Script")
+                    router.push(.result)
                     
 //                    MARK: - 이머시브존2
 //
