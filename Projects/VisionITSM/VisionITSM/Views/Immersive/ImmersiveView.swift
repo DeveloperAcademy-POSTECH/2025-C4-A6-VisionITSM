@@ -1,11 +1,3 @@
-//
-//  ImmersiveView.swift
-//  VisionITSM
-//
-//  Created by 선애 on 7/9/25.
-//
-
-
 import SwiftUI
 import RealityKit
 import RealityKitContent
@@ -19,6 +11,15 @@ struct ImmersiveView: View {
     
     @Bindable var homeViewModel: HomeViewModel
     
+    @State private var potatoEntities: [PotatoEntity] = []
+    
+    struct PotatoEntity {
+        let entity: Entity
+        let anchor: Entity
+        let originalModelName: String
+        var isSleeping: Bool = false
+    }
+    
     var body: some View {
         
         var potatoPositions: [SIMD3<Float>] = []    // 랜덤 배치되는 감자 청중의 위치를 저장하여 조명 등의 기능에 사용될 위치정보
@@ -26,6 +27,7 @@ struct ImmersiveView: View {
         RealityView { content, attachments in
             do {
                 let audienceSizeLevel = settingViewModel.settingModel.audienceSize
+                
                 let spawnCount: Int
                 let backgroundName: String
                 
@@ -69,9 +71,10 @@ struct ImmersiveView: View {
                 for anchorName in potatoAnchors {
                     if let anchorEntity = immersiveBackground.findEntity(named: anchorName) {
                         anchorEntity.isEnabled = false
-                        deactivateAllChildren(of: anchorEntity)
                     }
                 }
+                
+                potatoEntities.removeAll()
                 
                 for anchorName in selectedAnchors {
                     if let anchorEntity = immersiveBackground.findEntity(named: anchorName) {
@@ -87,6 +90,7 @@ struct ImmersiveView: View {
                             anchorEntity.addChild(randomModel)
                             
                             let position = anchorEntity.position(relativeTo: nil)
+                            print("position: \(position)")
                             potatoPositions.append(position)
                             
                             ["rightEye", "leftEyeball", "rightEye_001"].forEach { eyeName in
@@ -97,15 +101,28 @@ struct ImmersiveView: View {
                                 }
                             }
                             
-                            randomModel.setPosition(randomModel.position, relativeTo: nil)
+                            randomModel.position = anchorEntity.position(relativeTo: nil)
+                            print("position: \(randomModel.position)")
+                            randomModel.scale = anchorEntity.scale(relativeTo: nil)
+                            
                             content.add(randomModel)
                             
                             deactivateAllChildren(of: anchorEntity)
                             
-                            Task {
-                                await cyclePotatoAnimation(on: randomModel)
-                            }
+                            playPotatoAnimation(on: randomModel)
                             
+//                            playPotatoAnimation(on: anchorEntity)
+                            
+//                            Task {
+//                                await cyclePotatoAnimation(on: randomModel)
+//                            }
+                            
+                            let potatoEntity = PotatoEntity(
+                                entity: randomModel,
+                                anchor: anchorEntity,
+                                originalModelName: randomName
+                            )
+                            potatoEntities.append(potatoEntity)
                         }
                     } else {
                         print("⚠️ anchorEntity 추가 실패: \(anchorName)")
@@ -204,6 +221,50 @@ extension ImmersiveView {
         }
     }
     
+    // 돌발행동: 졸기
+    func checkSleepEvent(currentTime: Int) {
+        let distractionLevel = settingViewModel.settingModel.distractionLevel
+        
+        guard distractionLevel > 0 else { return }
+        
+        let interval: Int
+        switch distractionLevel {
+        case 1:
+            interval = 60
+        case 2:
+            interval = 30
+        default:
+            return
+        }
+        
+        if currentTime > 0 && currentTime % interval == 0 {
+            handleSleepEvent()
+            print("졸음 이벤트 확인 시작 - 시간: \(currentTime)초, distractionLevel: \(distractionLevel)")
+        }
+    }
+    
+    func handleSleepEvent() {
+        let distractionLevel = settingViewModel.settingModel.distractionLevel
+        
+        if Bool.random() == false {
+            print("50% 확률로 졸음 이벤트 스킵됨")
+            return
+        }
+        
+        let awakePotatos = potatoEntities.filter { !$0.isSleeping }
+        
+        guard let target = awakePotatos.randomElement() else {
+            print("모든 감자가 자는 중")
+            return
+        }
+        
+        print("😴 감자 졸기 시작: \(target.originalModelName)")
+        
+//        Task {
+//            await playSleepAnimation(for: target)
+//        }
+    }
+        
     /// 기본 애니메이션과 수면 애니메이션을 순차적으로 재생하는 메서드
     func cyclePotatoAnimation(on entity: Entity) async {
         // 지정된 속도로 애니메이션을 반복 재생하는 헬퍼

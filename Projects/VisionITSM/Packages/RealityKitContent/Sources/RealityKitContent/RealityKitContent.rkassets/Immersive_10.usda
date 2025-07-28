@@ -1,24 +1,42 @@
 #usda 1.0
 (
+    customLayerData = {
+        dictionary RealityKit = {
+            bool expandRootVariants = 1
+        }
+    }
     defaultPrim = "Root"
     metersPerUnit = 1
     upAxis = "Y"
 )
 
-def Xform "Root"
+def Xform "Root" (
+    customData = {
+        float3 rotationEulerHint = (0, 0, 0)
+    }
+)
 {
-    reorder nameChildren = ["GridMaterial", "visionitsmSkybox", "potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7", "potato_8", "potato_9", "potato_10"]
+    reorder nameChildren = ["GridMaterial", "visionitsmSkybox", "potato_1", "potato_2", "potato_3", "potato_4", "potato_5", "potato_6", "potato_7", "potato_8", "potato_9", "potato_10", "Timeline"]
+    quatf xformOp:orient = (1, 0, 0, 0)
+    float3 xformOp:translate = (0, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
     def "GridMaterial" (
         active = true
+        customData = {
+            float3 rotationEulerHint = (0, 0, 0)
+        }
         references = @Materials/GridMaterial.usda@
     )
     {
+        quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
     def "visionitsmSkybox" (
-        active = true
+        active = false
         references = @visionitsmSkybox.usdz@
     )
     {
@@ -28,6 +46,8 @@ def Xform "Root"
 
         over "SkySphere"
         {
+            float3 xformOp:translate = (0, 20, 0)
+
             over "SkySphere_mat"
             {
                 asset inputs:SkySphere_Texture = @visionitsmSkybox1.jpeg@
@@ -38,28 +58,28 @@ def Xform "Root"
     def "potato_1" (
         active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707963, -0.5235988, -3.4412757e-8)
+            float3 rotationEulerHint = (-1.5707959, 0, -6.7311355e-8)
         }
         references = @potato2.usdz@
     )
     {
-        quatf xformOp:orient = (0.6830127, -0.68301266, -0.18301271, -0.18301271)
-        float3 xformOp:scale = (6, 6, 6)
-        float3 xformOp:translate = (47.71845, -30, 0)
+        quatf xformOp:orient = (0.7071069, -0.7071066, 2.3798153e-8, -2.3798162e-8)
+        float3 xformOp:scale = (0.15, 0.15, 0.15)
+        float3 xformOp:translate = (-0.051212315, 0, -4)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
     def "potato_2" (
         active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707965, 0.17453292, 1.8913794e-7)
+            float3 rotationEulerHint = (-1.5707964, -0.2617994, 1.6969499e-7)
         }
         references = @potato2.usdz@
     )
     {
-        quatf xformOp:orient = (0.704416, -0.7044161, 0.06162834, 0.061628487)
-        float3 xformOp:scale = (6, 6, 6)
-        float3 xformOp:translate = (-23.92217, -30, -40)
+        quatf xformOp:orient = (0.7010574, -0.7010574, -0.09229602, -0.0922959)
+        float3 xformOp:scale = (0.15, 0.15, 0.15)
+        float3 xformOp:translate = (0.5, 0, -2.9)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "Area_002"
@@ -102,113 +122,129 @@ def Xform "Root"
     def "potato_3" (
         active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707965, -8.881784e-16, 1.720638e-8)
+            float3 rotationEulerHint = (-1.5707965, 0.2617994, 0)
         }
         references = @potato3.usdz@
     )
     {
-        quatf xformOp:orient = (0.7071067, -0.7071068, -6.0833747e-9, 6.0833734e-9)
-        float3 xformOp:scale = (6, 6, 6)
-        float3 xformOp:translate = (0, -30, -75)
+        quatf xformOp:orient = (0.7010573, -0.70105743, 0.09229595, 0.09229596)
+        float3 xformOp:scale = (0.15, 0.15, 0.15)
+        float3 xformOp:translate = (-0.5, 0, -2.9)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
     def "potato_4" (
         active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707965, 0, -1.0591725e-7)
+            float3 rotationEulerHint = (-1.5707964, 0.43633235, -1.6441612e-7)
         }
         references = @potato.usdz@
     )
     {
-        quatf xformOp:orient = (0.7071067, -0.7071068, 3.7447407e-8, -3.74474e-8)
-        float3 xformOp:scale = (6, 6, 6)
-        float3 xformOp:translate = (11.61878, -30, -40)
+        quatf xformOp:orient = (0.6903455, -0.6903455, 0.15304598, 0.15304588)
+        float3 xformOp:scale = (0.15, 0.15, 0.15)
+        float3 xformOp:translate = (-1, 0, -2.6)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
     def "potato_5" (
         active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707968, -0.17453292, -6.808966e-8)
+            float3 rotationEulerHint = (-1.5707968, 0.17453292, -6.0524144e-8)
         }
         references = @potato4.usdz@
     )
     {
-        quatf xformOp:orient = (0.70441586, -0.7044162, -0.06162838, -0.061628457)
-        float3 xformOp:scale = (6, 6, 6)
-        float3 xformOp:translate = (25.27795, -42.425, -8.34108)
+        quatf xformOp:orient = (0.70441586, -0.7044162, 0.061628424, 0.061628412)
+        float3 xformOp:scale = (0.15, 0.15, 0.15)
+        float3 xformOp:translate = (-0.39607438, -7.450581e-9, -3.53775)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
     def "potato_6" (
         active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707964, 0.34906584, 0)
+            float3 rotationEulerHint = (-1.5707958, -0.52359885, 6.8825514e-8)
         }
         references = @potato.usdz@
     )
     {
-        quatf xformOp:orient = (0.6963642, -0.6963643, 0.12278779, 0.1227878)
-        float3 xformOp:scale = (6, 6, 6)
-        float3 xformOp:translate = (-35.06778, -30, -4.77686)
+        quatf xformOp:orient = (0.6830129, -0.68301255, -0.18301278, -0.18301265)
+        float3 xformOp:scale = (0.15, 0.15, 0.15)
+        float3 xformOp:translate = (1.1385301, -3.7252903e-8, -2.56689)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
     def "potato_7" (
         active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707965, -0.17453292, 7.565518e-9)
+            float3 rotationEulerHint = (-1.5707958, 0.43633237, 1.6441613e-8)
         }
         references = @potato2.usdz@
     )
     {
-        quatf xformOp:orient = (0.704416, -0.7044161, -0.061628416, -0.061628424)
-        float3 xformOp:scale = (6, 6, 6)
-        float3 xformOp:translate = (33.65894, -30, -80)
+        quatf xformOp:orient = (0.6903457, -0.69034535, 0.15304597, 0.15304591)
+        float3 xformOp:scale = (0.15, 0.15, 0.15)
+        float3 xformOp:translate = (-0.9, 0, -3.2)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
     def "potato_8" (
         active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707965, 0, -7.565518e-9)
+            float3 rotationEulerHint = (-1.5707964, -0.34906584, -3.171497e-8)
         }
         references = @potato4.usdz@
     )
     {
-        quatf xformOp:orient = (0.7071067, -0.7071068, 2.6748148e-9, -2.6748144e-9)
-        float3 xformOp:scale = (6, 6, 6)
-        float3 xformOp:translate = (-5.90907, -30, -8.8792)
+        quatf xformOp:orient = (0.6963642, -0.6963643, -0.12278778, -0.12278781)
+        float3 xformOp:scale = (0.15, 0.15, 0.15)
+        float3 xformOp:translate = (0.9681215, 0, -3.10652)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            token info:id = "RealityKit.AnimationLibrary"
+
+            def RealityKitAnimationFile "default_subtree_animation"
+            {
+                uniform bool looping = 1
+                uniform string name = "default subtree animation"
+            }
+        }
     }
 
     def "potato_9" (
         active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707964, -0.34906587, 0)
+            float3 rotationEulerHint = (-1.5707964, -0.08726646, 2.9916162e-8)
         }
         references = @potato3.usdz@
     )
     {
-        quatf xformOp:orient = (0.6963642, -0.6963643, -0.1227878, -0.12278781)
-        float3 xformOp:scale = (6, 6, 6)
-        float3 xformOp:translate = (42.76286, -30, -40)
+        quatf xformOp:orient = (0.7064338, -0.7064338, -0.030843573, -0.030843552)
+        float3 xformOp:scale = (0.15, 0.15, 0.15)
+        float3 xformOp:translate = (0.3, 0, -3.4)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
     def "potato_10" (
         active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707965, -0.5235988, 0)
+            float3 rotationEulerHint = (-1.5707964, -0.2617994, 0)
         }
         references = @potato2.usdz@
     )
     {
-        quatf xformOp:orient = (0.68301266, -0.6830127, -0.1830127, -0.18301271)
-        float3 xformOp:scale = (6, 6, 6)
-        float3 xformOp:translate = (73.77284, -30, -40)
+        quatf xformOp:orient = (0.7010574, -0.7010574, -0.09229595, -0.09229595)
+        float3 xformOp:scale = (0.15, 0.15, 0.15)
+        float3 xformOp:translate = (0.72723496, 0, -3.80588)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            token info:id = "RealityKit.AnimationLibrary"
+        }
     }
 
     def Cube "SpawnSlidePosition" (
@@ -222,7 +258,7 @@ def Xform "Root"
         int ui:nodegraph:node:stackingOrder = 1
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (6.3455067, 8.928434, 55.658283)
+        float3 xformOp:translate = (0, 2, 1)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Material "DefaultMaterial"
@@ -239,6 +275,116 @@ def Xform "Root"
                 float inputs:roughness = 0.75
                 token outputs:surface
             }
+        }
+    }
+
+    def RealityKitTimeline "Timeline"
+    {
+        reorder nameChildren = ["Track", "Track2"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "default subtree animation"
+                int blendLayer = 500
+                double duration = 1.2083333730697632
+                uniform token info:id = "AA45497E-86BA-42C6-ABB2-49271A38C4A6"
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/potato_10>
+
+                def RealityKitStruct "handoffType"
+                {
+                    token type = "defaultHandoffType"
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 1
+                uniform token info:id = "0F98F807-0B15-4247-AA5F-A0C88E5868E2"
+                double startTime = 0
+                rel target = </Root/potato_5>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+    }
+
+    def Cylinder "Cylinder" (
+        active = false
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.01
+        rel material:binding = </Root/Cylinder/DefaultMaterial>
+        double radius = 0.1
+        float3 xformOp:scale = (2.220446e-16, 2.220446e-16, 2.220446e-16)
+        float3 xformOp:translate = (0, -40, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            prepend token outputs:surface.connect = </Root/Cylinder/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            uniform token info:id = "RealityKit.AnimationLibrary"
+        }
+    }
+
+    def Cube "Cube" (
+        active = false
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/Cube/DefaultMaterial>
+        double size = 0.2
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            prepend token outputs:surface.connect = </Root/Cube/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+
+    def "SkySphere" (
+        active = true
+        prepend references = @SkySphere.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+
+        over "SkySphere_mat"
+        {
+            asset inputs:SkySphere_Texture = @visionitsmSkybox1.jpeg@
         }
     }
 }
