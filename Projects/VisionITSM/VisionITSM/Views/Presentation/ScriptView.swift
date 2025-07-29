@@ -15,6 +15,7 @@ struct ScriptView: View {
     @Bindable var homeViewModel: HomeViewModel
     @Bindable var settingViewModel: SettingViewModel
     @Bindable var keynote: HomeModel
+    @Bindable var router: NavigationRouter
     
     @Environment(\.dismissWindow) private var dismissWindow
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
@@ -31,16 +32,13 @@ struct ScriptView: View {
         }
         .popover(isPresented: $isPop, attachmentAnchor: .rect(.rect(CGRect(x: 624, y: 0, width: 0, height: 0))), arrowEdge: .leading , content: {
             HStack(content: {
-                Button(action: {
+                Button(role: .cancel, action: {
                     isPop = false
                 }, label: {
                     Image(systemName: "xmark")
                 })
                 Button(action: {
-                    isPop = false
-                    settingViewModel.isTimerPlaying = false
-                    settingViewModel.counter = 0
-                    homeViewModel.currentIndex = 0
+                    resetPresentation()
                 }, label: {
                     Image(systemName: "return")
                 })
@@ -83,19 +81,6 @@ struct ScriptView: View {
             }, label: {
                 Image(systemName: "chevron.left")
             })
-            .alert(isPresented: $showingAlert) {
-                Alert(
-                    title: Text("End Session?"),
-                    message: Text("If you go back now, your session will end and all progress will be lost. Are you sure you want to continue?"),
-                    primaryButton: .default(Text("Dismiss")),
-                    secondaryButton: .destructive(Text("End Session"), action: {
-                        dismissWindow(id: "Script")
-                        Task {
-                            await dismissImmersiveSpace()
-                        }
-                    })
-                )
-            }
             .alert(
                 Text("End Session?"),
                 isPresented: $showingAlert
@@ -107,10 +92,7 @@ struct ScriptView: View {
                 }
                 
                 Button(role: .destructive) {
-                    dismissWindow(id: "Script")
-                    Task {
-                        await dismissImmersiveSpace()
-                    }
+                    cancelPresentation()
                 } label: {
                     Text("End Session")
                 }
@@ -118,7 +100,6 @@ struct ScriptView: View {
                 Text("If you go back now, your session will end and all progress will be lost. Are you sure you want to continue?")
             }
 
-            
             Spacer()
             
             Button(action: {
@@ -173,8 +154,10 @@ struct ScriptView: View {
         ScrollView() {
             if !(homeViewModel.currentKeynote?.keynote.isEmpty ?? .init()) {
                 Text(homeViewModel.currentKeynote?.keynote[homeViewModel.currentIndex].presenterNotes ?? "No Memo")
+                    .font(.system(size: 19))
             }
         }
+        .padding(.vertical, 36)
     }
     
     func getIndex(currentIndex: Int, maxIndex: Int, isLeft: Bool) -> String {
@@ -192,14 +175,33 @@ struct ScriptView: View {
             return keynote.keynote.count == 0 ? .gridNewButton : keynote.keynote[homeViewModel.currentIndex].slideImage ?? .gridNewButton
         } else {
             if homeViewModel.currentIndex == keynote.keynote.count - 1 {
-                return .gridNewButton
+                return .gridLastButton
             } else {
-                return keynote.keynote.count == 0 ? .gridNewButton : keynote.keynote[homeViewModel.currentIndex + 1].slideImage ?? .gridNewButton
+                return keynote.keynote.count == 0 ? .gridNewButton : keynote.keynote[homeViewModel.currentIndex + 1].slideImage ?? .gridLastButton
             }
+        }
+    }
+    
+    func resetPresentation() {
+        isPop = false
+        isCounting = false
+        settingViewModel.counter = 0
+        homeViewModel.currentIndex = 0
+    }
+    
+    func cancelPresentation() {
+        isCounting = false
+        settingViewModel.counter = 0
+        homeViewModel.currentIndex = 0
+        dismissWindow(id: "Script")
+        router.reset()
+        homeViewModel.currentKeynote = nil
+        Task {
+            await dismissImmersiveSpace()
         }
     }
 }
  
 #Preview {
-    ScriptView(homeViewModel: .init(), settingViewModel: .init(), keynote: .init(title: "QQQ", keynote: []))
+    ScriptView(homeViewModel: .init(), settingViewModel: .init(), keynote: .init(title: "QQQ", keynote: []), router: .init())
 }
