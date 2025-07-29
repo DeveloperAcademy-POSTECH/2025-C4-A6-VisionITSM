@@ -7,6 +7,8 @@ import ARKit
 struct ImmersiveView: View {
     @Environment(AppModel.self) private var appModel
     @Environment(SettingViewModel.self) private var settingViewModel
+    @Environment(\.scenePhase) var scenePhase
+    @Environment(\.openWindow) var openWindow
     @StateObject private var viewModel = AudienceSpawnViewModel()
     
     @Bindable var homeViewModel: HomeViewModel
@@ -186,6 +188,9 @@ struct ImmersiveView: View {
         }
         .onAppear {
             viewModel.generateSpawnPositions()
+        }
+        .onDisappear {
+            openWindow(id: "home")
         }
     }
 }
