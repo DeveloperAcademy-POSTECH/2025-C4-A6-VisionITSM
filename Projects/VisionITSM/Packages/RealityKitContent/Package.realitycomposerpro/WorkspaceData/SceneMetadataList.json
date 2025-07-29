@@ -15,110 +15,14 @@
     "objectMetadataList" : [
       [
         "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
-        "Root",
-        "SpatialAudio"
-      ],
-      {
-        "isExpanded": true,
-        "isLocked": false,
-        "selectedAudioFilePrim": {
-          "string": "/Root/SpatialAudio/testSound2_wav"
-        }
-      },
-      [
-        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
-        "Root",
-        "SpatialAudio",
-        "testSound_wav"
-      ],
-      {
-        "isExpanded": true,
-        "isLocked": false
-      },
-      [
-        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
         "Root"
       ],
       {
-        "isExpanded": true,
-        "isLocked": false
+        "isExpanded" : true,
+        "isLocked" : false
       },
       [
         "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
-        "Root",
-        "SpatialAudio",
-        "testSound_wav",
-        "SpatialAudio"
-      ],
-      {
-        "isExpanded": true,
-        "isLocked": false
-      },
-      [
-        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
-        "Root",
-        "visionitsmSkybox"
-      ],
-      {
-        "disallowsFraming": false,
-        "isExpanded": false,
-        "isLocked": false
-      },
-      [
-        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
-        "Root",
-        "SkySphere"
-      ],
-      {
-        "disallowsFraming": true,
-        "isExpanded": true,
-        "isLocked": false
-      },
-      [
-        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
-        "Root",
-        "Timeline",
-        "Track2"
-      ],
-      {
-        "isExpanded": true,
-        "isLocked": false
-      },
-      [
-        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
-        "Root",
-        "Timeline",
-        "Track"
-      ],
-      {
-        "isExpanded": true,
-        "isLocked": false
-      },
-      [
-        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
-        "Root",
-        "SkyDome"
-      ],
-      {
-        "disallowsFraming": true,
-        "isExpanded": false,
-        "isLocked": false
-      },
-      [
-        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
-        "Root",
-        "Timeline"
-      ],
-      {
-        "isExpanded": true,
-        "isLocked": false
-      }
-    ]
-  },
-  "4A9250F8-7C0D-4996-9016-CF0AB3FF63C6" : {
-    "objectMetadataList" : [
-      [
-        "4A9250F8-7C0D-4996-9016-CF0AB3FF63C6",
         "Root",
         "SpatialAudio"
       ],
@@ -130,12 +34,132 @@
         }
       },
       [
+        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
+        "Root",
+        "SpatialAudio",
+        "testSound_wav",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "SkySphere"
+      ],
+      {
+        "disallowsFraming" : true,
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
+        "Root",
+        "SpatialAudio",
+        "testSound_wav"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "Timeline",
+        "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
+        "Root",
+        "visionitsmSkybox"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "Timeline"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "SkyDome"
+      ],
+      {
+        "disallowsFraming" : true,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
+        "Root",
+        "Timeline",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "4755556D-9F65-46E6-A1E0-FA18327E794F" : {
+    "objectMetadataList" : [
+      [
+        "4755556D-9F65-46E6-A1E0-FA18327E794F",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "4755556D-9F65-46E6-A1E0-FA18327E794F",
+        "Root",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false,
+        "selectedAudioFilePrim" : {
+          "string" : "\/Root\/SpatialAudio\/SnoringSound_wav"
+        }
+      }
+    ]
+  },
+  "4A9250F8-7C0D-4996-9016-CF0AB3FF63C6" : {
+    "objectMetadataList" : [
+      [
         "4A9250F8-7C0D-4996-9016-CF0AB3FF63C6",
         "Root"
       ],
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "4A9250F8-7C0D-4996-9016-CF0AB3FF63C6",
+        "Root",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false,
+        "selectedAudioFilePrim" : {
+          "string" : "\/Root\/SpatialAudio\/testSound2_wav"
+        }
       }
     ]
   },
@@ -180,6 +204,47 @@
       [
         "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
         "Root",
+        "testSound_wav_1",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
+        "Root",
+        "testSound",
+        "SpatialAudio",
+        "testSound_wav",
+        "testSound_wav",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
+        "Root",
+        "testSound_wav",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
+        "Root",
         "potatoZZZ"
       ],
       {
@@ -199,45 +264,6 @@
       [
         "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
         "Root",
-        "SpatialAudio",
-        "testSound_wav",
-        "SpatialAudio"
-      ],
-      {
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
-        "Root",
-        "testSound_wav",
-        "SpatialAudio"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
-        "Root",
-        "testSound_wav_1",
-        "SpatialAudio"
-      ],
-      {
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
-        "Root",
         "potatoZZZ",
         "testSound",
         "SpatialAudio"
@@ -249,9 +275,7 @@
       [
         "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
         "Root",
-        "testSound",
         "SpatialAudio",
-        "testSound_wav",
         "testSound_wav",
         "SpatialAudio"
       ],
@@ -265,6 +289,14 @@
     "objectMetadataList" : [
       [
         "7110E10C-51D7-44A6-AAAC-79953A29A865",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "7110E10C-51D7-44A6-AAAC-79953A29A865",
         "Root",
         "potato_1"
       ],
@@ -276,14 +308,6 @@
         "7110E10C-51D7-44A6-AAAC-79953A29A865",
         "Root",
         "potato_2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "7110E10C-51D7-44A6-AAAC-79953A29A865",
-        "Root"
       ],
       {
         "isExpanded" : true,
@@ -319,188 +343,201 @@
         "_20gamza"
       ],
       {
-          "isExpanded" : true,
-          "isLocked" : false
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },
   "AF09ED6F-1707-48FD-8720-65B998362C09" : {
-      "objectMetadataList": [
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root"
-          ],
-          {
-              "isExpanded": true,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "SpawnSlidePosition"
-          ],
-          {
-              "disallowsFraming": false,
-              "isExpanded": false,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potato_4",
-              "Armature"
-          ],
-          {
-              "disallowsFraming": false,
-              "isExpanded": false,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potato_4",
-              "Armature",
-              "Armature"
-          ],
-          {
-              "disallowsFraming": false,
-              "isExpanded": false,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potato_0",
-              "Armature"
-          ],
-          {
-              "disallowsFraming": false,
-              "isExpanded": false,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potato_0",
-              "Armature",
-              "Armature"
-          ],
-          {
-              "disallowsFraming": false,
-              "isExpanded": false,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potato",
-              "Armature"
-          ],
-          {
-              "disallowsFraming": false,
-              "isExpanded": false,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potato",
-              "Armature",
-              "Armature"
-          ],
-          {
-              "disallowsFraming": false,
-              "isExpanded": false,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potatoWeye",
-              "Armature"
-          ],
-          {
-              "disallowsFraming": false,
-              "isExpanded": false,
-              "isLocked": false
-          },
-          
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potatoWeye",
-              "Armature",
-              "Armature"
-          ],
-          {
-              "disallowsFraming": false,
-              "isExpanded": false,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potatoZZZ",
-              "testSound"
-          ],
-          {
-              "isExpanded": true,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potatoZZZ",
-              "testSound",
-              "SpatialAudio"
-          ],
-          {
-              "isExpanded": true,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potatoZZZZ",
-              "testSound",
-              "SpatialAudio"
-          ],
-          {
-              "isExpanded": false,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "potatoZZZZ",
-              "potatoZZZ",
-              "testSound",
-              "SpatialAudio"
-          ],
-          {
-              "isExpanded": false,
-              "isLocked": false
-          },
-          [
-              "AF09ED6F-1707-48FD-8720-65B998362C09",
-              "Root",
-              "SpatialAudio"
-          ],
-          {
-              "isExpanded": false,
-              "isLocked": false,
-              "selectedAudioFilePrim": {
-                  "string": "/Root/SpatialAudio/testSound_wav"
-              }
-          },
-          ["AF09ED6F-1707-48FD-8720-65B998362C09", "Root", "SpatialAudio2"],
-          {
-              "isExpanded": false,
-              "isLocked": false,
-              "selectedAudioFilePrim": {
-                  "string": "/Root/SpatialAudio2/testSound2_wav"
-              }
-          }
+    "objectMetadataList" : [
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potatoZZZZ",
+        "testSound",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potatoZZZ",
+        "testSound"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potato",
+        "Armature",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "SpatialAudio2"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : false,
+        "selectedAudioFilePrim" : {
+          "string" : "\/Root\/SpatialAudio2\/testSound2_wav"
+        }
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potato_0",
+        "Armature",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potatoZZZ",
+        "testSound",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "SpawnSlidePosition"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potatoWeye",
+        "Armature",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potato_4",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "SnoringSound",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potato_0",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potato",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potatoWeye",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potato_4",
+        "Armature",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potatoZZZZ",
+        "potatoZZZ",
+        "testSound",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : false,
+        "selectedAudioFilePrim" : {
+          "string" : "\/Root\/SpatialAudio\/testSound_wav"
+        }
+      }
     ]
   },
   "CB766F92-EE55-4A63-9401-E7B8C009764D" : {

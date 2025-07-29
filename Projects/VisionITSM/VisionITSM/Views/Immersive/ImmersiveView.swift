@@ -378,8 +378,8 @@ extension ImmersiveView {
                 
                 await SpatialAudioPlayer.playSound(
                     entity: potato.entity,
-                    audioFileName: "testSound_wav",
-                    fromUSDAScene: "testSound.usda",
+                    audioFileName: "SnoringSound_wav",
+                    fromUSDAScene: "SnoringSound.usda",
                     duration: PotatoAnimationConfig.sleepAnimationDuration
                 )
                 
