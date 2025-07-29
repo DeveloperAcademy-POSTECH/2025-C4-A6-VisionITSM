@@ -66,7 +66,7 @@ struct ImmersiveView: View {
                 }
                 
                 let potatoVariants = ["potato", "potato2", "potato3", "potato4"]
-
+                
                 let selectedAnchors = Set(potatoAnchors).shuffled().prefix(spawnCount)
                 
                 for anchorName in potatoAnchors {
@@ -82,7 +82,7 @@ struct ImmersiveView: View {
                     if let anchorEntity = immersiveBackground.findEntity(named: anchorName) {
                         print("🔎 anchorEntity 추가 중: \(anchorName)")
                         
-//                        anchorEntity.isEnabled = true
+                        //                        anchorEntity.isEnabled = true
                         
                         if selectedAnchors.contains(anchorName) {
                             
@@ -113,9 +113,9 @@ struct ImmersiveView: View {
                             
                             playPotatoAnimation(on: randomModel)
                             
-//                            Task {
-//                                await cyclePotatoAnimation(on: randomModel)
-//                            }
+                            //                            Task {
+                            //                                await cyclePotatoAnimation(on: randomModel)
+                            //                            }
                             
                             let potatoEntity = PotatoEntity(
                                 entity: randomModel,
@@ -130,7 +130,7 @@ struct ImmersiveView: View {
                 }
                 if !potatoPositions.isEmpty {
                     let averagePosition = potatoPositions.reduce(SIMD3<Float>(0,0,0), +) / Float(potatoPositions.count)
-
+                    
                     let lightEntity = Entity()
                     /*
                      let light = DirectionalLightComponent(color: .white, intensity: 5000, isRealWorldProxy: false)
@@ -139,7 +139,7 @@ struct ImmersiveView: View {
                     var light = DirectionalLightComponent()
                     light.intensity = 5000
                     lightEntity.components.set(light)
-
+                    
                     // 감자들의 중심을 비추도록 방향 설정
                     lightEntity.look(
                         at: averagePosition,
@@ -149,7 +149,7 @@ struct ImmersiveView: View {
                     
                     content.add(lightEntity)
                     
-//                     이 위치는 RC Pro에서 설정한 위치
+                    //                     이 위치는 RC Pro에서 설정한 위치
                     spawnSliderPosition.setPosition(spawnSliderPosition.position, relativeTo: nil)
                     content.add(spawnSliderPosition)
                     
@@ -159,7 +159,7 @@ struct ImmersiveView: View {
                         spawnSliderPosition.addChild(attachment)
                     }
                 }
-
+                
                 //이머시브존 입장음
                 let entryAudioEntity = Entity()
                 content.add(entryAudioEntity)
@@ -243,12 +243,12 @@ extension ImmersiveView {
         
         presentationTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             elapsedTime += 1
-//            print("=== 발표 경과 시간: \(elapsedTime)초")
+            //            print("=== 발표 경과 시간: \(elapsedTime)초")
             
             checkSleepEvent(currentTime: elapsedTime)
         }
     }
-
+    
     func stopPresentationTimer() {
         print("=== 발표 타이머 정리")
         presentationTimer?.invalidate()
@@ -309,54 +309,6 @@ extension ImmersiveView {
         if let index = potatoEntities.firstIndex(where: { $0.entity == potato.entity }) {
             potatoEntities[index].isSleeping = true
         }
-        /*
-
-
-        // 1. 기본 애니메이션 재생
-        guard let basicClip = entity.availableAnimations.first else { return }
-        playLooping(basicClip)
-
-        // 2. 수면 전 대기
-        try? await Task.sleep(for: .seconds(PotatoAnimationConfig.sleepDelay))
-        // entity.stopAllAnimations()  // 기본 애니메이션을 계속 유지
-
-        // 3. 수면 애니메이션 로드 및 재생
-        if let sleepEntity = try? await Entity(named: "potatoZZZ", in: realityKitContentBundle),
-           let sleepClip = sleepEntity.availableAnimations.first {
-            // sleep 전용 속도로 반복 재생
-            let sleepResource = sleepClip.repeat(count: .max)
-            let sleepController = entity.playAnimation(
-                sleepResource,
-                transitionDuration: PotatoAnimationConfig.transitionDuration,
-                startsPaused: false
-            )
-            sleepController.speed = PotatoAnimationConfig.sleepAnimationSpeed
-
-            
-             // 졸음 소리 재생 (AudioFileResource 방식)
-//             do {
-//                 let audioResource = try await AudioFileResource.load(
-//                     named: "/Root/SpatialAudio/testSound_wav",  // ← RCP에서 실제 오디오가 존재하는 경로
-//                     from: "testSound.usda",
-//                     in: realityKitContentBundle
-//                 )
-//                 let audioController = entity.prepareAudio(audioResource)
-//                 audioController.play()
-//                 // 수면 애니메이션 종료 후 오디오 정지
-//                 Task {
-//                     try? await Task.sleep(for: .seconds(PotatoAnimationConfig.sleepAnimationDuration))
-//                     audioController.stop()
-//                 }
-//             } catch {
-//                 print("❌ testSound.wav 로드 실패: \(error)")
-//             }
-            await SpatialAudioPlayer.playSound(
-                entity: entity,
-                audioFileName: "testSound_wav",
-                fromUSDAScene: "testSound.usda",
-                duration: PotatoAnimationConfig.sleepAnimationDuration
-            )
-*/
         
         Task {
             do {
