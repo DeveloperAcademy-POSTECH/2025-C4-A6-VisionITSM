@@ -51,7 +51,8 @@ struct VisionITSMApp: App {
                     appModel.immersiveSpaceState = .closed
                 }
         }
-        .immersionStyle(selection: .constant(.progressive), in: .progressive)
+//        .immersionStyle(selection: .constant(.progressive), in: .progressive)
+        .immersionStyle(selection: .constant(.progressive), in: .full)
         //MARK: - 이머시브존3 ( 크라운 조절 믹스드)
 //        .immersionStyle(selection: .constant(.full), in: .mixed)
     }
