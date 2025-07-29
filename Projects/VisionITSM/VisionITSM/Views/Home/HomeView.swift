@@ -15,8 +15,8 @@ struct HomeView: View {
     let columns = Array(repeating: GridItem(.adaptive(minimum: 256), spacing: 48), count: 1)
     
     @Bindable var homeViewModel: HomeViewModel
+    @Bindable var router: NavigationRouter
     
-    @State private var router = NavigationRouter()
     @State private var parser = HybridPPTXParser()
     
     @Environment(SettingViewModel.self) var settingViewModel
@@ -82,7 +82,7 @@ struct HomeView: View {
             .navigationDestination(for: Route.self) { route in
                 switch route {
                 case .home:
-                    HomeView(homeViewModel: homeViewModel)
+                    HomeView(homeViewModel: homeViewModel, router: router)
                 case .result:
                     ResultView(router: router, settingViewModel: settingViewModel)
                 }
@@ -203,5 +203,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(homeViewModel: .init())
+    HomeView(homeViewModel: .init(), router: .init())
 }

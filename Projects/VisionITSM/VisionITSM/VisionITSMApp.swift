@@ -13,6 +13,7 @@ struct VisionITSMApp: App {
     @State private var appModel: AppModel = AppModel()
     @State private var homeViewModel: HomeViewModel = .init()
     @State private var settingViewModel: SettingViewModel = SettingViewModel()
+    @State private var router = NavigationRouter()
     
     init() {
         TrackingSystem.registerSystem()
@@ -21,7 +22,7 @@ struct VisionITSMApp: App {
  
     var body: some Scene {
         WindowGroup(id: "home") {
-            HomeView(homeViewModel: homeViewModel)
+            HomeView(homeViewModel: homeViewModel, router: router)
                 .environment(appModel)
                 .environment(settingViewModel)
         }
@@ -31,13 +32,12 @@ struct VisionITSMApp: App {
         
         
         WindowGroup(id: "Script") {
-            ScriptView(homeViewModel: homeViewModel, settingViewModel: settingViewModel, keynote: homeViewModel.currentKeynote ?? HomeModel(title: "오류", keynote: []))
+            ScriptView(homeViewModel: homeViewModel, settingViewModel: settingViewModel, keynote: homeViewModel.currentKeynote ?? HomeModel(title: "오류", keynote: []), router: router)
                 .frame(width: 640, height: 480)
+                .persistentSystemOverlays(.hidden)
+            
         }
         .windowResizability(.contentSize)
-        .defaultWindowPlacement {content,context in
-            WindowPlacement(.utilityPanel)
-        }
         
         
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
