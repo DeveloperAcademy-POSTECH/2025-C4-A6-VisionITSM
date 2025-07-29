@@ -7,7 +7,6 @@ import ARKit
 struct ImmersiveView: View {
     @Environment(AppModel.self) private var appModel
     @Environment(SettingViewModel.self) private var settingViewModel
-    @StateObject private var viewModel = AudienceSpawnViewModel()
     
     @Bindable var homeViewModel: HomeViewModel
     
@@ -167,15 +166,12 @@ struct ImmersiveView: View {
                 SlideView(homeViewModel: homeViewModel)
             }
         }
-        .onAppear {
-            viewModel.generateSpawnPositions()
-            startPresentationTimer()
-        }
-        .onDisappear {
-            stopPresentationTimer()
-        }
-        .onAppear {
-            viewModel.generateSpawnPositions()
+        .onChange(of: settingViewModel.isTimerPlaying) { _, newValue in
+            if newValue {
+                startPresentationTimer()
+            } else {
+                stopPresentationTimer()
+            }
         }
     }
 }

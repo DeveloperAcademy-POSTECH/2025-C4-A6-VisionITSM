@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TimerView: View {
     //MARK: - PROPERTIES
-    @Binding var isPlaying: Bool
     @Bindable var settingViewModel: SettingViewModel
     
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
@@ -21,30 +20,30 @@ struct TimerView: View {
     var body: some View {
         VStack {
             Button {
-                if isPlaying {
-                    isPlaying = false
+                if settingViewModel.isTimerPlaying {
+                    settingViewModel.isTimerPlaying = false
                     dismissWindow(id: "Script")
                     Task {
                         await dismissImmersiveSpace()
                     }
                 } else {
-                    isPlaying = true
+                    settingViewModel.isTimerPlaying = true
                 }
             } label: {
                 ZStack {
                     HStack(spacing: 6) {
-                        Image(systemName: isPlaying ? "stop.fill" : "play.fill")
-                        Text(isPlaying ? "\(settingViewModel.counter.asTimeHMS)" : "Start")
+                        Image(systemName: settingViewModel.isTimerPlaying ? "stop.fill" : "play.fill")
+                        Text(settingViewModel.isTimerPlaying ? "\(settingViewModel.counter.asTimeHMS)" : "Start")
                             .onReceive(timer) { _ in
-                                if isPlaying {
+                                if settingViewModel.isTimerPlaying {
                                     self.settingViewModel.counter += 1
                                 }
                             }
                     }
-                    .foregroundStyle(isPlaying ? Color.red : Color.white)
+                    .foregroundStyle(settingViewModel.isTimerPlaying ? Color.red : Color.white)
                 }
             }
-            .tint(isPlaying ? nil : Color.green)
+            .tint(settingViewModel.isTimerPlaying ? nil : Color.green)
         }
     }
 }

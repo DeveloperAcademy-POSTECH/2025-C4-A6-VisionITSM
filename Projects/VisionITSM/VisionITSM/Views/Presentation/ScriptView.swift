@@ -9,8 +9,6 @@ import SwiftUI
  
 struct ScriptView: View {
     //MARK: - PROPERTIES
-    
-    @State private var isCounting: Bool = false
     @State private var isPop: Bool = false
     @State private var showingAlert: Bool = false
     
@@ -40,7 +38,7 @@ struct ScriptView: View {
                 })
                 Button(action: {
                     isPop = false
-                    isCounting = false
+                    settingViewModel.isTimerPlaying = false
                     settingViewModel.counter = 0
                     homeViewModel.currentIndex = 0
                 }, label: {
@@ -54,7 +52,7 @@ struct ScriptView: View {
             homeViewModel.currentIndex = 0
         }
         .ornament(attachmentAnchor: .scene(UnitPoint(x: 0.5, y: -0.11)), contentAlignment: .top) {
-            TimerView(isPlaying: $isCounting, settingViewModel: settingViewModel)
+            TimerView(settingViewModel: settingViewModel)
         }
         .safeAreaPadding([.top, .horizontal], 24)
         .safeAreaInset(edge: .top, content: {
