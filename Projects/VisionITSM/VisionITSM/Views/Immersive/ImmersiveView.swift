@@ -314,54 +314,6 @@ extension ImmersiveView {
         if let index = potatoEntities.firstIndex(where: { $0.entity == potato.entity }) {
             potatoEntities[index].isSleeping = true
         }
-        /*
-
-
-        // 1. 기본 애니메이션 재생
-        guard let basicClip = entity.availableAnimations.first else { return }
-        playLooping(basicClip)
-
-        // 2. 수면 전 대기
-        try? await Task.sleep(for: .seconds(PotatoAnimationConfig.sleepDelay))
-        // entity.stopAllAnimations()  // 기본 애니메이션을 계속 유지
-
-        // 3. 수면 애니메이션 로드 및 재생
-        if let sleepEntity = try? await Entity(named: "potatoZZZ", in: realityKitContentBundle),
-           let sleepClip = sleepEntity.availableAnimations.first {
-            // sleep 전용 속도로 반복 재생
-            let sleepResource = sleepClip.repeat(count: .max)
-            let sleepController = entity.playAnimation(
-                sleepResource,
-                transitionDuration: PotatoAnimationConfig.transitionDuration,
-                startsPaused: false
-            )
-            sleepController.speed = PotatoAnimationConfig.sleepAnimationSpeed
-
-            
-             // 졸음 소리 재생 (AudioFileResource 방식)
-//             do {
-//                 let audioResource = try await AudioFileResource.load(
-//                     named: "/Root/SpatialAudio/testSound_wav",  // ← RCP에서 실제 오디오가 존재하는 경로
-//                     from: "testSound.usda",
-//                     in: realityKitContentBundle
-//                 )
-//                 let audioController = entity.prepareAudio(audioResource)
-//                 audioController.play()
-//                 // 수면 애니메이션 종료 후 오디오 정지
-//                 Task {
-//                     try? await Task.sleep(for: .seconds(PotatoAnimationConfig.sleepAnimationDuration))
-//                     audioController.stop()
-//                 }
-//             } catch {
-//                 print("❌ testSound.wav 로드 실패: \(error)")
-//             }
-            await SpatialAudioPlayer.playSound(
-                entity: entity,
-                audioFileName: "testSound_wav",
-                fromUSDAScene: "testSound.usda",
-                duration: PotatoAnimationConfig.sleepAnimationDuration
-            )
-*/
         
         Task {
             do {
