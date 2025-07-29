@@ -184,13 +184,13 @@ struct ScriptView: View {
     
     func resetPresentation() {
         isPop = false
-        isCounting = false
+        settingViewModel.isTimerPlaying = false
         settingViewModel.counter = 0
         homeViewModel.currentIndex = 0
     }
     
     func cancelPresentation() {
-        isCounting = false
+        settingViewModel.isTimerPlaying = false
         settingViewModel.counter = 0
         homeViewModel.currentIndex = 0
         dismissWindow(id: "Script")
