@@ -15,23 +15,13 @@
     "objectMetadataList" : [
       [
         "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
         "Root",
-        "SpatialAudio"
+        "visionitsmSkybox"
       ],
       {
-        "isExpanded" : true,
-        "isLocked" : false,
-        "selectedAudioFilePrim" : {
-          "string" : "\/Root\/SpatialAudio\/testSound2_wav"
-        }
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
       },
       [
         "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
@@ -39,6 +29,14 @@
         "SpatialAudio",
         "testSound_wav",
         "SpatialAudio"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -53,6 +51,38 @@
         "disallowsFraming" : true,
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
+        "Root",
+        "Timeline",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
+        "Root",
+        "SkyDome"
+      ],
+      {
+        "disallowsFraming" : true,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
+        "Root",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false,
+        "selectedAudioFilePrim" : {
+          "string" : "\/Root\/SpatialAudio\/testSound2_wav"
+        }
       },
       [
         "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
@@ -75,39 +105,9 @@
         "isLocked" : false
       },
       [
-        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
-        "Root",
-        "visionitsmSkybox"
-      ],
-      {
-        "disallowsFraming" : false,
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
         "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
         "Root",
         "Timeline"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "648A96A3-FFBD-4037-8E77-982FEF1B7B68",
-        "Root",
-        "SkyDome"
-      ],
-      {
-        "disallowsFraming" : true,
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "14DAD0C8-9D5D-497C-B783-BA328B93DA87",
-        "Root",
-        "Timeline",
-        "Track"
       ],
       {
         "isExpanded" : true,
@@ -119,14 +119,6 @@
     "objectMetadataList" : [
       [
         "4755556D-9F65-46E6-A1E0-FA18327E794F",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "4755556D-9F65-46E6-A1E0-FA18327E794F",
         "Root",
         "SpatialAudio"
       ],
@@ -136,6 +128,14 @@
         "selectedAudioFilePrim" : {
           "string" : "\/Root\/SpatialAudio\/SnoringSound_wav"
         }
+      },
+      [
+        "4755556D-9F65-46E6-A1E0-FA18327E794F",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },
@@ -203,40 +203,7 @@
     "objectMetadataList" : [
       [
         "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
-        "Root",
-        "testSound_wav_1",
-        "SpatialAudio"
-      ],
-      {
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
-        "Root",
-        "testSound",
-        "SpatialAudio",
-        "testSound_wav",
-        "testSound_wav",
-        "SpatialAudio"
-      ],
-      {
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
         "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
-        "Root",
-        "testSound_wav",
-        "SpatialAudio"
       ],
       {
         "isExpanded" : true,
@@ -254,7 +221,7 @@
       [
         "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
         "Root",
-        "testSound",
+        "testSound_wav",
         "SpatialAudio"
       ],
       {
@@ -275,7 +242,40 @@
       [
         "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
         "Root",
+        "testSound",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
+        "Root",
         "SpatialAudio",
+        "testSound_wav",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
+        "Root",
+        "testSound_wav_1",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "67B68799-BEF6-48BF-B323-B9D04E9EF0B1",
+        "Root",
+        "testSound",
+        "SpatialAudio",
+        "testSound_wav",
         "testSound_wav",
         "SpatialAudio"
       ],
@@ -289,14 +289,6 @@
     "objectMetadataList" : [
       [
         "7110E10C-51D7-44A6-AAAC-79953A29A865",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "7110E10C-51D7-44A6-AAAC-79953A29A865",
         "Root",
         "potato_1"
       ],
@@ -308,6 +300,14 @@
         "7110E10C-51D7-44A6-AAAC-79953A29A865",
         "Root",
         "potato_2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "7110E10C-51D7-44A6-AAAC-79953A29A865",
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -331,7 +331,8 @@
     "objectMetadataList" : [
       [
         "919EBBA3-1BEE-4996-AA78-74001E2FB9CA",
-        "Root"
+        "Root",
+        "_20gamza"
       ],
       {
         "isExpanded" : true,
@@ -339,8 +340,7 @@
       },
       [
         "919EBBA3-1BEE-4996-AA78-74001E2FB9CA",
-        "Root",
-        "_20gamza"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -353,30 +353,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potatoZZZZ",
-        "testSound",
-        "SpatialAudio"
-      ],
-      {
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "potatoZZZ",
-        "testSound"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "potato",
-        "Armature",
-        "Armature"
+        "SpawnSlidePosition"
       ],
       {
         "disallowsFraming" : false,
@@ -398,7 +375,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potato_0",
+        "potato",
         "Armature",
         "Armature"
       ],
@@ -410,8 +387,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potatoZZZ",
-        "testSound",
+        "SnoringSound",
         "SpatialAudio"
       ],
       {
@@ -421,7 +397,9 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "SpawnSlidePosition"
+        "potato_4",
+        "Armature",
+        "Armature"
       ],
       {
         "disallowsFraming" : false,
@@ -431,8 +409,42 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : false,
+        "selectedAudioFilePrim" : {
+          "string" : "\/Root\/SpatialAudio\/testSound_wav"
+        }
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
         "potatoWeye",
         "Armature",
+        "Armature"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potatoZZZZ",
+        "testSound",
+        "SpatialAudio"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "potato_0",
         "Armature"
       ],
       {
@@ -454,17 +466,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "SnoringSound",
-        "SpatialAudio"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "potato_0",
+        "potatoWeye",
         "Armature"
       ],
       {
@@ -486,18 +488,18 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potatoWeye",
-        "Armature"
+        "potatoZZZ",
+        "testSound",
+        "SpatialAudio"
       ],
       {
-        "disallowsFraming" : false,
-        "isExpanded" : false,
+        "isExpanded" : true,
         "isLocked" : false
       },
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "potato_4",
+        "potato_0",
         "Armature",
         "Armature"
       ],
@@ -529,14 +531,12 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "SpatialAudio"
+        "potatoZZZ",
+        "testSound"
       ],
       {
-        "isExpanded" : false,
-        "isLocked" : false,
-        "selectedAudioFilePrim" : {
-          "string" : "\/Root\/SpatialAudio\/testSound_wav"
-        }
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },
@@ -544,8 +544,7 @@
     "objectMetadataList" : [
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root",
-        "GridMaterial"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -553,7 +552,8 @@
       },
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root"
+        "Root",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
