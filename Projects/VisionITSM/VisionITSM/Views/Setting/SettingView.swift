@@ -84,13 +84,13 @@ struct SettingView: View {
                     }
                     
                     
-                    Text("Audience SizeAudience SizeAudience SizeAudience SizeAudience SizeAudience SizeAudience Size")
+                    Text("Gradually increasing the audience size helps you build confidence in public speaking")
                         .font(.system(size: 13))
                         .multilineTextAlignment(.leading)
                 }
                 
                 VStack(alignment: .leading, spacing: 7) {
-                    Text("Audience Size")
+                    Text("Distraction Level")
                     
                     ZStack(alignment: .center) {
                         Slider(
@@ -111,7 +111,7 @@ struct SettingView: View {
                         .padding(.horizontal, 66)
                     }
                     
-                    Text("Audience SizeAudience SizeAudience SizeAudience SizeAudience SizeAudience SizeAudience Size")
+                    Text("Challenge yourself with higher distraction levels to improve your adaptability")
                         .multilineTextAlignment(.leading)
                         .font(.system(size: 13))
                 }
@@ -123,8 +123,6 @@ struct SettingView: View {
                     router.push(.result)
                     
 //                    MARK: - 이머시브존2
-//
-
                     Task {
                         await handleEnterSession()
                     }
