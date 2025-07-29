@@ -237,6 +237,7 @@ extension ImmersiveView {
 
     func stopPresentationTimer() {
         print("=== 발표 타이머 정리")
+        wakeUpAllSleepingPotatoes()
         presentationTimer?.invalidate()
         presentationTimer = nil
         elapsedTime = 0
@@ -277,10 +278,6 @@ extension ImmersiveView {
             return
         }
         
-        if let index = potatoEntities.firstIndex(where: { $0.entity == target.entity }) {
-            potatoEntities[index].isSleeping = true
-        }
-        
         print("😴 감자 졸기 시작: \(target.originalModelName)")
         playSleepAnimation(for: target)
     }
@@ -291,10 +288,9 @@ extension ImmersiveView {
     
     func playSleepAnimation(for potato: PotatoEntity) {
         guard !potato.isSleeping else { return }
+        guard let index = potatoEntities.firstIndex(where: { $0.entity == potato.entity }) else { return }
         
-        if let index = potatoEntities.firstIndex(where: { $0.entity == potato.entity }) {
-            potatoEntities[index].isSleeping = true
-        }
+        potatoEntities[index].isSleeping = true
         
         Task {
             do {
@@ -315,28 +311,7 @@ extension ImmersiveView {
                 sleepController.speed = PotatoAnimationConfig.sleepAnimationSpeed
                 
                 try await Task.sleep(for: .seconds(PotatoAnimationConfig.sleepAnimationDuration))
-                
-                potato.entity.stopAllAnimations()
-                
-                guard let basicClip = potato.entity.availableAnimations.first else {
-                    print("⚠️ 기본 애니메이션 찾을 수 없음")
-                    return
-                }
-                
-                let basicResource = basicClip.repeat(count: .max)
-                let basicController = potato.entity.playAnimation(
-                    basicResource,
-                    transitionDuration: PotatoAnimationConfig.transitionDuration,
-                    startsPaused: false
-                )
-                basicController.speed = PotatoAnimationConfig.basicAnimationSpeed
-                
-                print("😊 감자 깨어남: \(potato.originalModelName)")
-                
-                if let index = potatoEntities.firstIndex(where: { $0.entity == potato.entity }) {
-                    potatoEntities[index].isSleeping = false
-                }
-                
+                wakeUpPotato(potatoEntities[index])
             } catch {
                 print("❌ 수면 애니메이션 처리 중 오류: \(error)")
                 
@@ -344,6 +319,51 @@ extension ImmersiveView {
                     potatoEntities[index].isSleeping = false
                 }
             }
+        }
+    }
+    
+    func wakeUpPotato(_ potato: PotatoEntity) {
+        if !potato.isSleeping {
+            print("이미 깬 감자라 깨우지 않음: \(potato.originalModelName)")
+            return
+        }
+        
+        guard potato.isSleeping else { return }
+        
+        Task {
+            potato.entity.stopAllAnimations()
+            
+            guard let basicClip = potato.entity.availableAnimations.first else {
+                print("⚠️ 기본 애니메이션 찾을 수 없음")
+                return
+            }
+            
+            let basicResource = basicClip.repeat(count: .max)
+            let basicController = potato.entity.playAnimation(
+                basicResource,
+                transitionDuration: PotatoAnimationConfig.transitionDuration,
+                startsPaused: false
+            )
+            basicController.speed = PotatoAnimationConfig.basicAnimationSpeed
+            
+            if let index = potatoEntities.firstIndex(where: { $0.entity == potato.entity }) {
+                potatoEntities[index].isSleeping = false
+            }
+            
+            print("😊 감자 깨어남: \(potato.originalModelName)")
+        }
+    }
+    
+    func wakeUpAllSleepingPotatoes() {
+        let sleepingPotatoes = potatoEntities.filter { $0.isSleeping }
+        
+        guard !sleepingPotatoes.isEmpty else {
+            print("깨울 감자가 없음")
+            return
+        }
+        
+        for potato in sleepingPotatoes {
+            wakeUpPotato(potato)
         }
     }
 }
