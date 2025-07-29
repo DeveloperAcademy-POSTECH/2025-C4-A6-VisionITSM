@@ -18,7 +18,7 @@ struct ResultView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 24) {
                     resultItemView(title: "Audience Size", result: settingViewModel.settingModel.audienceSize)
-                    resultItemView(title: "Dustraction Level", result: settingViewModel.settingModel.distractionLevel)
+                    resultItemView(title: "Distraction Level", result: settingViewModel.settingModel.distractionLevel)
                     
                     resultTimeItemView(title: "Time Spent", result: "\(settingViewModel.counter.asTimeHMS)")
                 }
