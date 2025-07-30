@@ -65,14 +65,25 @@ struct SettingView: View {
                     Text("Audience Size")
                     
                     ZStack(alignment: .center) {
-                        Slider(
-                            value: $settingViewModel.settingModel.audienceSize,
-                            in: 0...2,
-                            step: 1
-                        ) {
-                            Text("\(settingViewModel.settingModel.audienceSize)")
+                        VStack(spacing: 2) {
+                            Slider(
+                                value: $settingViewModel.settingModel.audienceSize,
+                                in: 0...2,
+                                step: 1
+                            ) {
+                                Text("\(settingViewModel.settingModel.audienceSize)")
+                            }
+                            .frame(width: 288, height: 44)
+                            
+                            HStack {
+                                Text("5")
+                                Spacer()
+                                Text("10")
+                                Spacer()
+                                Text("20")
+                            }
+                            .frame(width: 260)
                         }
-                        .frame(width: 288, height: 64)
                         
                         HStack {
                             Image(systemName: "person.fill")

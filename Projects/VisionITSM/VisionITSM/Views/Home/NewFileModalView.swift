@@ -12,7 +12,6 @@ struct NewFileModalView: View {
     @State private var fileName = ""
     @Environment(\.dismiss) private var dismiss
     @Bindable var homeViewModel: HomeViewModel
-//    @State private var parser = HybridPPTXParser()
     
     //MARK: - BODY
     var body: some View {
@@ -48,7 +47,6 @@ struct NewFileModalView: View {
     
     private var NewFileImportButton: some View {
         Button {
-//            homeViewModel.keynoteTitle = self.fileName
             homeViewModel.parser.parseFiles(
                 pptxURL: homeViewModel.selectedPPTXURL,
                 pdfURL: homeViewModel.selectedPDFURL
