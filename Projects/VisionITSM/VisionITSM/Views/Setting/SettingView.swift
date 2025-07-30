@@ -10,151 +10,171 @@ import SwiftUI
 struct SettingView: View {
     //MARK: - PROPERTIES
     @Bindable var settingViewModel: SettingViewModel
-    
     @Bindable var router: NavigationRouter
+    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.pushWindow) private var pushWindow
-    
     //MARK: - 이머시브존1
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     
     //MARK: - BODY
     var body: some View {
         VStack {
-            ZStack {
-                Text("🛠️ Setting")
-                    .font(.largeTitle)
-                HStack {
-                    Button(action: {
-                        print("뒤로가기")
-                        dismiss()
-                    }, label: {
-                        Image(systemName: "chevron.left")
-                    })
-                    .buttonBorderShape(.circle)
-                    Spacer()
-                    
-                }
-                .padding(.leading, 24)
-            }
-            .frame(height: 92)
-            
+            titleView
             
             VStack(alignment: .center, spacing: 24) {
-                HStack(spacing: 8) {
-                    Circle()
-                        .frame(width: 36, height: 36)
-                    VStack(alignment: .leading) {
-                        Text("Environments")
-                        Text(settingViewModel.settingModel.background.title)
-                    }
-                    
-                    Spacer()
-                    
-                    Button {
-                        print("배경선택")
-                    } label: {
-                        Image(systemName: "chevron.right")
-                    }
-                    .buttonStyle(.plain)
-                    .padding(.trailing, 8)
-                }
+                environmentSettingView
                 
+                audienceSettingView
                 
-                VStack(alignment: .leading, spacing: 7) {
-                    Text("Audience Size")
-                    
-                    ZStack(alignment: .center) {
-                        VStack(spacing: 2) {
-                            Slider(
-                                value: $settingViewModel.settingModel.audienceSize,
-                                in: 0...2,
-                                step: 1
-                            ) {
-                                Text("\(settingViewModel.settingModel.audienceSize)")
-                            }
-                            .frame(width: 288, height: 44)
-                            
-                            HStack {
-                                Text("5")
-                                Spacer()
-                                Text("10")
-                                Spacer()
-                                Text("20")
-                            }
-                            .frame(width: 260)
-                        }
-                        
-                        HStack {
-                            Image(systemName: "person.fill")
-                            Spacer()
-                            Image(systemName: "person.3.fill")
-                                .offset(x: 10)
-                        }
-                        .padding(.horizontal, 66)
-                    }
-                    
-                    
-                    Text("Gradually increasing the audience size helps you build confidence in public speaking")
-                        .font(.system(size: 13))
-                        .multilineTextAlignment(.leading)
-                }
-                
-                VStack(alignment: .leading, spacing: 7) {
-                    Text("Distraction Level")
-                    
-                    ZStack(alignment: .center) {
-                        Slider(
-                            value: $settingViewModel.settingModel.distractionLevel,
-                            in: 0...2,
-                            step: 1
-                        ) {
-                            Text("\(settingViewModel.settingModel.distractionLevel)")
-                        }
-                        .frame(width: 288, height: 64)
-                        
-                        HStack {
-                            Image(systemName: "leaf.fill")
-                            Spacer()
-                            Image(systemName: "flame.fill")
-                            
-                        }
-                        .padding(.horizontal, 66)
-                    }
-                    
-                    Text("Challenge yourself with higher distraction levels to improve your adaptability")
-                        .multilineTextAlignment(.leading)
-                        .font(.system(size: 13))
-                }
+                distractionSettingView
                 
                 Button {
-                    dismiss()
-                    pushWindow(id: "Script")
-                    router.push(.result)
-                    
-//                    MARK: - 이머시브존2
-                    Task {
-                        let result = await openImmersiveSpace(id: "ImmersiveSpace")
-                        switch result {
-                        case .opened:
-                            print("Immersive space opened")
-                        case .userCancelled, .error:
-                            print("Failed to open immersive space")
-                        @unknown default:
-                            break
-                        }
-                    }
+                    enterSession()
                 } label: {
                     Label {
                         Text("Enter Session")
                     } icon: {
                         Image(systemName: "door.right.hand.open")
                     }
-                    
                 }
             }
             .padding(.horizontal, 44)
             .padding(.vertical, 20)
+        }
+    }
+    
+    //MARK: TOP
+    private var titleView: some View {
+        ZStack {
+            Text("🛠️ Setting")
+                .font(.largeTitle)
+            HStack {
+                Button(action: {
+                    print("뒤로가기")
+                    dismiss()
+                }, label: {
+                    Image(systemName: "chevron.left")
+                })
+                .buttonBorderShape(.circle)
+                Spacer()
+                
+            }
+            .padding(.leading, 24)
+        }
+        .frame(height: 92)
+    }
+    
+    
+    //MARK: MIDDLE
+    private var environmentSettingView: some View {
+        HStack(spacing: 8) {
+            Circle()
+                .frame(width: 36, height: 36)
+            VStack(alignment: .leading) {
+                Text("Environments")
+                Text(settingViewModel.settingModel.background.title)
+            }
+            
+            Spacer()
+            
+            Button {
+                print("배경선택")
+            } label: {
+                Image(systemName: "chevron.right")
+            }
+            .buttonStyle(.plain)
+            .padding(.trailing, 8)
+        }
+    }
+    
+    private var audienceSettingView: some View {
+        VStack(alignment: .leading, spacing: 7) {
+            Text("Audience Size")
+            
+            ZStack(alignment: .center) {
+                VStack(spacing: 2) {
+                    Slider(
+                        value: $settingViewModel.settingModel.audienceSize,
+                        in: 0...2,
+                        step: 1
+                    ) {
+                        Text("\(settingViewModel.settingModel.audienceSize)")
+                    }
+                    .frame(width: 288, height: 44)
+                    
+                    HStack {
+                        Text("5")
+                        Spacer()
+                        Text("10")
+                        Spacer()
+                        Text("20")
+                    }
+                    .frame(width: 260)
+                }
+                
+                HStack {
+                    Image(systemName: "person.fill")
+                    Spacer()
+                    Image(systemName: "person.3.fill")
+                        .offset(x: 10)
+                }
+                .padding(.horizontal, 66)
+            }
+            
+            
+            Text("Gradually increasing the audience size helps you build confidence in public speaking")
+                .font(.system(size: 13))
+                .multilineTextAlignment(.leading)
+        }
+    }
+    
+    private var distractionSettingView: some View {
+        VStack(alignment: .leading, spacing: 7) {
+            Text("Distraction Level")
+            
+            ZStack(alignment: .center) {
+                Slider(
+                    value: $settingViewModel.settingModel.distractionLevel,
+                    in: 0...2,
+                    step: 1
+                ) {
+                    Text("\(settingViewModel.settingModel.distractionLevel)")
+                }
+                .frame(width: 288, height: 64)
+                
+                HStack {
+                    Image(systemName: "leaf.fill")
+                    Spacer()
+                    Image(systemName: "flame.fill")
+                    
+                }
+                .padding(.horizontal, 66)
+            }
+            
+            Text("Challenge yourself with higher distraction levels to improve your adaptability")
+                .multilineTextAlignment(.leading)
+                .font(.system(size: 13))
+        }
+    }
+    
+    
+    //MARK: FUNCTION
+    func enterSession() {
+        dismiss()
+        pushWindow(id: "Script")
+        router.push(.result)
+//                    MARK: - 이머시브존2
+        Task {
+            let result = await openImmersiveSpace(id: "ImmersiveSpace")
+            switch result {
+            case .opened:
+                print("Immersive space opened")
+            case .userCancelled, .error:
+                print("Failed to open immersive space")
+            @unknown default:
+                break
+            }
         }
     }
 }

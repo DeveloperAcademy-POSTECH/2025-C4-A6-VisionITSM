@@ -22,6 +22,10 @@ class HomeViewModel {
     
     var currentIndex: Int = 0
     
+    var newFileInfos: [NewFileModalInfo] = []
+    
+    let columns = Array(repeating: GridItem(.adaptive(minimum: 256), spacing: 48), count: 1)
+    
     init() {
         fetchList()
     }
@@ -47,8 +51,6 @@ class HomeViewModel {
         self.showingFilePicker = false
         self.showPPTXPicker = true
     }
-    
-    var newFileInfos: [NewFileModalInfo] = []
     
     func fetchList() {
         self.newFileInfos = [

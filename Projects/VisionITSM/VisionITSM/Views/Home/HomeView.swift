@@ -12,18 +12,13 @@ import UniformTypeIdentifiers
 
 struct HomeView: View {
     //MARK: - PROPERTIES
-    let columns = Array(repeating: GridItem(.adaptive(minimum: 256), spacing: 48), count: 1)
+    @State private var parsingSheet: Bool = false
+    @State private var isModal: Bool = false
     
     @Bindable var homeViewModel: HomeViewModel
     @Bindable var router: NavigationRouter
     
-    @State private var parser = HybridPPTXParser()
-    
     @Environment(SettingViewModel.self) var settingViewModel
-    
-    @State private var parsingSheet: Bool = false
-    @State private var isModal: Bool = false
-    
     @Environment(\.modelContext) private var context
     @Query(sort: \HomeModel.createAt, order: .reverse) private var keynotes: [HomeModel]
     
@@ -95,7 +90,7 @@ struct HomeView: View {
     
     //MARK: - VIEW
     private var GridListView: some View {
-        LazyVGrid(columns: columns, spacing: 48) {
+        LazyVGrid(columns: homeViewModel.columns, spacing: 48) {
             Button(action: {
                 print("추가 버튼 클릭")
                 homeViewModel.openPicker()

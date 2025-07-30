@@ -16,12 +16,7 @@ struct ResultView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 36) {
             HStack {
-                VStack(alignment: .leading, spacing: 24) {
-                    resultItemView(title: "Audience Size", result: settingViewModel.settingModel.audienceSize)
-                    resultItemView(title: "Distraction Level", result: settingViewModel.settingModel.distractionLevel)
-                    
-                    resultTimeItemView(title: "Time Spent", result: "\(settingViewModel.counter.asTimeHMS)")
-                }
+                resultListView
                 
                 Spacer()
             }
@@ -46,6 +41,16 @@ struct ResultView: View {
             }
         }
     }
+    
+    private var resultListView: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            resultItemView(title: "Audience Size", result: settingViewModel.settingModel.audienceSize)
+            resultItemView(title: "Distraction Level", result: settingViewModel.settingModel.distractionLevel)
+            
+            resultTimeItemView(title: "Time Spent", result: "\(settingViewModel.counter.asTimeHMS)")
+        }
+    }
+    
     
     func resultTimeItemView(title: String, result: String) -> some View {
         VStack(alignment: .leading, spacing: 24) {

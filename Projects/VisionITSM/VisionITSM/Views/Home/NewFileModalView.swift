@@ -10,8 +10,10 @@ import SwiftUI
 struct NewFileModalView: View {
     //MARK: - PROPERTIES
     @State private var fileName = ""
-    @Environment(\.dismiss) private var dismiss
+    
     @Bindable var homeViewModel: HomeViewModel
+    
+    @Environment(\.dismiss) private var dismiss
     
     //MARK: - BODY
     var body: some View {
@@ -114,9 +116,6 @@ struct NewFileModalView: View {
         .padding(.vertical, 20)
         .padding(.horizontal, 20)
     }
-    
-    //MARK: - FUNCTION
-    
 }
 
 #Preview {

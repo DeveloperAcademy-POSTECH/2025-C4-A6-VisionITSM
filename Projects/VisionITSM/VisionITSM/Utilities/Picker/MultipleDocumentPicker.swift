@@ -56,10 +56,6 @@ struct MultipleDocumentPicker: UIViewControllerRepresentable {
             }
         }
         
-        func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-//            parent.isPresented = false
-        }
-        
         
         func getPDFTitle(from url: URL) -> String? {
             guard let pdfDocument = PDFDocument(url: url) else {
