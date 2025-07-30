@@ -33,9 +33,6 @@ struct HomeView: View {
             ScrollView {
                 GridListView
             }
-//            .onChange(of: homeViewModel.showingFilePicker) { oldValue, newValue in
-//                print(newValue)
-//            }
             .sheet(isPresented: $homeViewModel.showingFilePicker) {
                 NewFileModalView(homeViewModel: homeViewModel)
             }
@@ -121,16 +118,6 @@ struct HomeView: View {
             }
         }
     }
-    
-//    private var parsingModalView: some View {
-//        VStack {
-//            if parser.isLoading {
-//                loadingView
-//            } else if homeViewModel.currentKeynote == nil {
-//                SelectView
-//            }
-//        }
-//    }
     
     private var loadingView: some View {
         VStack(spacing: 16) {
