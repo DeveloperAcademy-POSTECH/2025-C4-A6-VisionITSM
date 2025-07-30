@@ -11,5 +11,6 @@ import Foundation
 class SettingViewModel {
     var isShowSetting: Bool = false
     var counter: Int = 0
+    var isTimerPlaying: Bool = false
     var settingModel: SettingModel = .init(background: .nuri, audienceSize: 0, distractionLevel: 0)
 }
