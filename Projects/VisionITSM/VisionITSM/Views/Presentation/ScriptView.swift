@@ -31,19 +31,7 @@ struct ScriptView: View {
             PresentNoteView
         }
         .popover(isPresented: $isPop, attachmentAnchor: .rect(.rect(CGRect(x: 624, y: 0, width: 0, height: 0))), arrowEdge: .leading , content: {
-            HStack(content: {
-                Button(role: .cancel, action: {
-                    isPop = false
-                }, label: {
-                    Image(systemName: "xmark")
-                })
-                Button(action: {
-                    resetPresentation()
-                }, label: {
-                    Image(systemName: "return")
-                })
-            })
-            .frame(width: 180, height: 80)
+            editButtonView
         })
         .task {
             settingViewModel.counter = 0
@@ -112,6 +100,22 @@ struct ScriptView: View {
         .safeAreaPadding(.horizontal, 24)
         .buttonBorderShape(.circle)
         .foregroundStyle(Color.secondary)
+    }
+    
+    private var editButtonView: some View {
+        HStack(content: {
+            Button(role: .cancel, action: {
+                isPop = false
+            }, label: {
+                Image(systemName: "xmark")
+            })
+            Button(action: {
+                resetPresentation()
+            }, label: {
+                Image(systemName: "return")
+            })
+        })
+        .frame(width: 180, height: 80)
     }
     
     //MARK: - MIDDLE
