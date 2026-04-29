@@ -133,3 +133,12 @@ iOSInjectionProject/
 
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,macos,swift,swiftpackagemanager,cocoapods
+
+# Reality Composer Pro 자동 생성 (사용자별)
+**/Package.realitycomposerpro/PluginData/
+**/Package.realitycomposerpro/WorkspaceData/SceneMetadataList.json
+**/Package.realitycomposerpro/WorkspaceData/*.rcuserdata
+
+# 대용량 산출물 (PDF/PPTX deliverables)
+*.pptx
+finalpdf.pdf
